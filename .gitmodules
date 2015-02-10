@@ -1,0 +1,3 @@
+[submodule "beaconizer"]
+	path = beaconizer
+	url = https://github.com/mcupak/beaconizer.git
