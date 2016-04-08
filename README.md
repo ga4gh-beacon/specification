@@ -1,6 +1,12 @@
 # Beacon Project Repository
-GA4GH Beacon team repo
 
+## What's a Beacon?
+
+A “Beacon” is a web-accessible service that can be queried for information about a specific allele. A user of a Beacon can pose queries of the form “Have you observed this nucleotide (e.g. C) at this genomic location (e.g. position 32,936,732 on chromosome 13)?” to which the Beacon must respond with either “yes” or “no.” In this way, a Beacon allows allelic information of interest to be discovered by a remote querier with no reference to a specific sample or patient the allele was observed in.
+
+## Related Links
+
+GA4GH Beacon Site: http://ga4gh.org/#/beacon
 
 ## Developer FAQ
 
