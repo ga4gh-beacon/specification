@@ -1,78 +1,33 @@
-![Image](http://genomicsandhealth.org/files/logo_ga.png)
+# Beacon Project Repository
 
+## What's a Beacon?
 
-# Schemas for the Data Working Group
+A “Beacon” is a web-accessible service that can be queried for information about a specific allele. A user of a Beacon can pose queries of the form “Have you observed this nucleotide (e.g. C) at this genomic location (e.g. position 32,936,732 on chromosome 13)?” to which the Beacon must respond with either “yes” or “no.” In this way, a Beacon allows allelic information of interest to be discovered by a remote querier with no reference to a specific sample or patient the allele was observed in.
 
+## Related Links
 
-The [Global Alliance for Genomics and Health][ga4gh] is an international
-coalition, formed to enable the sharing of genomic and clinical data.
+GA4GH Beacon Site: http://ga4gh.org/#/beacon
 
-The [Data Working
-Group](http://genomicsandhealth.org/our-work/working-groups/data-working-group)
-concentrates on data representation, storage, and analysis, including working
-with platform development partners and industry leaders to develop standards
-that will facilitate interoperability.
+## Developer FAQ
 
-Each area of genomics and health has a dedicated team working to define those
-standards.
+### What are the valid responses for a beacon?
 
+A: Yes or No
 
-## Reads Task Team
+Yes means, "I have information about the queried variant" and No means, either (i) "I don't have information about the queried variant" or (ii) "I don't know if I have information about the queried variant".
 
-The [Reads Task Team](https://groups.google.com/forum/#!forum/dwgreadtaskteam)
-is focused on standards for accessing genomic read data -- collections of
-primary data collected from sequencing machines.
+The decision to support either Yes or No, and not an additional Null option, was due to complexities in distinguishing between "I don't have information about the queried variant" and "I don't know if I have information about the queried variant". For example, if a beacon is served from a VCF file that has reference alleles omitted, it is impossible to determine whether the reference allele was observed but not recorded, or not observed at all.
 
-The team will deliver:
+It was decided that an additional set of Evidence Codes could be returned if this information is available.
 
-  1. Data model. An abstract, mathematically complete and precise model of the
-     data that is manipulated by the API. See the [Avro
-     directory](src/main/resources/avro) for our in-progress work on defining
-     v0.5 of the data model. 
-  2. API Specification. A human-readable document introducing and defining the
-     API, accompanied by a formal specification. See the [documentation
-     page](http://ga4gh.org/#/apis/reads/v0.1) for the published v0.1
-     API.
-  3. Reference Implementation. Open source working code demonstrating the API,
-     ideally which can underpin real world working implementations.
+### Is the position in a Beacon query 0-based or 1-based?
 
-## Reference Variation Task Team
+A: 0-based
 
-The Reference Variation Task Team is focused on standards for storing and
-accessing reference genome and variant data -- the results of analysis of
-primary data collected from sequencing machines.
+The decision to use 0-based coordinates for the position in the Beacon query was based on alignment with the core GA4GH APIs. Of course, when designing clients (e.g. websites) which query beacons, developers should use descretion about what the end-user expects. The Beacon Network, for example, takes 1-based coordinates as input and queries connected Beacons in 0-based coordinates, as appropriate.
 
-## File Formats Task Team
+### How are queries against complex mutations treated? 
 
-One small but essential part of this effort is the definition,
-standardisation, and improvement of basic file formats for sequence and
-variation data, and for associated infrastructure such as index formats.
+A: For insertions and deletions exact match is required for a Yes response. More complex mutations (e.g. inversions, duplications) are not yet supported.
 
-These format specifications can be found in the
-[samtools/hts-specs repository][hts-specs].
-
-[ga4gh]:      http://genomicsandhealth.org/
-[hts-specs]:  https://github.com/samtools/hts-specs
-
-## Metadata Task Team
-
-The Metadata Task Team (MTT) concerns itself with data structures, attributes 
-and values used to describe *everything but the sequence*.  This includes 
-metadata for individuals, samples, analyses, instrumentation a well as 
-ontology representations for metadata. Naturally, the group interacts 
-heavily with members of most other task teams and working groups.
-
-[MTT Wiki](https://github.com/ga4gh/metadata-team/wiki)
-
-
-## Build Status
-
-[![Build Status](https://travis-ci.org/ga4gh/schemas.svg?branch=master)](https://travis-ci.org/ga4gh/schemas)
-
-## How to contribute changes
-
-See the [CONTRIBUTING.md](CONTRIBUTING.md) documement.
-
-## License
-
-See the [LICENSE](LICENSE)
+Queries for insertions or deletions must be sepcified using ref and alt strings of bases. For insertions and deletions exact match is required for a Yes response. More complex mutations (e.g. inversions, duplications) are not yet supported. 

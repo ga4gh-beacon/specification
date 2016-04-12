@@ -1,0 +1,9 @@
+[submodule "beaconizer"]
+	path = beaconizer
+	url = https://github.com/mcupak/beaconizer.git
+[submodule "beacon-of-beacons"]
+	path = beacon-of-beacons
+	url = https://github.com/mcupak/beacon-of-beacons.git
+[submodule]
+	beaconizer = master
+	beacon-of-beacons = master
