@@ -3,12 +3,20 @@
 /**
 A Beacon is a web service for genetic data sharing that can be queried for 
 information about specific alleles.
+
+This schema defines standard fields as recognized by the Beacon API. An
+implementation of the Beacon API can optionally provide additional metadata
+by extending records in this protocol.
 */
 protocol Beacons {
 
 import idl "consentcode.avdl";
 
-/** Query for information about a specific allele. */
+/**
+Query for information about a specific allele.
+
+The query should not be extended to include additional fields.
+*/
 record BeaconAlleleRequest {
   /**
   Reference name.
@@ -92,9 +100,6 @@ record BeaconDataset {
 
   /** URL to an external system providing more dataset information. */
   union{ null, string } externalUrl = null;
-
-  /** Additional structured metadata, key-value pairs. */
-  union{ null, map<string> } info = null;
 }
 
 /** Organization owning a beacon. */
@@ -122,9 +127,6 @@ record BeaconOrganization {
 
   /** URL to the logo of the organization (image). */
   union{ null, string } logoUrl = null;
-
-  /** Additional structured metadata, key-value pairs. */
-  union{ null, map<string> } info = null;
 }
 
 /** Beacon. */
@@ -170,9 +172,6 @@ record Beacon {
   responses.
   */
   union{ null, array<BeaconAlleleRequest> } sampleAlleleRequests = null;
-
-  /** Additional structured metadata, key-value pairs. */
-  union{ null, map<string> } info = null;
 }
 
 /** Beacon-specific error representing an unexpected problem. */
@@ -182,6 +181,21 @@ record BeaconError {
 
   /** Error message. */
   union{ null, string } message = null;
+}
+
+/** Allele metadata. */
+record BeaconAlleleInformation {
+  /** Frequency of this allele in the dataset. Between 0 and 1, inclusive. */
+  union{ null, double } frequency = null;
+
+  /** Number of variants matching the allele request in the dataset. */
+  union{ null, long } variantCount = null;
+
+  /** Number of calls matching the allele request in the dataset. */
+  union{ null, long } callCount = null;
+
+  /** Number of samples matching the allele request in the dataset. */
+  union{ null, long } sampleCount = null;
 }
 
 /** Dataset's response to a query for information about a specific allele. */
@@ -197,6 +211,9 @@ record BeaconDatasetAlleleResponse {
   */
   union{ null, boolean } exists;
 
+  /** Allele metadata. */
+  union{ null, BeaconAlleleInformation } alleleInformation = null;
+
   /**
   Dataset-specific error.
 
@@ -204,18 +221,6 @@ record BeaconDatasetAlleleResponse {
   `exists` has to be null.
   */
   union{ null, BeaconError } `error` = null;
-
-  /** Frequency of this allele in the dataset. Between 0 and 1, inclusive. */
-  union{ null, double } frequency = null;
-
-  /** Number of variants matching the allele request in the dataset. */
-  union{ null, long } variantCount = null;
-
-  /** Number of calls matching the allele request in the dataset. */
-  union{ null, long } callCount = null;
-
-  /** Number of samples matching the allele request in the dataset. */
-  union{ null, long } sampleCount = null;
 
   /** Additional note or description of the response. */
   union{ null, string } note = null;
@@ -225,9 +230,6 @@ record BeaconDatasetAlleleResponse {
   more information about a given allele.
   */
   union{ null, string } externalUrl = null;
-
-  /** Additional structured metadata, key-value pairs. */
-  union{ null, map<string> } info = null;
 }
 
 /** Beacon's response to a query for information about a specific allele. */
