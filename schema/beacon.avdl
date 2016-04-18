@@ -8,10 +8,14 @@ protocol Beacons {
 
 import idl "consentcode.avdl";
 
-/** Query for information about a specific allele. */
+/**
+Query for information about a specific allele.
+
+Based on `org.ga4gh.models.Variant`.
+*/
 record BeaconAlleleRequest {
   /**
-  Reference name.
+  Reference name (chromosome).
 
   Accepted values: 1-22, X, Y.
   */
@@ -90,7 +94,7 @@ record BeaconDataset {
   /** Total number of samples in the dataset. */
   union{ null, long } sampleCount = null;
 
-  /** URL to an external system providing more dataset information. */
+  /** URL to an external system providing more dataset information (RFC 3986 format). */
   union{ null, string } externalUrl = null;
 
   /** Additional structured metadata, key-value pairs. */
@@ -111,16 +115,18 @@ record BeaconOrganization {
   /** Address of the organization. */
   union{ null, string } address = null;
 
-  /** Web of the organization (URL). */
+  /** URL of the website of the organization (RFC 3986 format). */
   union{ null, string } welcomeUrl = null;
 
   /**
   URL with the contact for the beacon operator/maintainer, e.g. link to
-  a contact form or an email in RFC 2368 scheme.
+  a contact form (RFC 3986 format) or an email (RFC 2368 format).
   */
   union{ null, string } contactUrl = null;
 
-  /** URL to the logo of the organization (image). */
+  /**
+  URL to the logo (PNG/JPG format) of the organization (RFC 3986 format).
+  */
   union{ null, string } logoUrl = null;
 
   /** Additional structured metadata, key-value pairs. */
@@ -147,10 +153,13 @@ record Beacon {
   /** Version of the beacon. */
   union{ null, string } version = null;
 
-  /** URL to the welcome page/UI for this beacon. */
+  /** URL to the welcome page for this beacon (RFC 3986 format). */
   union{ null, string } welcomeUrl = null;
 
-  /** Alternative URL to the API, e.g. a restricted version of this beacon. */
+  /**
+  Alternative URL to the API, e.g. a restricted version of this beacon
+  (RFC 3986 format).
+  */
   union{ null, string } alternativeUrl = null;
 
   /** The time this beacon was created in ms from the epoch. */
@@ -222,7 +231,7 @@ record BeaconDatasetAlleleResponse {
 
   /**
   URL to an external system, such as a secured beacon or a system providing
-  more information about a given allele.
+  more information about a given allele (RFC 3986 format).
   */
   union{ null, string } externalUrl = null;
 
