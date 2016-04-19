@@ -6,11 +6,27 @@ A “Beacon” is a web-accessible service that can be queried for information a
 
 ## Related Links
 
-GA4GH Beacon Site: http://ga4gh.org/#/beacon
+* GA4GH Beacon Site: http://ga4gh.org/#/beacon
+* Beacon Network: http://beacon-network.org
 
-## Developer FAQ
+## How to light a Beacon
 
-### What are the valid responses for a beacon?
+If you are a data steward, please consider lighting a Beacon. There are three options of varying complexity for lighting beacons:
+* From scratch (hardest): develop a Beacon compliant with the specification(s) in the schemas directory of this repository
+* Reference impementation (easier): use a free to download and install implementation of Beacon, which you host on your network or on a cloud instance you own 
+* Managed solutions (easiest): use an implementation of Beacon that is implemented and maintained by a third-party
+
+Please contact us for support in lighting a Beacon. 
+
+## Developers
+
+### Development Model
+
+We adopt the Gitflow development model as outlined here: http://nvie.com/posts/a-successful-git-branching-model/
+
+### Developer FAQs
+
+#### What are the valid responses for a beacon?
 
 A: Yes or No
 
