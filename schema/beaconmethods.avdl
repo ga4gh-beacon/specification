@@ -1,0 +1,27 @@
+@namespace("org.ga4gh.beacon")
+
+protocol BeaconMethods {
+
+import idl "beacon.avdl";
+
+/****************  /  *******************/
+/**
+Gets beacon information.
+
+`GET /` (root of the beacon API) returns a representation of `Beacon`.
+*/
+Beacon getBeacon();
+
+/****************  /alleles  *******************/
+/**
+Gets response to a beacon query for information about a specific allele.
+
+`GET /alleles` uses `BeaconAlleleRequest` for parameters and returns
+a representation of `BeaconAlleleResponse`. Example: `GET /alleles?
+referenceName=1&start=1000&referenceBases=A&alternateBases=C&assemblyId=GRCh37&
+datasetIds=d1&datasetIds=d2`
+*/
+BeaconAlleleResponse getBeaconAlleleResponse(
+  BeaconAlleleRequest beaconAlleleRequest);
+
+}
