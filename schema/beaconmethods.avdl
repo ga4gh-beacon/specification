@@ -12,12 +12,12 @@ Gets beacon information.
 */
 Beacon getBeacon();
 
-/****************  /alleles  *******************/
+/****************  /query  *******************/
 /**
-Gets response to a beacon query for information about a specific allele.
+Gets response to a beacon query for allele information.
 
-`GET /alleles` uses `BeaconAlleleRequest` for parameters and returns
-a representation of `BeaconAlleleResponse`. Example: `GET /alleles?
+`GET /query` uses `BeaconAlleleRequest` for parameters and returns
+a representation of `BeaconAlleleResponse`. Example: `GET /query?
 referenceName=1&start=1000&referenceBases=A&alternateBases=C&assemblyId=GRCh37&
 datasetIds=d1&datasetIds=d2`
 */
