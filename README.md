@@ -20,9 +20,9 @@ Please contact us for support in lighting a Beacon.
 
 ## Developers
 
-### Development Model
+### How to contribute
 
-We adopt the Gitflow development model as outlined here: http://nvie.com/posts/a-successful-git-branching-model/
+See the [CONTRIBUTING.md](CONTRIBUTING.md) document.
 
 ### Developer FAQs
 
