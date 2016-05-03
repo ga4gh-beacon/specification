@@ -74,13 +74,11 @@ record BeaconDataset {
   */
   union{ null, org.ga4gh.consentcode.ConsentCodeDataUse } consentCodeDataUse;
 
-  /** The time the dataset was created in the beacon in ms from the epoch. */
-  long created = null;
+  /** The time the dataset was created (ISO 8601 format). */
+  string createDateTime;
 
-  /**
-  The time the dataset was last updated in the beacon in ms from the epoch.
-  */
-  long updated = null;
+  /** The time the dataset was updated in (ISO 8601 format). */
+  string updateDateTime;
 
   /** Version of the dataset. */
   union{ null, string } version = null;
@@ -162,11 +160,11 @@ record Beacon {
   */
   union{ null, string } alternativeUrl = null;
 
-  /** The time this beacon was created in ms from the epoch. */
-  union { null, long } created = null;
+  /** The time the beacon was created (ISO 8601 format). */
+  union{ null, string } createDateTime;
 
-  /** The time this beacon was last updated in ms from the epoch. */
-  union { null, long } updated = null;
+  /** The time the beacon was updated in (ISO 8601 format). */
+  union{ null, string } updateDateTime;
 
   /**
   Datasets served by the beacon. Any beacon should specify at least one
