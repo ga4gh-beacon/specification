@@ -16,10 +16,28 @@ Beacon getBeacon();
 /**
 Gets response to a beacon query for allele information.
 
-`GET /query` uses `BeaconAlleleRequest` for parameters and returns
-a representation of `BeaconAlleleResponse`. Example: `GET /query?
-referenceName=1&start=1000&referenceBases=A&alternateBases=C&assemblyId=GRCh37&
-datasetIds=d1&datasetIds=d2`
+GET and POST HTTP verbs must be supported. `GET /query` accepts fields of
+`BeaconAlleleRequest` as URL parameters and returns a JSON representation of
+`BeaconAlleleResponse`. `POST /query` accepts a JSON representation of
+`BeaconAlleleRequest` as the request body and returns a JSON representation
+of `BeaconAlleleResponse`.
+
+Examples:
+GET /query?referenceName=1&start=1000&referenceBases=A&alternateBases=C
+&assemblyId=GRCh37&datasetIds=d1&datasetIds=d2
+
+POST /query
+{
+  "referenceName": "1",
+  "start": 1000,
+  "referenceBases": "A",
+  "alternateBases": "C",
+  "assemblyId": "GRCh37",
+  "datasetIds": [
+    "d1",
+    "d2"
+  ]
+}
 */
 BeaconAlleleResponse getBeaconAlleleResponse(
   BeaconAlleleRequest beaconAlleleRequest);
