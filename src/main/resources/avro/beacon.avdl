@@ -200,7 +200,7 @@ record BeaconDatasetAlleleResponse {
   Indicator of whether the given allele was observed in the dataset.
 
   This should be non-null, unless there was an error, in which case
-  `error` has to be null.
+  `error` has to be non-null.
   */
   union{ null, boolean } exists;
 
@@ -242,18 +242,30 @@ record BeaconAlleleResponse {
   /** Identifier of the beacon, as defined in `Beacon`. */
   string beaconId;
 
-  /** Allele request as interpreted by the beacon. */
-  union{ null, BeaconAlleleRequest } alleleRequest;
+  /**
+  Indicator of whether the given allele was observed in any of the datasets
+  queried.
 
-  /** Indicator of whether the beacon has observed the allele. */
-  array<BeaconDatasetAlleleResponse> datasetAlleleResponses = [];
+  This should be non-null, unless there was an error, in which case
+  `error` has to be non-null.
+  */
+  union{ null, boolean } exists;
 
   /**
   Beacon-specific error.
 
-  This should be non-null in exceptional situations only.
+  This should be non-null in exceptional situations only, in which case
+  `exists` has to be null.
   */
   union{ null, BeaconError } `error` = null;
+
+  /** Allele request as interpreted by the beacon. */
+  union{ null, BeaconAlleleRequest } alleleRequest;
+
+  /**
+  Indicator of whether the given allele was observed in individual datasets.
+  */
+  array<BeaconDatasetAlleleResponse> datasetAlleleResponses = [];
 }
 
 }
