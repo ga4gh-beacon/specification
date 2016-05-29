@@ -242,6 +242,12 @@ record BeaconAlleleResponse {
   /** Identifier of the beacon, as defined in `Beacon`. */
   string beaconId;
 
+  /**
+  Version of the API. If specified, the value must match `apiVersion` in 
+  `Beacon`.
+  */
+  union{ null, string } apiVersion = null;
+
   /** Allele request as interpreted by the beacon. */
   union{ null, BeaconAlleleRequest } alleleRequest;
 
