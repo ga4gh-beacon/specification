@@ -6,8 +6,6 @@ information about specific alleles.
 */
 protocol Beacons {
 
-import idl "consentcode.avdl";
-
 /**
 Query for information about a specific allele.
 
@@ -68,11 +66,6 @@ record BeaconDataset {
 
   /** Assembly identifier (GRC notation, e.g. `GRCh37`). */
   string assemblyId;
-
-  /**
-  Data use conditions for this dataset based on consent codes.
-  */
-  union{ null, org.ga4gh.consentcode.ConsentCodeDataUse } consentCodeDataUse;
 
   /** The time the dataset was created (ISO 8601 format). */
   string createDateTime;
