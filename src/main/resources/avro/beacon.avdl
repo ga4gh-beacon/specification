@@ -53,6 +53,15 @@ record BeaconAlleleRequest {
   If this field is null/not specified, all datasets should be queried.
   */
   union{ null, array<string> } datasetIds = null;
+
+  /**
+  Indicator of whether responses for individual datasets
+  (`datasetAlleleResponses`) should be included (not null) in the response
+  (`BeaconAlleleResponse`) to this request.
+
+  If null (not specified), the default value of false is assumed.
+  */
+  union{ null, boolean } includeDatasetResponses = null;
 }
 
 /** Dataset of a beacon. */
@@ -264,8 +273,11 @@ record BeaconAlleleResponse {
 
   /**
   Indicator of whether the given allele was observed in individual datasets.
+
+  This should be non-null if `includeDatasetResponses` in the corresponding
+  `BeaconAlleleRequest` is true, and null otherwise.
   */
-  array<BeaconDatasetAlleleResponse> datasetAlleleResponses = [];
+  union{ null, array<BeaconDatasetAlleleResponse> } datasetAlleleResponses = null;
 }
 
 }
