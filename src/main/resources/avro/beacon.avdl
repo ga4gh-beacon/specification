@@ -1,0 +1,276 @@
+@namespace("org.ga4gh.beacon")
+
+/**
+A Beacon is a web service for genetic data sharing that can be queried for 
+information about specific alleles.
+*/
+protocol Beacons {
+
+/**
+Query for information about a specific allele.
+
+Based on `org.ga4gh.models.Variant`.
+*/
+record BeaconAlleleRequest {
+  /**
+  Reference name (chromosome).
+
+  Accepted values: 1-22, X, Y.
+  */
+  string referenceName;
+
+  /**
+  Position, allele locus (0-based).
+
+  Accepted values: non-negative integers smaller than reference length.
+  */
+  long start;
+
+  /**
+  Reference bases for this variant (starting from `start`).
+
+  Accepted values: see the REF field in VCF 4.2 specification
+  (https://samtools.github.io/hts-specs/VCFv4.2.pdf).
+  */
+  string referenceBases;
+
+  /**
+  The bases that appear instead of the reference bases.
+
+  Accepted values: see the ALT field in VCF 4.2 specification
+  (https://samtools.github.io/hts-specs/VCFv4.2.pdf).
+  */
+  string alternateBases;
+
+  /** Assembly identifier (GRC notation, e.g. `GRCh37`). */
+  string assemblyId;
+
+  /**
+  Identifiers of datasets, as defined in `BeaconDataset`.
+
+  If this field is null/not specified, all datasets should be queried.
+  */
+  union{ null, array<string> } datasetIds = null;
+
+  /**
+  Indicator of whether responses for individual datasets
+  (`datasetAlleleResponses`) should be included (not null) in the response
+  (`BeaconAlleleResponse`) to this request.
+
+  If null (not specified), the default value of false is assumed.
+  */
+  union{ null, boolean } includeDatasetResponses = null;
+}
+
+/** Dataset of a beacon. */
+record BeaconDataset {
+  /** Unique identifier of the dataset. */
+  string id;
+
+  /** Name of the dataset. */
+  string name;
+
+  /** Description of the dataset. */
+  union{ null, string } description = null;
+
+  /** Assembly identifier (GRC notation, e.g. `GRCh37`). */
+  string assemblyId;
+
+  /** The time the dataset was created (ISO 8601 format). */
+  string createDateTime;
+
+  /** The time the dataset was updated in (ISO 8601 format). */
+  string updateDateTime;
+
+  /** Version of the dataset. */
+  union{ null, string } version = null;
+
+  /** Total number of variants in the dataset. */
+  union{ null, long } variantCount = null;
+
+  /** Total number of calls in the dataset. */
+  union{ null, long } callCount = null;
+
+  /** Total number of samples in the dataset. */
+  union{ null, long } sampleCount = null;
+
+  /** URL to an external system providing more dataset information (RFC 3986 format). */
+  union{ null, string } externalUrl = null;
+
+  /** Additional structured metadata, key-value pairs. */
+  union{ null, map<string> } info = null;
+}
+
+/** Organization owning a beacon. */
+record BeaconOrganization {
+  /** Unique identifier of the organization. */
+  string id;
+
+  /** Name of the organization. */
+  string name;
+
+  /** Description of the organization. */
+  union{ null, string } description = null;
+
+  /** Address of the organization. */
+  union{ null, string } address = null;
+
+  /** URL of the website of the organization (RFC 3986 format). */
+  union{ null, string } welcomeUrl = null;
+
+  /**
+  URL with the contact for the beacon operator/maintainer, e.g. link to
+  a contact form (RFC 3986 format) or an email (RFC 2368 format).
+  */
+  union{ null, string } contactUrl = null;
+
+  /**
+  URL to the logo (PNG/JPG format) of the organization (RFC 3986 format).
+  */
+  union{ null, string } logoUrl = null;
+
+  /** Additional structured metadata, key-value pairs. */
+  union{ null, map<string> } info = null;
+}
+
+/** Beacon. */
+record Beacon {
+  /** Unique identifier of the beacon. */
+  string id;
+
+  /** Name of the beacon. */
+  string name;
+
+  /** Version of the API provided by the beacon. */
+  string apiVersion;
+
+  /** Organization owning the beacon. */
+  BeaconOrganization organization;
+
+  /** Description of the beacon. */
+  union{ null, string } description = null;
+
+  /** Version of the beacon. */
+  union{ null, string } version = null;
+
+  /** URL to the welcome page for this beacon (RFC 3986 format). */
+  union{ null, string } welcomeUrl = null;
+
+  /**
+  Alternative URL to the API, e.g. a restricted version of this beacon
+  (RFC 3986 format).
+  */
+  union{ null, string } alternativeUrl = null;
+
+  /** The time the beacon was created (ISO 8601 format). */
+  union{ null, string } createDateTime;
+
+  /** The time the beacon was updated in (ISO 8601 format). */
+  union{ null, string } updateDateTime;
+
+  /**
+  Datasets served by the beacon. Any beacon should specify at least one
+  dataset.
+  */
+  array<BeaconDataset> datasets = [];
+
+  /**
+  Examples of interesting queries, e.g. a few queries demonstrating different
+  responses.
+  */
+  union{ null, array<BeaconAlleleRequest> } sampleAlleleRequests = null;
+
+  /** Additional structured metadata, key-value pairs. */
+  union{ null, map<string> } info = null;
+}
+
+/** Beacon-specific error representing an unexpected problem. */
+record BeaconError {
+  /** Numeric error code. */
+  int errorCode;
+
+  /** Error message. */
+  union{ null, string } message = null;
+}
+
+/** Dataset's response to a query for information about a specific allele. */
+record BeaconDatasetAlleleResponse {
+  /** Identifier of the dataset, as defined in `BeaconDataset`. */
+  string datasetId;
+
+  /**
+  Indicator of whether the given allele was observed in the dataset.
+
+  This should be non-null, unless there was an error, in which case
+  `error` has to be non-null.
+  */
+  union{ null, boolean } exists;
+
+  /**
+  Dataset-specific error.
+
+  This should be non-null in exceptional situations only, in which case
+  `exists` has to be null.
+  */
+  union{ null, BeaconError } `error` = null;
+
+  /** Frequency of this allele in the dataset. Between 0 and 1, inclusive. */
+  union{ null, double } frequency = null;
+
+  /** Number of variants matching the allele request in the dataset. */
+  union{ null, long } variantCount = null;
+
+  /** Number of calls matching the allele request in the dataset. */
+  union{ null, long } callCount = null;
+
+  /** Number of samples matching the allele request in the dataset. */
+  union{ null, long } sampleCount = null;
+
+  /** Additional note or description of the response. */
+  union{ null, string } note = null;
+
+  /**
+  URL to an external system, such as a secured beacon or a system providing
+  more information about a given allele (RFC 3986 format).
+  */
+  union{ null, string } externalUrl = null;
+
+  /** Additional structured metadata, key-value pairs. */
+  union{ null, map<string> } info = null;
+}
+
+/** Beacon's response to a query for information about a specific allele. */
+record BeaconAlleleResponse {
+  /** Identifier of the beacon, as defined in `Beacon`. */
+  string beaconId;
+
+  /**
+  Indicator of whether the given allele was observed in any of the datasets
+  queried.
+
+  This should be non-null, unless there was an error, in which case
+  `error` has to be non-null.
+  */
+  union{ null, boolean } exists;
+
+  /**
+  Beacon-specific error.
+
+  This should be non-null in exceptional situations only, in which case
+  `exists` has to be null.
+  */
+  union{ null, BeaconError } `error` = null;
+
+  /** Allele request as interpreted by the beacon. */
+  union{ null, BeaconAlleleRequest } alleleRequest;
+
+  /**
+  Indicator of whether the given allele was observed in individual datasets.
+
+  This should be non-null if `includeDatasetResponses` in the corresponding
+  `BeaconAlleleRequest` is true, and null otherwise.
+  */
+  union{ null, array<BeaconDatasetAlleleResponse> } datasetAlleleResponses = null;
+}
+
+}
