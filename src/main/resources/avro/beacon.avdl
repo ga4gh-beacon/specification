@@ -51,6 +51,15 @@ record BeaconAlleleRequest {
   If this field is null/not specified, all datasets should be queried.
   */
   union{ null, array<string> } datasetIds = null;
+
+  /**
+  Indicator of whether responses for individual datasets
+  (`datasetAlleleResponses`) should be included (not null) in the response
+  (`BeaconAlleleResponse`) to this request.
+
+  If null (not specified), the default value of false is assumed.
+  */
+  union{ null, boolean } includeDatasetResponses = null;
 }
 
 /** Dataset of a beacon. */
@@ -193,7 +202,7 @@ record BeaconDatasetAlleleResponse {
   Indicator of whether the given allele was observed in the dataset.
 
   This should be non-null, unless there was an error, in which case
-  `error` has to be null.
+  `error` has to be non-null.
   */
   union{ null, boolean } exists;
 
@@ -235,18 +244,33 @@ record BeaconAlleleResponse {
   /** Identifier of the beacon, as defined in `Beacon`. */
   string beaconId;
 
-  /** Allele request as interpreted by the beacon. */
-  union{ null, BeaconAlleleRequest } alleleRequest;
+  /**
+  Indicator of whether the given allele was observed in any of the datasets
+  queried.
 
-  /** Indicator of whether the beacon has observed the allele. */
-  array<BeaconDatasetAlleleResponse> datasetAlleleResponses = [];
+  This should be non-null, unless there was an error, in which case
+  `error` has to be non-null.
+  */
+  union{ null, boolean } exists;
 
   /**
   Beacon-specific error.
 
-  This should be non-null in exceptional situations only.
+  This should be non-null in exceptional situations only, in which case
+  `exists` has to be null.
   */
   union{ null, BeaconError } `error` = null;
+
+  /** Allele request as interpreted by the beacon. */
+  union{ null, BeaconAlleleRequest } alleleRequest;
+
+  /**
+  Indicator of whether the given allele was observed in individual datasets.
+
+  This should be non-null if `includeDatasetResponses` in the corresponding
+  `BeaconAlleleRequest` is true, and null otherwise.
+  */
+  union{ null, array<BeaconDatasetAlleleResponse> } datasetAlleleResponses = null;
 }
 
 }
