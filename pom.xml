@@ -4,7 +4,7 @@
     <groupId>org.ga4gh</groupId>
     <artifactId>beacon</artifactId>
     <packaging>jar</packaging>
-    <version>0.3.0</version>
+    <version>0.4.0-SNAPSHOT</version>
 
     <name>Beacon</name>
     <description>Beacon data models and APIs</description>
