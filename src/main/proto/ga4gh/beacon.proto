@@ -1,0 +1,234 @@
+syntax = "proto3";
+
+package ga4gh;
+
+// A Beacon is a web service for genetic data sharing that can be queried for
+// information about specific alleles.
+// Query for information about a specific allele. Based on ga4gh variant.
+message BeaconAlleleRequest {
+  // Reference name (chromosome).
+  //
+  // Accepted values: 1-22, X, Y.
+  string reference_name = 1;
+
+  // Position, allele locus (0-based).
+  //
+  // Accepted values: non-negative integers smaller than reference length.
+  int64 start = 2;
+
+  // Reference bases for this variant (starting from `start`).
+  //
+  // Accepted values: see the REF field in VCF 4.2 specification
+  // (https://samtools.github.io/hts-specs/VCFv4.2.pdf).
+  string reference_bases = 3;
+
+  // The bases that appear instead of the reference bases.
+  //
+  // Accepted values: see the ALT field in VCF 4.2 specification
+  // (https://samtools.github.io/hts-specs/VCFv4.2.pdf).
+  string alternate_bases = 4;
+
+  // Assembly identifier (GRC notation, e.g. `GRCh37`).
+  string assembly_id = 5;
+
+  // Identifiers of datasets, as defined in `BeaconDataset`.
+  //
+  // If this field is null/not specified, all datasets should be queried.
+  repeated string dataset_ids = 6;
+
+  // Indicator of whether responses for individual datasets
+  // (`datasetAlleleResponses`) should be included (not null) in the response
+  // (`BeaconAlleleResponse`) to this request.
+  //
+  // If null (not specified), the default value of false is assumed.
+  bool include_dataset_responses = 7;
+}
+
+// Dataset of a beacon.
+message BeaconDataset {
+  // Unique identifier of the dataset. 
+  string id = 1;
+
+  // Name of the dataset.
+  string name = 2;
+
+  // Description of the dataset.
+  string description = 3;
+
+  // Assembly identifier (GRC notation, e.g. `GRCh37`). 
+  string assembly_id = 4;
+
+  // The time the dataset was created (ISO 8601 format). 
+  string create_date_time = 5;
+
+  // The time the dataset was updated in (ISO 8601 format). 
+  string update_date_time = 6;
+
+  // Version of the dataset. 
+  string version = 7;
+
+  // Total number of variants in the dataset. 
+  int64 variant_count = 8;
+
+  // Total number of calls in the dataset. 
+  int64 call_count = 9;
+
+  // Total number of samples in the dataset. 
+  int64 sample_count = 10;
+
+  // URL to an external system providing more dataset information (RFC 3986 format). 
+  string external_url = 11;
+
+  // A map of additional information.
+  map<string, string> info = 12;
+}
+
+// Organization owning a beacon. 
+message BeaconOrganization {
+  // Unique identifier of the organization. 
+  string id = 1;
+
+  // Name of the organization. 
+  string name = 2;
+
+  // Description of the organization. 
+  string description = 3;
+
+  // Address of the organization. 
+  string address = 4;
+
+  // URL of the website of the organization (RFC 3986 format). 
+  string welcome_url = 5;
+
+  // URL with the contact for the beacon operator/maintainer, e.g. link to
+  // a contact form (RFC 3986 format) or an email (RFC 2368 format).
+  string contact_url = 6;
+
+  // URL to the logo (PNG/JPG format) of the organization (RFC 3986 format).
+  string logoUrl = 7;
+
+  // A map of additional information.
+  map<string, string> info = 12;
+}
+
+// Beacon. 
+message Beacon {
+  // Unique identifier of the beacon. 
+  string id = 1;
+
+  // Name of the beacon. 
+  string name = 2;
+
+  // Version of the API provided by the beacon. 
+  string api_version = 3;
+
+  // Organization owning the beacon. 
+  BeaconOrganization organization = 4;
+
+  // Description of the beacon. 
+  string description = 5;
+
+  // Version of the beacon. 
+  string version = 6;
+
+  // URL to the welcome page for this beacon (RFC 3986 format). 
+  string welcome_url = 7;
+
+  // Alternative URL to the API, e.g. a restricted version of this beacon
+  // (RFC 3986 format).
+  string alternative_url = 8;
+
+  // The time the beacon was created (ISO 8601 format). 
+  string create_date_time = 9;
+
+  // The time the beacon was updated in (ISO 8601 format). 
+  string update_date_time = 10;
+
+  // Datasets served by the beacon. Any beacon should specify at least one
+  // dataset.
+  repeated BeaconDataset datasets = 11;
+
+  // Examples of interesting queries, e.g. a few queries demonstrating different
+  // responses.
+  repeated BeaconAlleleRequest sample_allele_requests = 12;
+
+  // A map of additional information.
+  map<string, string> info = 13;
+}
+
+// Beacon-specific error representing an unexpected problem. 
+message BeaconError {
+  // Numeric error code. 
+  int32 error_code = 1;
+
+  // Error message. 
+  string message = 2;
+}
+
+// Dataset's response to a query for information about a specific allele. 
+message BeaconDatasetAlleleResponse {
+  // Identifier of the dataset, as defined in `BeaconDataset`. 
+  string dataset_id = 1;
+
+  // Indicator of whether the given allele was observed in the dataset.
+  //
+  // This should be non-null, unless there was an error, in which case
+  // `error` has to be non-null.
+  bool exists = 2;
+
+  // Dataset-specific error.
+  //
+  // This should be non-null in exceptional situations only, in which case
+  // `exists` has to be null.
+  BeaconError error = 3;
+
+  // Frequency of this allele in the dataset. Between 0 and 1, inclusive. 
+  double frequency = 4;
+
+  // Number of variants matching the allele request in the dataset. 
+  int64 variant_count = 5;
+
+  // Number of calls matching the allele request in the dataset. 
+  int64 call_count = 6;
+
+  // Number of samples matching the allele request in the dataset. 
+  int64 sample_count = 7;
+
+  // Additional note or description of the response. 
+  string note = 8;
+
+  // URL to an external system, such as a secured beacon or a system providing
+  // more information about a given allele (RFC 3986 format).
+  string external_url = 9;
+
+  // A map of additional information.
+  map<string, string> info = 13;
+}
+
+// Beacon's response to a query for information about a specific allele. 
+message BeaconAlleleResponse {
+  // Identifier of the beacon, as defined in `Beacon`. 
+  string beacon_id = 1;
+
+  // Indicator of whether the given allele was observed in any of the datasets
+  // queried.
+  //
+  // This should be non-null, unless there was an error, in which case
+  // `error` has to be non-null.
+  bool exists = 2;
+
+  // Beacon-specific error.
+  //
+  // This should be non-null in exceptional situations only, in which case
+  // `exists` has to be null.
+  BeaconError error = 3;
+  
+  // Allele request as interpreted by the beacon. 
+  BeaconAlleleRequest allele_request = 4;
+
+  // Indicator of whether the given allele was observed in individual datasets.
+  //
+  // This should be non-null if `includeDatasetResponses` in the corresponding
+  // `BeaconAlleleRequest` is true, and null otherwise.
+  repeated BeaconDatasetAlleleResponse dataset_allele_responses = 5;
+}
