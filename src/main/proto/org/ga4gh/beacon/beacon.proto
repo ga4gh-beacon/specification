@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package ga4gh;
+package org.ga4gh.beacon;
 
 // A Beacon is a web service for genetic data sharing that can be queried for
 // information about specific alleles.
