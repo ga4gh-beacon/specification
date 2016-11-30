@@ -42,6 +42,15 @@ record BeaconAlleleRequest {
   */
   string alternateBases;
 
+  /**
+  Additional information for alternateBases. Based on VCF "INFO" field.
+
+  Accepted VCF INFO keys:
+  END, SVLEN, CIPOS, CIEND
+  key-value pairs are separated by a semi-colon as in VCF.
+  */ 
+  union{ null, string } alternateBasesInfo = null;
+
   /** Assembly identifier (GRC notation, e.g. `GRCh37`). */
   string assemblyId;
 
