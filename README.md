@@ -16,6 +16,18 @@ A list of related tools and projects developed by the community is maintained on
 
 Guidelines for contributing to this repository are listed in the [CONTRIBUTING.md](CONTRIBUTING.md) document.
 
+## How to build
+
+Prerequisites: Maven 3+, Java 1.6+.
+
+To generate Java code, run `mvn package` and check the output in the `target` directory. 
+
+## How to test
+
+Prerequisites: Python 2.7 (incl. pip).
+
+Install dependencies with `pip install -r requirements.txt`. To run the test suite, use `nosetests -v tests`. To check the test code style violations, run `flake8 tests`.
+
 ## License
 
 See the [LICENSE](LICENSE) file.
