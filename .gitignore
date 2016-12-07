@@ -73,3 +73,5 @@ target/
 #********** IntelliJ files ******
 *.iml
 
+#********** Dependency files ********
+src/avro-schema-test-base

@@ -24,13 +24,9 @@ To generate Java code, run `mvn package` and check the output in the `target` di
 
 ## How to test
 
-Prerequisites: Python 2.7 (incl. pip).
+Prerequisites: Python 2.7 (incl. Pip 7+).
 
-Install dependencies with `pip install -r requirements.txt`. To run the test suite, use `nosetests -v tests`. To check the test code style violations, run `flake8 tests`.
-
-## License
-
-See the [LICENSE](LICENSE) file.
+Install dependencies with `pip install -r requirements.txt`. To run the test suite, use `nosetests -v`.
 
 ## More information
 
