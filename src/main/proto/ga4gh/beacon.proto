@@ -85,7 +85,7 @@ message BeaconDataset {
 
 // Organization owning a beacon. 
 message BeaconOrganization {
-  // Unique identifier of the organization. 
+  // Unique identifier of the organization. Use reversed namespace convention (e.g. org.ga4gh)
   string id = 1;
 
   // Name of the organization. 
@@ -113,10 +113,10 @@ message BeaconOrganization {
 
 // Beacon. 
 message Beacon {
-  // Unique identifier of the beacon. 
+  // Unique identifier of the beacon. Use reversed namespace convention (e.g. org.ga4gh.beacon)
   string id = 1;
 
-  // Name of the beacon. 
+  // Name of the beacon. )
   string name = 2;
 
   // Version of the API provided by the beacon. 
