@@ -44,6 +44,15 @@ message BeaconAlleleRequest {
   //
   // If null (not specified), the default value of false is assumed.
   bool include_dataset_responses = 7;
+
+  enum FilterDatasetResponse {
+    HIT = 0; // Only datasets where the allele was found
+    MISS = 1; // Only datasets where the allele was not found
+  }
+
+  // If include_dataset_responses is true, use this field to filter the response.
+  // Accepted values: hit (only datasets where the allele was found), miss (the .
+  FilterDatasetResponse filter_response = 8;
 }
 
 // Dataset of a beacon.
