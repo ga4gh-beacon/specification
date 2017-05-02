@@ -171,10 +171,26 @@ message Beacon {
 
 // Beacon-specific error representing an unexpected problem. 
 message BeaconError {
+
+  enum ErrorCode {
+    GENERIC_ERROR = 0; // HTTP error code 400. To be used when the error is not among below.
+    UNAUTHORIZED = 1; // HTTP error code 401
+    NOT_FOUND = 2; // HTTP error code 404
+    PRECONDITION_FAILED = 3; // HTTP error code 412
+  }
+
   // Numeric error code. 
   int32 error_code = 1;
 
-  // Error message. 
+  // Error message.
+  // Accepted values:
+  // - HTTP error code 400: generic error. If not 
+  // - HTTP error code 401: Unauthenticated users cannot access this dataset
+  // - HTTP error code 404: Dataset not found
+  // - HTTP error code 412: Missing mandatory parameters: referenceName, position/start and/or assemblyId
+  // - HTTP error code 412: The reference genome of this dataset X does not match the provided value
+  // - HTTP error code 412: Invalid alternateBases parameter, it can only be [ACTG]+
+  // - HTTP error code 412: Invalid referenceBases parameter, it can only be [ACTG]+
   string message = 2;
 }
 
