@@ -51,7 +51,6 @@ message BeaconAlleleRequest {
   }
 
   // If include_dataset_responses is true, use this field to filter the response.
-  // Accepted values: hit (only datasets where the allele was found), miss (the .
   FilterDatasetResponse filter_response = 8;
 }
 
@@ -240,9 +239,12 @@ message BeaconAlleleResponse {
   // Allele request as interpreted by the beacon. 
   BeaconAlleleRequest allele_request = 4;
 
+  // Version of the API provided by the beacon. 
+  string api_version = 5;
+
   // Indicator of whether the given allele was observed in individual datasets.
   //
   // This should be non-null if `includeDatasetResponses` in the corresponding
   // `BeaconAlleleRequest` is true, and null otherwise.
-  repeated BeaconDatasetAlleleResponse dataset_allele_responses = 5;
+  repeated BeaconDatasetAlleleResponse dataset_allele_responses = 6;
 }
