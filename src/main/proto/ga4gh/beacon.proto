@@ -90,10 +90,10 @@ message BeaconDataset {
   string external_url = 11;
 
   // Data use conditions for this dataset based on consent codes.
-  ConsentCodeDataUse consentCodeDataUse = 12;
+  ConsentCodeDataUse consentCodeDataUse = 13;
 
   // A map of additional information.
-  map<string, string> info = 13;
+  map<string, string> info = 12;
 }
 
 // Organization owning a beacon. 
@@ -256,11 +256,11 @@ message BeaconAlleleResponse {
   BeaconAlleleRequest allele_request = 4;
 
   // Version of the API provided by the beacon. 
-  string api_version = 5;
+  string api_version = 6;
 
   // Indicator of whether the given allele was observed in individual datasets.
   //
   // This should be non-null if `includeDatasetResponses` in the corresponding
   // `BeaconAlleleRequest` is true, and null otherwise.
-  repeated BeaconDatasetAlleleResponse dataset_allele_responses = 6;
+  repeated BeaconDatasetAlleleResponse dataset_allele_responses = 5;
 }
