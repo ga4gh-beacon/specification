@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+import "consent_code.proto";
+
 package ga4gh;
 
 // A Beacon is a web service for genetic data sharing that can be queried for
@@ -79,8 +81,11 @@ message BeaconDataset {
   // URL to an external system providing more dataset information (RFC 3986 format). 
   string external_url = 11;
 
+  // Data use conditions for this dataset based on consent codes.
+  ConsentCodeDataUse consentCodeDataUse = 12;
+
   // A map of additional information.
-  map<string, string> info = 12;
+  map<string, string> info = 13;
 }
 
 // Organization owning a beacon. 
