@@ -50,15 +50,18 @@ message BeaconAlleleRequest {
 // varying start and end positions, and queries will be addressed e.g. to
 // find all deletion variants overlapping with the CDR of a gene of interest.
 //
-// ____S-----S_____________E------E_______
-// ######+++++++++++++++++++++++##########
-// ###########+++++++++++++++#############
+//           11111111112222222222333333333
+// 012345678901234567890123456789012345678
 //
-// ____S________________________E_________
-// ####++++++++++++++++++++++++++#########
+// ____S-----S_____________E------E_______   start[3,10], end[23,31]
+//  #####+++++++++++++++++++++++##########
+//  #########++++++++++++++++#############
 //
-// S----------------------S_____E_________
-// ################++++++++++++++#########
+// ____S________________________E_________   start[3], end[28]
+//  ###++++++++++++++++++++++++++#########
+//
+// S----------------------S_____E_________   start[0,23], end[28]
+//  ###############++++++++++++++#########
 //
 message BeaconCNVrequest {
 
@@ -69,7 +72,7 @@ message BeaconCNVrequest {
   string reference_name = 1;
 
   // Position, genomic locus (0-based). This is represented as a list with
-  // 1..2 elements.
+  // 1 or 2 elements.
   // For the querying of variants with known exact position,
   // the use of a single start position value is sufficient.
   // For querying imprecise positions (e.g. identifying all structural variants
@@ -81,16 +84,18 @@ message BeaconCNVrequest {
   repeated int64 start = 2;
 
   // Position of the end of avariant as genomic locus (0-based). This is
-  // represented as a list with of 0..2 elements.
+  // represented as a list with of 0, 1 or 2 elements.
   // For the query against  e.g. a structural variant with known exact end
   // position, the use of a single end value is possible.
   // For querying imprecise positions (e.g. identifying all structural variants
   // starting in a genomic region), 2 values indicating start and end of the
   // assumed end are required.
   //
-  // Accepted values: 1 or 2 non-negative integers smaller or equal to the
+  // Accepted values: 0, 1 or 2 non-negative integers smaller or equal to the
   // reference length.
-  // Required.
+  // Optional; if no value is provided, the server should use the value(s) from
+  // the "start" attribute (i.e. processing the request as for a variant
+  // contained in the range given by the start interval).
   repeated int64 end = 3;
 
   // The "variant_type" is used to denote e.g. structural variants.
