@@ -1,4 +1,4 @@
-# Beacon Schemas
+# Beacon Schemas [![Build Status](https://travis-ci.org/ga4gh/beacon-team.svg?branch=develop)](https://travis-ci.org/ga4gh/beacon-team) [![GitHub license](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://raw.githubusercontent.com/ga4gh/beacon-team/develop/LICENSE) [![Slack](https://beacon-team-slackin.herokuapp.com/badge.svg)](https://beacon-team-slackin.herokuapp.com/)
 
 ## What is a Beacon?
 
@@ -16,9 +16,17 @@ A list of related tools and projects developed by the community is maintained on
 
 Guidelines for contributing to this repository are listed in the [CONTRIBUTING.md](CONTRIBUTING.md) document.
 
-## License
+## How to build
 
-See the [LICENSE](LICENSE) file.
+Prerequisites: Maven 3+, Java 1.6+.
+
+To generate Java code, run `mvn package` and check the output in the `target` directory. 
+
+## How to test
+
+Prerequisites: Python 2.7 (incl. Pip 7+).
+
+Install dependencies with `pip install -r requirements.txt`. To run the test suite, use `nosetests -v`.
 
 ## More information
 
