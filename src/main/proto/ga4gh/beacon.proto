@@ -36,20 +36,19 @@ message BeaconAlleleRequest {
   // If this field is null/not specified, all datasets should be queried.
   repeated string dataset_ids = 6;
 
-  // Indicator of whether responses for individual datasets
-  // (`datasetAlleleResponses`) should be included (not null) in the response
-  // (`BeaconAlleleResponse`) to this request.
-  //
-  // If null (not specified), the default value of false is assumed.
-  bool include_dataset_responses = 7;
-
   enum FilterDatasetResponse {
-    HIT = 0; // Only datasets where the allele was found
-    MISS = 1; // Only datasets where the allele was not found
+    ALL = 0; // All datasets
+    HIT = 1; // Only datasets where the allele was found
+    MISS = 2; // Only datasets where the allele was not found
+    NONE = 3; // No dataset
   }
 
-  // If include_dataset_responses is true, use this field to filter the response.
-  FilterDatasetResponse filter_response = 8;
+  // Indicator of whether responses for individual datasets
+  // (`datasetAlleleResponses`) should be included in the response
+  // (`BeaconAlleleResponse`) to this request or not.
+  //
+  // If null (not specified), the default value of NONE is assumed.
+  FilterDatasetResponse include_dataset_responses = 7;
 }
 
 // Dataset of a beacon.
@@ -84,7 +83,8 @@ message BeaconDataset {
   // Total number of samples in the dataset. 
   int64 sample_count = 10;
 
-  // URL to an external system providing more dataset information (RFC 3986 format). 
+  // URL to an external system providing more dataset information (RFC 3986 
+  // format). 
   string external_url = 11;
 
   // A map of additional information.
@@ -93,7 +93,8 @@ message BeaconDataset {
 
 // Organization owning a beacon. 
 message BeaconOrganization {
-  // Unique identifier of the organization. Use reversed namespace convention (e.g. org.ga4gh)
+  // Unique identifier of the organization. Use reverse domain name notation 
+  // (e.g. org.ga4gh)
   string id = 1;
 
   // Name of the organization. 
@@ -121,10 +122,11 @@ message BeaconOrganization {
 
 // Beacon. 
 message Beacon {
-  // Unique identifier of the beacon. Use reversed namespace convention (e.g. org.ga4gh.beacon)
+  // Unique identifier of the beacon. Use reverse domain name notation (e.g. 
+  // org.ga4gh.beacon)
   string id = 1;
 
-  // Name of the beacon. )
+  // Name of the beacon.
   string name = 2;
 
   // Version of the API provided by the beacon. 
@@ -156,8 +158,8 @@ message Beacon {
   // dataset.
   repeated BeaconDataset datasets = 11;
 
-  // Examples of interesting queries, e.g. a few queries demonstrating different
-  // responses.
+  // Examples of interesting queries, e.g. a few queries demonstrating 
+  // different responses.
   repeated BeaconAlleleRequest sample_allele_requests = 12;
 
   // A map of additional information.
@@ -168,24 +170,30 @@ message Beacon {
 message BeaconError {
 
   enum ErrorCode {
-    GENERIC_ERROR = 0; // HTTP error code 400. To be used when the error is not among below.
-    UNAUTHORIZED = 1; // HTTP error code 401
-    NOT_FOUND = 2; // HTTP error code 404
-    PRECONDITION_FAILED = 3; // HTTP error code 412
+    // HTTP error code 400. To be used when the error is not among below.
+    GENERIC_ERROR = 0;
+    // HTTP error code 401 
+    UNAUTHORIZED = 1; 
+    // HTTP error code 404
+    NOT_FOUND = 2;
   }
 
-  // Numeric error code. 
-  int32 error_code = 1;
+  // Error code. 
+  ErrorCode error_code = 1;
 
   // Error message.
   // Accepted values:
-  // - HTTP error code 400: generic error. If not 
+  // - HTTP error code 400: Generic error.
   // - HTTP error code 401: Unauthenticated users cannot access this dataset
   // - HTTP error code 404: Dataset not found
-  // - HTTP error code 412: Missing mandatory parameters: referenceName, position/start and/or assemblyId
-  // - HTTP error code 412: The reference genome of this dataset X does not match the provided value
-  // - HTTP error code 412: Invalid alternateBases parameter, it can only be [ACTG]+
-  // - HTTP error code 412: Invalid referenceBases parameter, it can only be [ACTG]+
+  // - HTTP error code 400: Missing mandatory parameters: referenceName, 
+  //                          position/start and/or assemblyId
+  // - HTTP error code 400: The reference genome of this dataset X does not 
+  //                          match the provided value
+  // - HTTP error code 400: Invalid alternateBases parameter, it can only be 
+  //                          [ACTG]+
+  // - HTTP error code 400: Invalid referenceBases parameter, it can only be 
+  //                          [ACTG]+
   string message = 2;
 }
 
