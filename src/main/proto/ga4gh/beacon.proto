@@ -12,62 +12,69 @@ message BeaconAlleleRequest {
   // Required.
   string reference_name = 1;
 
-  // Position, genomic locus (0-based). This is represented as a list with
-  // 1..2 elements.
-  // For the querying of variants with known exact position and composition,
-  // the use of a single start position value is sufficient.
-  // For querying imprecise positions (e.g. identifying all structural variants
-  // starting in a genomic region), 2 values indicating start and end of this
-  // region are required.
+  // Position, genomic locus (0-based).
   //
-  // Accepted values: 1 or 2 non-negative integers smaller than reference length.
-  // Required.
-  repeated int64 start = 2;
+  // start only:
+  //   - for single positions, e.g. the start of a specified sequence alteration
+  //     where the size is given through the specified alternate_bases
+  //   - typical use are queries for SNV and small InDels
+  //   - the use of "start" without an "end" parameter requires the use of
+  //     "reference_bases"
+  //
+  // start and end:
+  //   - special use case for exactly determined structural changes
+  //   - TODO: may be used to determine an interval in which a specific sequence
+  //     variant (such as normally spefified by a single start parameter) can
+  //     occur (e.g. an abberrant stop codon)
+  //
+  // start_min + start_max + end_min + end_max
+  //   - for querying imprecise positions (e.g. identifying all structural
+  //     variants starting anywhere between start_min <-> start_max, and ending
+  //     anywhere between end_min <-> end_max
+  //   - single or douple sided precise matches can be achieved by setting
+  //     start_min = start_max XOR end_min = end_max
+  //
+  int64 start = 2;  // required
 
-  // Position of the end of avariant as genomic locus (0-based). This is
-  // represented as a list with of 0..2 elements.
-  // A query against variants with known exact position and composition (e.g.
-  // single base SNP), no "end" parameters have to be specified.
-  // For the query against  e.g. a structural variant with known exact end
-  // position, the use of a single end value is possible.
-  // For querying imprecise positions (e.g. identifying all structural variants
-  // starting in a genomic region), 2 values indicating start and end of the
-  // assumed end are required.
-  //
-  // Accepted values: 0, 1 or 2 non-negative integers smaller or equal to the
-  // reference length.
-  // Optional.
-  repeated int64 end = 3;
+  int64 start_min = 3;
+
+  int64 start_max = 4;
+
+  int64 end = 5;
+
+  int64 end_min = 6;
+
+  int64 end_max = 7;
 
   // Reference bases for this variant (starting from `start`).
   //
   // Accepted values: see the REF field in VCF 4.2 specification
   // (https://samtools.github.io/hts-specs/VCFv4.2.pdf).
   // Optional.
-  string reference_bases = 4;
+  string reference_bases = 8;
 
   // The bases that appear instead of the reference bases.
   //
   // Accepted values: see the ALT field in VCF 4.2 specification
   // (https://samtools.github.io/hts-specs/VCFv4.2.pdf).
   // Optional (either "alternate_bases" or "variant_type" is required)
-  string alternate_bases = 5;
+  string alternate_bases = 9;
 
   // The "variant_type" is used to denote e.g. structural variants.
   // Examples:
   //   DUP  : duplication of sequence following "start"; not necessarily in situ
   //   DEL  : deletion of sequence following "start"
   // Optional (either "alternate_bases" or "variant_type" is required)
-  string variant_type = 6;
+  string variant_type = 10;
 
   // Assembly identifier (GRC notation, e.g. `GRCh37`).
-  string assembly_id = 6;
+  string assembly_id = 11;
 
   // Identifiers of datasets, as defined in `BeaconDataset`.
   //
   // If this field is null/not specified, all datasets should be queried.
   // Optional.
-  repeated string dataset_ids = 7;
+  repeated string dataset_ids = 12;
 
   // Indicator of whether responses for individual datasets
   // (`datasetAlleleResponses`) should be included (not null) in the response
@@ -75,7 +82,7 @@ message BeaconAlleleRequest {
   //
   // If null (not specified), the default value of false is assumed.
   // Optional.
-  bool include_dataset_responses = 8;
+  bool include_dataset_responses = 13;
 }
 
 // Dataset of a beacon.
