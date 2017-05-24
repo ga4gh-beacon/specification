@@ -50,7 +50,7 @@ message BeaconAlleleRequest {
   //
   // Accepted values: see the REF field in VCF 4.2 specification
   // (https://samtools.github.io/hts-specs/VCFv4.2.pdf).
-  // Optional.
+  // Required if none of end | end_min | end_max parameters is given.
   string reference_bases = 8;
 
   // The bases that appear instead of the reference bases.
