@@ -34,7 +34,7 @@ message BeaconAlleleRequest {
   //   - single or douple sided precise matches can be achieved by setting
   //     start_min = start_max XOR end_min = end_max
   //
-  int64 start = 2;  // required
+  int64 start = 2;
 
   int64 start_min = 3;
 
@@ -65,6 +65,8 @@ message BeaconAlleleRequest {
   //   DUP  : duplication of sequence following "start"; not necessarily in situ
   //   DEL  : deletion of sequence following "start"
   // Optional (either "alternate_bases" or "variant_type" is required)
+  // TODO: Evaluate implementation of variant_type as ontology term
+  // (e.g. SO - Sequence Ontology or general GA4GH style OntologyTerm object).
   string variant_type = 10;
 
   // Assembly identifier (GRC notation, e.g. `GRCh37`).
