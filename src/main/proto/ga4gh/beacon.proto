@@ -65,8 +65,6 @@ message BeaconAlleleRequest {
   //   DUP  : duplication of sequence following "start"; not necessarily in situ
   //   DEL  : deletion of sequence following "start"
   // Optional (either "alternate_bases" or "variant_type" is required)
-  // TODO: Evaluate implementation of variant_type as ontology term
-  // (e.g. SO - Sequence Ontology or general GA4GH style OntologyTerm object).
   string variant_type = 10;
 
   // Assembly identifier (GRC notation, e.g. `GRCh37`).
