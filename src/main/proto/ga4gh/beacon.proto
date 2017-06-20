@@ -23,9 +23,6 @@ message BeaconAlleleRequest {
   //
   // start and end:
   //   - special use case for exactly determined structural changes
-  //   - TODO: may be used to determine an interval in which a specific sequence
-  //     variant (such as normally spefified by a single start parameter) can
-  //     occur (e.g. an abberrant stop codon)
   //
   // start_min + start_max + end_min + end_max
   //   - for querying imprecise positions (e.g. identifying all structural
@@ -50,7 +47,10 @@ message BeaconAlleleRequest {
   //
   // Accepted values: see the REF field in VCF 4.2 specification
   // (https://samtools.github.io/hts-specs/VCFv4.2.pdf).
-  // Required if none of end | end_min | end_max parameters is given.
+  // When querying for variants without specific base alterations (e.g.
+  // imprecise structural variants with separate variant_type as well as
+  // start_min & end_min ... parameters), the use of a single "N" value is
+  // recommended.
   string reference_bases = 8;
 
   // The bases that appear instead of the reference bases.
@@ -78,13 +78,19 @@ message BeaconAlleleRequest {
   // Optional.
   repeated string dataset_ids = 12;
 
+  enum FilterDatasetResponse {
+    ALL = 0; // All datasets
+    HIT = 1; // Only datasets where the allele was found
+    MISS = 2; // Only datasets where the allele was not found
+    NONE = 3; // No dataset
+  }
+
   // Indicator of whether responses for individual datasets
-  // (`datasetAlleleResponses`) should be included (not null) in the response
-  // (`BeaconAlleleResponse`) to this request.
+  // (`datasetAlleleResponses`) should be included in the response
+  // (`BeaconAlleleResponse`) to this request or not.
   //
-  // If null (not specified), the default value of false is assumed.
-  // Optional.
-  bool include_dataset_responses = 13;
+  // If null (not specified), the default value of NONE is assumed.
+  FilterDatasetResponse include_dataset_responses = 13;
 }
 
 // Dataset of a beacon.
@@ -119,7 +125,8 @@ message BeaconDataset {
   // Total number of samples in the dataset.
   int64 sample_count = 10;
 
-  // URL to an external system providing more dataset information (RFC 3986 format).
+  // URL to an external system providing more dataset information (RFC 3986
+  // format).
   string external_url = 11;
 
   // A map of additional information.
@@ -128,7 +135,8 @@ message BeaconDataset {
 
 // Organization owning a beacon.
 message BeaconOrganization {
-  // Unique identifier of the organization.
+  // Unique identifier of the organization. Use reverse domain name notation
+  // (e.g. org.ga4gh)
   string id = 1;
 
   // Name of the organization.
@@ -156,7 +164,8 @@ message BeaconOrganization {
 
 // Beacon.
 message Beacon {
-  // Unique identifier of the beacon.
+  // Unique identifier of the beacon. Use reverse domain name notation (e.g.
+  // org.ga4gh.beacon)
   string id = 1;
 
   // Name of the beacon.
@@ -191,8 +200,8 @@ message Beacon {
   // dataset.
   repeated BeaconDataset datasets = 11;
 
-  // Examples of interesting queries, e.g. a few queries demonstrating different
-  // responses.
+  // Examples of interesting queries, e.g. a few queries demonstrating
+  // different responses.
   repeated BeaconAlleleRequest sample_allele_requests = 12;
 
   // A map of additional information.
@@ -201,10 +210,32 @@ message Beacon {
 
 // Beacon-specific error representing an unexpected problem.
 message BeaconError {
-  // Numeric error code.
-  int32 error_code = 1;
+
+  enum ErrorCode {
+    // HTTP error code 400. To be used when the error is not among below.
+    GENERIC_ERROR = 0;
+    // HTTP error code 401
+    UNAUTHORIZED = 1;
+    // HTTP error code 404
+    NOT_FOUND = 2;
+  }
+
+  // Error code.
+  ErrorCode error_code = 1;
 
   // Error message.
+  // Accepted values:
+  // - HTTP error code 400: Generic error.
+  // - HTTP error code 401: Unauthenticated users cannot access this dataset
+  // - HTTP error code 404: Dataset not found
+  // - HTTP error code 400: Missing mandatory parameters: referenceName,
+  //                          position/start and/or assemblyId
+  // - HTTP error code 400: The reference genome of this dataset X does not
+  //                          match the provided value
+  // - HTTP error code 400: Invalid alternateBases parameter, it can only be
+  //                          [ACTG]+
+  // - HTTP error code 400: Invalid referenceBases parameter, it can only be
+  //                          [ACTG]+
   string message = 2;
 }
 
@@ -268,6 +299,9 @@ message BeaconAlleleResponse {
 
   // Allele request as interpreted by the beacon.
   BeaconAlleleRequest allele_request = 4;
+
+  // Version of the API provided by the beacon.
+  string api_version = 6;
 
   // Indicator of whether the given allele was observed in individual datasets.
   //
