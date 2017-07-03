@@ -2,6 +2,9 @@ syntax = "proto3";
 
 package ga4gh;
 
+option java_package = "org.ga4gh.beacon";
+option java_multiple_files = true;
+
 import "ga4gh/beacon.proto";
 import "google/protobuf/empty.proto";
 
