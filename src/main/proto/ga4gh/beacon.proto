@@ -2,6 +2,9 @@ syntax = "proto3";
 
 package ga4gh;
 
+option java_package = "org.ga4gh.beacon";
+option java_multiple_files = true;
+
 // A Beacon is a web service for genetic data sharing that can be queried for
 // information about specific alleles.
 // Query for information about a specific allele. Based on ga4gh variant.
