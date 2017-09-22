@@ -136,7 +136,7 @@ message BeaconDataset {
   // A map of additional information.
   map<string, string> info = 12;
 
-  DataUseConditions DataUseConditions = 14;
+  DataUseConditions DataUseConditions = 13;
 
 }
 
