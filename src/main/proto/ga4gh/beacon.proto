@@ -2,6 +2,9 @@ syntax = "proto3";
 
 package ga4gh;
 
+import "ADAM.proto";
+import "consent_code.proto";
+
 option java_package = "org.ga4gh.beacon";
 option java_multiple_files = true;
 
@@ -132,6 +135,31 @@ message BeaconDataset {
 
   // A map of additional information.
   map<string, string> info = 12;
+
+  DataUseConditions DataUseConditions = 14;
+
+}
+
+message DataUseConditions {
+
+  // For more information, see https://github.com/ga4gh/ga4gh-consent-policy
+  ConsentCodeDataUse consentCodeDataUse = 1;
+
+  // For more information, see https://github.com/ga4gh/ADA-M
+  AdaM adamDataUse = 2;
+
+}
+
+message AdaM {
+  
+  ADAM.Header header = 1;
+
+  ADAM.Profile profile = 2;
+
+  ADAM.Terms terms = 3;
+
+  ADAM.MetaConditions metaConditions = 4;
+
 }
 
 // Organization owning a beacon.
