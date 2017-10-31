@@ -62,6 +62,8 @@
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.targetEncoding>UTF-8</project.build.targetEncoding>
+
+        <maven-dependency-plugin.version>3.0.2</maven-dependency-plugin.version>
     </properties>
 
     <prerequisites>
@@ -192,24 +194,40 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.xolstice.maven.plugins</groupId>
-                <artifactId>protobuf-maven-plugin</artifactId>
-                <configuration>
-                    <protocArtifact>com.google.protobuf:protoc:${proto.version}:exe:${os.detected.classifier}</protocArtifact>
-                </configuration>
+                <groupId>com.github.os72</groupId>
+                <artifactId>protoc-jar-maven-plugin</artifactId>
+                <version>3.4.0.1</version>
                 <executions>
                     <execution>
+                        <phase>generate-sources</phase>
                         <goals>
-                            <goal>compile</goal>
-                            <goal>compile-python</goal>
+                            <goal>run</goal>
                         </goals>
+                        <configuration>
+                            <protocArtifact>com.google.protobuf:protoc:3.0.0</protocArtifact>
+                            <includeStdTypes>true</includeStdTypes>
+                            <includeDirectories>
+                                <include>../ga4gh-consent-policy/src/main/proto</include>
+                                <include>../ADA-M</include>
+                            </includeDirectories>
+                            <inputDirectories>
+                                <include>../ga4gh-consent-policy/src/main/proto</include>
+                                <include>../ADA-M</include>
+                                <include>src/main/proto</include>
+                            </inputDirectories>
+                            <outputTargets>
+                                <outputTarget>
+                                    <type>java</type>
+                                </outputTarget>
+                            </outputTargets>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
         </plugins>
     </build>
 
-    <dependencyManagement>
+     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>com.google.protobuf</groupId>
@@ -220,7 +238,7 @@
     </dependencyManagement>
 
     <dependencies>
-        <dependency>
+         <dependency>
             <groupId>com.google.protobuf</groupId>
             <artifactId>protobuf-java</artifactId>
         </dependency>
