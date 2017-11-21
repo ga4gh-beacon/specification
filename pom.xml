@@ -24,7 +24,8 @@
         <connection>scm:git:https://github.com/ga4gh/beacon-team</connection>
         <developerConnection>scm:git:https://github.com/ga4gh/beacon-team</developerConnection>
         <url>https://github.com/ga4gh/beacon-team</url>
-    </scm>
+      <tag>beacon-0.4.0</tag>
+  </scm>
     <developers>
         <developer>
             <name>GA4GH developers</name>
