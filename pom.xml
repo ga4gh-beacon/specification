@@ -54,21 +54,44 @@
         <maven.source.plugin.version>3.0.1</maven.source.plugin.version>
         <maven.surefire.plugin.version>2.19.1</maven.surefire.plugin.version>
         <maven.exec.plugin.version>1.5.0</maven.exec.plugin.version>
-        <protobuf.plugin.version>0.5.0</protobuf.plugin.version>
+        <maven.protoc-jar-maven.plugin.version>3.4.0.1</maven.protoc-jar-maven.plugin.version>
 
         <maven.enforcer.jdk.version>[1.6,)</maven.enforcer.jdk.version>
         <maven.enforcer.maven.version>[3.1.0,)</maven.enforcer.maven.version>
+
         <proto.version>3.0.0</proto.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.targetEncoding>UTF-8</project.build.targetEncoding>
-
-        <maven-dependency-plugin.version>3.0.2</maven-dependency-plugin.version>
     </properties>
 
-    <prerequisites>
-        <maven>3.0</maven>
-    </prerequisites>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.google.protobuf</groupId>
+                <artifactId>protobuf-java</artifactId>
+                <version>${proto.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+        </dependency>
+    </dependencies>
 
     <build>
         <extensions>
@@ -144,11 +167,6 @@
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-site-plugin</artifactId>
-                    <version>${maven.site.plugin.version}</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
                     <version>${maven.source.plugin.version}</version>
                 </plugin>
@@ -158,14 +176,9 @@
                     <version>${maven.surefire.plugin.version}</version>
                 </plugin>
                 <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>exec-maven-plugin</artifactId>
-                    <version>${maven.exec.plugin.version}</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.xolstice.maven.plugins</groupId>
-                    <artifactId>protobuf-maven-plugin</artifactId>
-                    <version>${protobuf.plugin.version}</version>
+                    <groupId>com.github.os72</groupId>
+                    <artifactId>protoc-jar-maven-plugin</artifactId>
+                    <version>${maven.protoc-jar-maven.plugin.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -196,7 +209,6 @@
             <plugin>
                 <groupId>com.github.os72</groupId>
                 <artifactId>protoc-jar-maven-plugin</artifactId>
-                <version>3.4.0.1</version>
                 <executions>
                     <execution>
                         <phase>generate-sources</phase>
@@ -207,12 +219,12 @@
                             <protocArtifact>com.google.protobuf:protoc:3.0.0</protocArtifact>
                             <includeStdTypes>true</includeStdTypes>
                             <includeDirectories>
-                                <include>../ga4gh-consent-policy/src/main/proto</include>
-                                <include>../ADA-M</include>
+                                <include>ga4gh-consent-policy/src/main/protobuf</include>
+                                <include>ADA-M</include>
                             </includeDirectories>
                             <inputDirectories>
-                                <include>../ga4gh-consent-policy/src/main/proto</include>
-                                <include>../ADA-M</include>
+                                <include>ga4gh-consent-policy/src/main/protobuf</include>
+                                <include>ADA-M</include>
                                 <include>src/main/proto</include>
                             </inputDirectories>
                             <outputTargets>
@@ -226,34 +238,6 @@
             </plugin>
         </plugins>
     </build>
-
-     <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.google.protobuf</groupId>
-                <artifactId>protobuf-java</artifactId>
-                <version>${proto.version}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
-    <dependencies>
-         <dependency>
-            <groupId>com.google.protobuf</groupId>
-            <artifactId>protobuf-java</artifactId>
-        </dependency>
-    </dependencies>
-
-    <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-    </distributionManagement>
 
     <profiles>
         <profile>
