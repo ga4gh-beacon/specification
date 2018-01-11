@@ -26,7 +26,7 @@ paths:
           description: OK / Call is successful
           schema:
             items:
-              $ref: '#/definitions/Beacon'
+              $ref: 'https://raw.githubusercontent.com/sdelatorrep/beacon-team/openapi_v2.0/beacon.yaml#/definitions/Beacon'
   '/query':
     get:
       description: Get response to a Beacon query for allele information.
@@ -152,20 +152,20 @@ paths:
           description: OK / Call is successful
           schema:
             items:
-              $ref: '#/definitions/BeaconAlleleResponse'
+              $ref: 'https://raw.githubusercontent.com/sdelatorrep/beacon-team/openapi_v2.0/beacon.yaml#/definitions/BeaconAlleleResponse'
         '400':
           description: Bad request (e.g. missing mandatory parameter)
           schema:
-            $ref: '#/definitions/BeaconAlleleResponse'
+            $ref: 'https://raw.githubusercontent.com/sdelatorrep/beacon-team/openapi_v2.0/beacon.yaml#/definitions/BeaconAlleleResponse'
             
         '401':
           description: Unauthorised (e.g. when an unauthenticated user tries to access a protected resource)
           schema:
-            $ref: '#/definitions/BeaconAlleleResponse'
+            $ref: 'https://raw.githubusercontent.com/sdelatorrep/beacon-team/openapi_v2.0/beacon.yaml#/definitions/BeaconAlleleResponse'
         '403':
           description: Forbidden (e.g. the resource is protected for all users or the user is authenticated but s/he is not granted for this resource)
           schema:
-            $ref: '#/definitions/BeaconAlleleResponse'
+            $ref: 'https://raw.githubusercontent.com/sdelatorrep/beacon-team/openapi_v2.0/beacon.yaml#/definitions/BeaconAlleleResponse'
     post:
       description: Gets response to a beacon query for allele information.
       operationId: postBeaconAlleleResponse
@@ -176,23 +176,23 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/BeaconAlleleRequest'
+            $ref: 'https://raw.githubusercontent.com/sdelatorrep/beacon-team/openapi_v2.0/beacon.yaml#/definitions/BeaconAlleleRequest'
       responses:
         '200':
           description: OK / Call is successful
           schema:
             items:
-              $ref: '#/definitions/BeaconAlleleResponse'
+              $ref: 'https://raw.githubusercontent.com/sdelatorrep/beacon-team/openapi_v2.0/beacon.yaml#/definitions/BeaconAlleleResponse'
         '400':
           description: Bad request (e.g. missing mandatory parameter)
           schema:
-            $ref: '#/definitions/BeaconAlleleResponse'
+            $ref: 'https://raw.githubusercontent.com/sdelatorrep/beacon-team/openapi_v2.0/beacon.yaml#/definitions/BeaconAlleleResponse'
             
         '401':
           description: Unauthorised (e.g. when an unauthenticated user tries to access a protected resource)
           schema:
-            $ref: '#/definitions/BeaconAlleleResponse'
+            $ref: 'https://raw.githubusercontent.com/sdelatorrep/beacon-team/openapi_v2.0/beacon.yaml#/definitions/BeaconAlleleResponse'
         '403':
           description: Forbidden (e.g. the resource is protected for all users or the user is authenticated but s/he is not granted for this resource)
           schema:
-            $ref: '#/definitions/BeaconAlleleResponse'
+            $ref: 'https://raw.githubusercontent.com/sdelatorrep/beacon-team/openapi_v2.0/beacon.yaml#/definitions/BeaconAlleleResponse'
