@@ -351,7 +351,7 @@ definitions:
     description: Data use conditions ruling this dataset.
     properties:
       consentCodeDataUse:
-        $ref: "https://raw.githubusercontent.com/sdelatorrep/ga4gh-consent-policy/open_api/src/main/consent_code.yaml#/definitions/ConsentCodeDataUse"
+        $ref: "https://raw.githubusercontent.com/sdelatorrep/ga4gh-consent-policy/openapi_v2.0/consent_code.yaml#/definitions/ConsentCodeDataUse"
       adamDataUse:
         $ref: "#/definitions/AdamDataUse"
   AdamDataUse:
@@ -363,10 +363,10 @@ definitions:
       - metaConditions
     properties:
       header:
-        $ref: "https://raw.githubusercontent.com/sdelatorrep/ADA-M/open_api/adam.yml#/definitions/AdamHeader"
+        $ref: "https://raw.githubusercontent.com/sdelatorrep/ADA-M/openapi_v2.0/adam.yaml#/definitions/AdamHeader"
       profile:
-        $ref: "https://raw.githubusercontent.com/sdelatorrep/ADA-M/open_api/adam.yml#/definitions/AdamProfile"
+        $ref: "https://raw.githubusercontent.com/sdelatorrep/ADA-M/openapi_v2.0/adam.yaml#/definitions/AdamProfile"
       terms:
-        $ref: "https://raw.githubusercontent.com/sdelatorrep/ADA-M/open_api/adam.yml#/definitions/AdamTerms"
+        $ref: "https://raw.githubusercontent.com/sdelatorrep/ADA-M/openapi_v2.0/adam.yaml#/definitions/AdamTerms"
       metaConditions:
-        $ref: "https://raw.githubusercontent.com/sdelatorrep/ADA-M/open_api/adam.yml#/definitions/AdamMetaConditions"
+        $ref: "https://raw.githubusercontent.com/sdelatorrep/ADA-M/openapi_v2.0/adam.yaml#/definitions/AdamMetaConditions"
