@@ -5,6 +5,7 @@ branches:
   only:
   - master
   - develop
+  - develop-proto
 script:
 - nosetests -v $VIRTUAL_ENV/src/avro-schema-test-base
 notifications:
