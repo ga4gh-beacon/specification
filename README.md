@@ -1,4 +1,4 @@
-# Beacon Schemas [![Build Status](https://travis-ci.org/ga4gh/beacon-team.svg?branch=develop)](https://travis-ci.org/ga4gh/beacon-team) [![GitHub license](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://raw.githubusercontent.com/ga4gh/beacon-team/develop/LICENSE) [![Slack](https://beacon-team-slackin.herokuapp.com/badge.svg)](https://beacon-team-slackin.herokuapp.com/)
+# Beacon Schemas [![](https://travis-ci.org/ga4gh/beacon-team.svg?branch=develop)](https://travis-ci.org/ga4gh/beacon-team) [![](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://raw.githubusercontent.com/ga4gh/beacon-team/develop/LICENSE) [![](https://beacon-team-slackin.herokuapp.com/badge.svg)](https://beacon-team-slackin.herokuapp.com/) [![](https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png)](https://zenhub.com)
 
 ## What is a Beacon?
 
