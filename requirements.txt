@@ -1,5 +1,0 @@
--e git+https://github.com/mcupak/avro-schema-test-base.git@v0.1.0#egg=avro-schema-test-base
-avro==1.8.0
-humanize==0.5.1
-nose==1.3.7
-requests==2.12.3
