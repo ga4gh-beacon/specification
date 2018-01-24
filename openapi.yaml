@@ -6,10 +6,6 @@ info:
   description: >-
     A Beacon is a web service for genetic data sharing that can be queried for information about specific alleles.
 
-host: egatest.crg.eu
-
-basePath: /requesterportal/v1/beacon
-
 schemes:
   - https
   - http
