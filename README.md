@@ -1,5 +1,8 @@
 # Beacon Schemas [![](https://travis-ci.org/ga4gh/beacon-team.svg?branch=develop)](https://travis-ci.org/ga4gh/beacon-team) [![](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://raw.githubusercontent.com/ga4gh/beacon-team/develop/LICENSE) [![](https://beacon-team-slackin.herokuapp.com/badge.svg)](https://beacon-team-slackin.herokuapp.com/) [![](https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png)](https://zenhub.com)
 
+
+Specification Status: <img src="http://online.swagger.io/validator?url=http://online.swagger.io/validator?url=https://raw.githubusercontent.com/ga4gh-beacon/specification/develop/openapi.yaml">
+
 ## What is a Beacon?
 
 A _Beacon_ is a web-accessible service that can be queried for information about a specific allele. A user of a Beacon can pose queries of the form _Have you observed this nucleotide (e.g. C) at this genomic location (e.g. position 32,936,732 on chromosome 13)?_ to which the Beacon must respond with either _yes_ or _no_.
