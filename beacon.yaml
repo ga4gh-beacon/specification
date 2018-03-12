@@ -276,6 +276,9 @@ definitions:
           $ref: "#/definitions/KeyValuePair"    
       dataUseConditions:
         $ref: "#/definitions/DataUseConditions"
+  BeaconAttackResponse
+    type: response
+    
   BeaconDatasetAlleleResponse:
     type: object
     required:
