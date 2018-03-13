@@ -276,8 +276,40 @@ definitions:
           $ref: "#/definitions/KeyValuePair"    
       dataUseConditions:
         $ref: "#/definitions/DataUseConditions"
-  BeaconAttackResponse
-    type: response
+ 
+  BeaconAttackResponse:
+   type: object
+   BeaconQuery:
+   
+    
+
+  BeaconHistoryResponse:
+   type: object
+   required:
+    - UUID   #The uuid of a set of queries associated with a suspected attack. Can be time based  or grouped by other crieria depending on Beacon Policy
+    
+   
+  BeaconQuery:
+   type: object
+   query_ip: 
+   query_timestamp: 
+   query_ip_count:
+   query_account: 
+   query_ip_moving_freq:
+   query: 
+   query_response: 
+   attack_suspected: 
+   mitigation_strategy_employed:
+   mitigation_strategies:
+    mitigation_strategy:
+     parameters": 
+     parameter_type": 
+     parameter_value": 
+     parameter_units": 
+   history:
+
+    
+    
     
   BeaconDatasetAlleleResponse:
     type: object
