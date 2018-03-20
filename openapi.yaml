@@ -69,32 +69,37 @@ paths:
               - the use of "start" without an "end" parameter requires the use of "referenceBases"
             * start and end:
               - special use case for exactly determined structural changes
-            * startMin + startMax + endMin + endMax
-              - for querying imprecise positions (e.g. identifying all structural variants starting anywhere between startMin <-> startMax, and ending anywhere between endMin <-> endMax
-              - single or douple sided precise matches can be achieved by setting startMin = startMax XOR endMin = endMax
           in: query
-          required: true
+          required: false
           type: integer
           format: int64
           minimum: 0
         - name: startMin
-          description: 'Minimum start coordinate'
+          description: |
+            Minimum start coordinate
+            * startMin + startMax + endMin + endMax
+              - for querying imprecise positions (e.g. identifying all structural variants starting anywhere between startMin <-> startMax, and ending anywhere between endMin <-> endMax
+              - single or douple sided precise matches can be achieved by setting startMin = startMax XOR endMin = endMax
           type: string
           in: query
         - name: startMax
-          description: 'Maximum start coordinate'
+          description: |
+            Maximum start coordinate. See startMin.
           type: string
           in: query
         - name: end
-          description: 'Precise end coordinate'
+          description: |
+            Precise end coordinate. See start.
           type: string
           in: query
         - name: endMin
-          description: 'Minimum end coordinate'
+          description: |
+            Minimum end coordinate. See startMin.
           type: string
           in: query
         - name: endMax
-          description: 'Maximum end coordinate'
+          description: |
+            Maximum end coordinate. See startMin.
           type: string
           in: query
         - name: referenceBases
