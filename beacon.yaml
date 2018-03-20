@@ -139,15 +139,11 @@ definitions:
         description: Maximum end coordinate. See startMin.
         type: integer
       referenceBases:
-        description: >-
-          Reference bases for this variant (starting from `start`). For accepted values see the REF field in VCF 4.2 specification
+        description: |
+          Reference bases for this variant (starting from `start`). Accepted values: [ACGT]*
+            When querying for variants without specific base alterations (e.g. imprecise structural variants with separate variant_type as well as start_min & end_min ... parameters), the use of a single "N" value is required.
         type: string
-        enum:
-          - A
-          - C
-          - G
-          - T
-          - N
+        pattern: '^([ACGT]+|N)$'
       alternateBases:
         description: >-
           The bases that appear instead of the reference bases. For accepted values see the ALT field in VCF 4.2 specification
