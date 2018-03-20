@@ -104,17 +104,12 @@ paths:
           in: query
         - name: referenceBases
           description: |
-            Reference bases for this variant (starting from `start`). 
-            For accepted values see the REF field in VCF 4.2 specification.
+            Reference bases for this variant (starting from `start`). Accepted values: [ACGT]*
+            When querying for variants without specific base alterations (e.g. imprecise structural variants with separate variant_type as well as start_min & end_min ... parameters), the use of a single "N" value is required.
           in: query
           required: true
           type: string
-          enum:
-            - A
-            - C
-            - G
-            - T
-            - N
+          pattern: '^([ACGT]+|N)$'
         - name: alternateBases
           description: |
             The bases that appear instead of the reference bases. 
