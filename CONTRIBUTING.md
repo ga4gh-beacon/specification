@@ -47,32 +47,7 @@ The current code conventions for the source files are as follows:
 -   Use `UpperCamelCase` for object or record names.
 -   Use `lowerCamelCase` for attribute or method names.
 -   Use `CONSTANT_CASE` for global and constant values.
--   Comments:
-    -   Comments should be indented at the same level as the surrounding code.
-    -   Comments should precede the code that they make a comment on. Documentation comments will not work otherwise.
-    -   Documentation comments, which are intended to be processed by avrodoc and displayed in the user-facing API documentation, must use the `/** ... */` style, and must not have a leading `*` on each internal line:
-
-            /**
-            This documentation comment will be
-            processed correctly by avrodoc.
-            */
-
-            /**
-            * This documentation comment will have a
-            * bullet point at the start of every line
-            * when processed by avrodoc.
-            */
-
-    -   Block and multi-line non-documentation comments, intended for schema developers only, must use the `/* ... */` style.
-
-            /*
-            This multi-line comment will not appear in the
-            avrodoc documentation and is intended for
-            schema developers.
-            */
-
-    -   All multi-line comments should have the comment text at the same indent level as the comment delimeters.
-    -   One-line non-documentation comments, intended for schema developers only, must use the `// ...` style.
+-   Comments: Please use the OpenAPI description for addition information
 
 ## Gitflow Workflow
 
@@ -84,7 +59,7 @@ If you wish to collaborate on a new feature with other GA4GH members you can ask
 
 Once a topic branch exists, pull requests can be made against it in the usual way. It may also be brought up to date with new changes merged into develop by anyone with commit access, if the changes produce merely a fast-forward merge for each constituent branch. However, if changes from the develop branch create a new merge commit in or or more of the repositories, that commit needs to be reviewed in a pull request.
 
-Changes made in a topic branch can be merged into develop by creating and then [resolving in the normal way](#issue_resolution) a pull request against the develop branch.
+Changes made in a topic branch can be merged into develop by creating and then resolving in the normal way a pull request against the develop branch.
 
 Topic branches that have been merged into develop and that are no longer being developed upon should be [deleted](https://github.com/blog/1335-tidying-up-after-pull-requests) (they will still appear in the git history).
 
