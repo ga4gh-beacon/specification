@@ -102,7 +102,6 @@ definitions:
     required:
       - referenceName
       - referenceBases
-      - alternateBases
       - assemblyId
     properties:
       referenceName:
@@ -145,8 +144,20 @@ definitions:
         type: string
         pattern: '^([ACGT]+|N)$'
       alternateBases:
-        description: >-
-          The bases that appear instead of the reference bases. For accepted values see the ALT field in VCF 4.2 specification
+        description: |
+          The bases that appear instead of the reference bases. Accepted values: [ACGT]* or N.
+          Symbolic ALT alleles (DEL, INS, DUP, INV, CNV, DUP:TANDEM, DEL:ME, INS:ME) will be represented in `variantType`.
+          Optional: either `alternateBases` or `variantType` is required.
+        type: string
+        pattern: '^([ACGT]+|N)$'
+      variantType:
+        description: |
+          The `variantType` is used to denote e.g. structural variants.
+          Examples: 
+          * DUP: duplication of sequence following `start`; not necessarily in situ
+          * DEL: deletion of sequence following `start`
+
+          Optional: either `alternateBases` or `variantType` is required.
         type: string
       assemblyId:
         description: 'Assembly identifier (GRC notation, e.g. `GRCh37`).'
