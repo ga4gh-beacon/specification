@@ -101,11 +101,6 @@ definitions:
     type: object
     required:
       - referenceName
-      - start
-      - startMin
-      - startMax
-      - endMin
-      - endMax
       - referenceBases
       - alternateBases
       - assemblyId
@@ -113,19 +108,35 @@ definitions:
       referenceName:
         $ref: "#/definitions/Chromosome"
       start:
-        description: 'Position, allele locus (0-based)'
+        description:  |
+          Precise start coordinate position, allele locus (0-based).
+          * start only:
+            - for single positions, e.g. the start of a specified sequence alteration where the size is given through the specified alternateBases
+            - typical use are queries for SNV and small InDels
+            - the use of "start" without an "end" parameter requires the use of "referenceBases"
+          * start and end:
+            - special use case for exactly determined structural changes
         type: integer
         format: int64
         minimum: 0
       end:
+        description: Precise end coordinate. See start.
         type: integer
       startMin:
+        description:  |
+          Minimum start coordinate
+          * startMin + startMax + endMin + endMax
+            - for querying imprecise positions (e.g. identifying all structural variants starting anywhere between startMin <-> startMax, and ending anywhere between endMin <-> endMax
+            - single or douple sided precise matches can be achieved by setting startMin = startMax XOR endMin = endMax
         type: integer
       startMax:
+        description: Maximum start coordinate. See startMin.
         type: integer
       endMin:
+        description: Minimum end coordinate. See startMin.
         type: integer
       endMax:
+        description: Maximum end coordinate. See startMin.
         type: integer
       referenceBases:
         description: >-
