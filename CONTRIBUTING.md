@@ -6,7 +6,7 @@ There are two ways to contribute - via issues, which are used for discussion, an
 
 ## Issues
 
-The project's [Issues Page](https://github.com/ga4gh/beacon-team/issues) is a forum to discuss both major and minor issues related to developing the Beacon API. It also serves as the means for collaborating with the group and discussing contributions that will ultimately lead to changes to the API. See the [Issue](#issue_resolution) section below for specifics on how issues are resolved by the community.
+The project's [Issues Page](https://github.com/ga4gh-beacon/specification/issues) is a forum to discuss both major and minor issues related to developing the Beacon API. It also serves as the means for collaborating with the group and discussing contributions that will ultimately lead to changes to the API. See the [Issue](#issue_resolution) section below for specifics on how issues are resolved by the community.
 
 ## Pull Requests
 
@@ -37,17 +37,6 @@ A pull request is ready to be merged when either of the following is true:
 We sometimes waive the time constraint for cosmetic-only changes -- use good judgment. If an issue gets any **-1** votes, the comments on the issue need to reach consensus before the issue can be resolved one way or the other. There isn't any strict time limit on a contentious issue.
 
 The project will strive for full consensus on everything until it runs into a problem with this model.
-
-## Syntax Style and Conventions
-
-The current code conventions for the source files are as follows:
-
--   Use two-space indentation, and no tabs.
--   Hard-wrap code to 80 characters per line.
--   Use `UpperCamelCase` for object or record names.
--   Use `lowerCamelCase` for attribute or method names.
--   Use `CONSTANT_CASE` for global and constant values.
--   Comments: Please use the OpenAPI description for addition information
 
 ## Gitflow Workflow
 
