@@ -1,7 +1,7 @@
 # Beacon Schemas [![](https://travis-ci.org/ga4gh/beacon-team.svg?branch=develop)](https://travis-ci.org/ga4gh/beacon-team) [![](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://raw.githubusercontent.com/ga4gh/beacon-team/develop/LICENSE) [![](https://beacon-team-slackin.herokuapp.com/badge.svg)](https://beacon-team-slackin.herokuapp.com/) [![](https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png)](https://zenhub.com)
 
 
-Specification Status: <img src="http://online.swagger.io/validator?url=http://online.swagger.io/validator?url=https://raw.githubusercontent.com/ga4gh-beacon/specification/develop/openapi.yaml">
+Specification Status: <img src="http://online.swagger.io/validator?url=https://raw.githubusercontent.com/ga4gh-beacon/specification/develop/openapi.yaml">
 
 ## What is a Beacon?
 
