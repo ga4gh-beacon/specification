@@ -12,30 +12,30 @@ definitions:
     description: 'Reference name (chromosome). Accepting values 1-22, X, Y.'
     type: string
     enum:
-      - 1
-      - 2
-      - 3
-      - 4
-      - 5
-      - 6
-      - 7
-      - 8
-      - 9
-      - 10
-      - 11
-      - 12
-      - 13
-      - 14
-      - 15
-      - 16
-      - 17
-      - 18
-      - 19
-      - 20
-      - 21
-      - 22
-      - X 
-      - Y
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      - '5'
+      - '6'
+      - '7'
+      - '8'
+      - '9'
+      - '10'
+      - '11'
+      - '12'
+      - '13'
+      - '14'
+      - '15'
+      - '16'
+      - '17'
+      - '18'
+      - '19'
+      - '20'
+      - '21'
+      - '22'
+      - 'X'
+      - 'Y'
   Beacon:
     type: object
     required:
@@ -101,45 +101,63 @@ definitions:
     type: object
     required:
       - referenceName
-      - start
-      - startMin
-      - startMax
-      - endMin
-      - endMax
       - referenceBases
-      - alternateBases
       - assemblyId
     properties:
       referenceName:
         $ref: "#/definitions/Chromosome"
       start:
-        description: 'Position, allele locus (0-based)'
+        description:  |
+          Precise start coordinate position, allele locus (0-based).
+          * start only:
+            - for single positions, e.g. the start of a specified sequence alteration where the size is given through the specified alternateBases
+            - typical use are queries for SNV and small InDels
+            - the use of "start" without an "end" parameter requires the use of "referenceBases"
+          * start and end:
+            - special use case for exactly determined structural changes
         type: integer
         format: int64
         minimum: 0
       end:
+        description: Precise end coordinate. See start.
         type: integer
       startMin:
+        description:  |
+          Minimum start coordinate
+          * startMin + startMax + endMin + endMax
+            - for querying imprecise positions (e.g. identifying all structural variants starting anywhere between startMin <-> startMax, and ending anywhere between endMin <-> endMax
+            - single or douple sided precise matches can be achieved by setting startMin = startMax XOR endMin = endMax
         type: integer
       startMax:
+        description: Maximum start coordinate. See startMin.
         type: integer
       endMin:
+        description: Minimum end coordinate. See startMin.
         type: integer
       endMax:
+        description: Maximum end coordinate. See startMin.
         type: integer
       referenceBases:
-        description: >-
-          Reference bases for this variant (starting from `start`). For accepted values see the REF field in VCF 4.2 specification
+        description: |
+          Reference bases for this variant (starting from `start`). Accepted values: [ACGT]*
+            When querying for variants without specific base alterations (e.g. imprecise structural variants with separate variant_type as well as start_min & end_min ... parameters), the use of a single "N" value is required.
         type: string
-        enum:
-          - A
-          - C
-          - G
-          - T
-          - N
+        pattern: '^([ACGT]+|N)$'
       alternateBases:
-        description: >-
-          The bases that appear instead of the reference bases. For accepted values see the ALT field in VCF 4.2 specification
+        description: |
+          The bases that appear instead of the reference bases. Accepted values: [ACGT]* or N.
+          Symbolic ALT alleles (DEL, INS, DUP, INV, CNV, DUP:TANDEM, DEL:ME, INS:ME) will be represented in `variantType`.
+          Optional: either `alternateBases` or `variantType` is required.
+        type: string
+        pattern: '^([ACGT]+|N)$'
+      variantType:
+        description: |
+          The `variantType` is used to denote e.g. structural variants.
+          Examples: 
+          * DUP: duplication of sequence following `start`; not necessarily in situ
+          * DEL: deletion of sequence following `start`
+
+          Optional: either `alternateBases` or `variantType` is required.
         type: string
       assemblyId:
         description: 'Assembly identifier (GRC notation, e.g. `GRCh37`).'
