@@ -1,10 +1,3 @@
-*.py[cod]
-target
-*~
-#*
-doc/source/schemas/*.avpr
-build
-
 #********** windows template**********
 
 # Windows image file caches
@@ -41,7 +34,6 @@ $RECYCLE.BIN/
 
 #********** emacs template**********
 
-*~
 \#*\#
 /.emacs.desktop
 /.emacs.desktop.lock
@@ -62,16 +54,9 @@ tramp
 Session.vim
 
 
-#********** maven template**********
-
-target/
-
 #********** Travis CI **********
 
 !.travis.yml
 
 #********** IntelliJ files ******
 *.iml
-
-#********** Dependency files ********
-src/avro-schema-test-base
