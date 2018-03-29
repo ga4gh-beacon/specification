@@ -4,11 +4,26 @@ Specification Status: <img src="http://online.swagger.io/validator?url=https://r
 
 ## What is a Beacon?
 
-A _Beacon_ is a web-accessible service that can be queried for information about a specific allele. A user of a Beacon can pose queries of the form _Have you observed this nucleotide (e.g. C) at this genomic location (e.g. position 32,936,732 on chromosome 13)?_ to which the Beacon must respond with either _yes_ or _no_.
+The _Beacon_ project was launched in 2014 to show the willingness of researchers to enable the secure sharing of genomic data from participants of genomic studies. _Beacons_ are web-servers that answer questions such as _Does your dataset include a genome that has a specific nucleotide (e.g. G) at a specific genomic coordinate (e.g. Chr.1 position 111,111)?_ to which the _Beacon_ must respond with _yes_ or _no_, without referring to a specific individual.
+
+## Specification
+
+The specification is detailed in the [beacon.md](beacon.md) document.
+
+## License
+
+This project is licensed under the terms of the [Apache2.0 license](LICENSE).
 
 ## How to contribute
 
 Guidelines for contributing to this repository are listed in the [CONTRIBUTING.md](CONTRIBUTING.md) document.
+
+## Communications
+- [Slack Channel](https://beacon-team-slackin.herokuapp.com/)
+- [Bi-weekly Technical Call](https://docs.google.com/document/d/13c5-c2WsQTRysl0QQEMmap__0jh3OstuM8YwzE-3AlQ/edit#)
+
+## GitHub projects page
+(need to fill)
 
 ## More information
 
