@@ -23,7 +23,10 @@ Guidelines for contributing to this repository are listed in the [CONTRIBUTING.m
 - [Bi-weekly Technical Call](https://docs.google.com/document/d/13c5-c2WsQTRysl0QQEMmap__0jh3OstuM8YwzE-3AlQ/edit#)
 
 ## GitHub projects page
-(need to fill)
+
+All members of the [ga4gh-beacon GitHub organisation](https://github.com/ga4gh-beacon) have access to the [projects page](https://github.com/orgs/ga4gh-beacon/projects/1).
+
+This page is used to plan and manage the work across the ga4gh-beacon repositories, allowing everyone to see what’s already in motion and to work together without duplicating effort.
 
 ## More information
 
