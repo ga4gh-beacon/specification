@@ -23,6 +23,104 @@ paths:
           schema:
             items:
               $ref: 'https://raw.githubusercontent.com/sdelatorrep/beacon-team/openapi_v2.0/beacon.yaml#/definitions/Beacon'
+  '/security/query_log{data_range}':
+    get:
+      description:Return a set of queries for a given data range
+      operationId: getQueryLogByData
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK / Call is successful
+          schema:
+          items:
+          $ref: ''
+        '403':
+          description: Forbidden (e.g. the resource is protected for all users or the user is authenticated but s/he is not granted for this resource)
+          schema:
+          $ref: ''
+        '400':
+          description: Bad request (e.g. missing mandatory parameter)
+          schema:
+          $ref: ''
+        '401':
+          description: Unauthorised (e.g. when an unauthenticated user tries to access a protected resource)
+          schema:
+          $ref: ''
+  '/security/query_log{user_id}':
+      get:
+        description:Return a set of queries for a given user id
+        operationId: getQueryLogByUserId
+        produces:
+          - application/json
+        responses:
+          '200':
+            description: OK / Call is successful
+            schema:
+            items:
+            $ref: ''
+          '403':
+            description: Forbidden (e.g. the resource is protected for all users or the user is authenticated but s/he is not granted for this resource)
+            schema:
+            $ref: ''
+          '400':
+            description: Bad request (e.g. missing mandatory parameter)
+            schema:
+            $ref: ''
+          401':
+            description: Unauthorised (e.g. when an unauthenticated user tries to access a protected resource)
+            schema:
+            $ref: ''
+  '/networks':
+    get:
+      description: Get information about Network Membership
+      operationId: getNetworks
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK / Call is successful
+          schema:
+          items:
+          $ref: ''
+        '403':
+          description: Forbidden (e.g. the resource is protected for all users or the user is authenticated but s/he is not granted for this resource)
+          schema:
+          $ref: ''
+        '400':
+          description: Bad request (e.g. missing mandatory parameter)
+          schema:
+          $ref: ''
+        401':
+         description: Unauthorised (e.g. when an unauthenticated user tries to access a protected resource)
+         schema:
+         $ref: ''
+  '/mitigation_strategy{dataset_id}':
+      get:
+        description: Get Information on mitigation strategy dor a given dataset
+        operationId: getMitigationStrategyBYDataset
+        produces:
+          - application/json
+        responses:
+          '200':
+            description: OK / Call is successful
+            schema:
+            items:
+            $ref: ''
+          '403':
+            description: Forbidden (e.g. the resource is protected for all users or the user is authenticated but s/he is not granted for this resource)
+            schema:
+            $ref: ''
+          '400':
+            description: Bad request (e.g. missing mandatory parameter)
+            schema:
+            $ref: ''
+          401':
+           description: Unauthorised (e.g. when an unauthenticated user tries to access a protected resource)
+           schema:
+           $ref: ''
+  ''
+
   '/query':
     get:
       description: Get response to a Beacon query for allele information.
@@ -205,3 +303,20 @@ paths:
           description: Forbidden (e.g. the resource is protected for all users or the user is authenticated but s/he is not granted for this resource)
           schema:
             $ref: 'https://raw.githubusercontent.com/sdelatorrep/beacon-team/openapi_v2.0/beacon.yaml#/definitions/BeaconAlleleResponse'
+definitions:
+  mitigation_strategy:
+    properties:
+      strategy_type:
+        type: string
+        description: Title of strategy
+      strategy_description:
+        type: string
+        description: Description of strategy
+      parameter_description:
+        type: string
+        description: Parameter Description
+      parameter_value:
+        type: double
+        description: Set value for parameter
+
+
