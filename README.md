@@ -16,6 +16,10 @@ This project is licensed under the terms of the [Apache2.0 license](LICENSE).
 
 Guidelines for contributing to this repository are listed in the [CONTRIBUTING.md](CONTRIBUTING.md) document.
 
+## How to test
+
+Use [Swagger Validator Badge](https://github.com/swagger-api/validator-badge) to validate the YAML file.
+
 ## Communications
 - [Slack Channel](https://beacon-team-slackin.herokuapp.com/)
 - [Bi-weekly Technical Call](https://docs.google.com/document/d/13c5-c2WsQTRysl0QQEMmap__0jh3OstuM8YwzE-3AlQ/edit#)
