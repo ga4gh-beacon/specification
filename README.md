@@ -1,7 +1,5 @@
 # Beacon API specification [![](https://travis-ci.org/ga4gh-beacon/specification.svg?branch=develop)](https://travis-ci.org/ga4gh-beacon/specification) [![](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://raw.githubusercontent.com/ga4gh-beacon/specification/develop/LICENSE) [![](https://beacon-team-slackin.herokuapp.com/badge.svg)](https://beacon-team-slackin.herokuapp.com/)
 
-Specification Status: <img src="http://online.swagger.io/validator?url=https://raw.githubusercontent.com/ga4gh-beacon/specification/develop/openapi.yaml">
-
 ## What is a Beacon?
 
 The _Beacon_ project was launched in 2014 to show the willingness of researchers to enable the secure sharing of genomic data from participants of genomic studies. _Beacons_ are web-servers that answer questions such as _Does your dataset include a genome that has a specific nucleotide (e.g. G) at a specific genomic coordinate (e.g. Chr.1 position 111,111)?_ to which the _Beacon_ must respond with _yes_ or _no_, without referring to a specific individual.
@@ -17,6 +15,10 @@ This project is licensed under the terms of the [Apache2.0 license](LICENSE).
 ## How to contribute
 
 Guidelines for contributing to this repository are listed in the [CONTRIBUTING.md](CONTRIBUTING.md) document.
+
+## How to test
+
+Use [Swagger Validator Badge](https://github.com/swagger-api/validator-badge) to validate the YAML file.
 
 ## Communications
 - [Slack Channel](https://beacon-team-slackin.herokuapp.com/)
