@@ -16,16 +16,15 @@ externalDocs:
 paths:
   /:
     get:
-      description: Get information about Beacon
+      description: Get information about the Beacon
       operationId: getBeacon
       responses:
         '200':
-          description: OK / Call is successful
+          description: successful operation
           content:
             application/json:
               schema:
-                items:
-                  $ref: '#/components/schemas/Beacon'
+                $ref: '#/components/schemas/Beacon'
   /query:
     get:
       description: Get response to a Beacon query for allele information.
@@ -142,7 +141,7 @@ paths:
           description: >
             The `variantType` is used to denote e.g. structural variants.
 
-            Examples: 
+            Examples:
 
             * DUP: duplication of sequence following `start`; not necessarily in
             situ
@@ -176,7 +175,7 @@ paths:
           description: >
             Indicator of whether responses for individual datasets
             (datasetAlleleResponses) should be included in the response
-            (BeaconAlleleResponse) to this request or not. 
+            (BeaconAlleleResponse) to this request or not.
 
             If null (not specified), the default value of NONE is assumed.
           in: query
@@ -190,7 +189,7 @@ paths:
               - NONE
       responses:
         '200':
-          description: OK / Call is successful
+          description: successful operation
           content:
             application/json:
               schema:
@@ -223,7 +222,7 @@ paths:
       operationId: postBeaconAlleleResponse
       responses:
         '200':
-          description: OK / Call is successful
+          description: successful operation
           content:
             application/json:
               schema:
