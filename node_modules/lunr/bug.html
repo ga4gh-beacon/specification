@@ -1,0 +1,19 @@
+<script src="lunr.js"></script>
+
+<script>
+const data = [{name: 'phone'}, {name: 'iphone'}]
+window.idx = lunr(function () {
+    this.ref('name')
+    this.field('name')
+    data.forEach(item => this.add(item))
+})
+
+console.log(idx.search('phone'))
+// [ { ref: 'phone', score: 1, matchData: { metadata: [Object] } } ]
+console.log(idx.search('iphone'))
+// [ { ref: 'iphone', score: 1, matchData: { metadata: [Object] } } ]
+console.log(idx.search('*phone'))
+// [ { ref: 'phone', score: 1, matchData: { metadata: [Object] } } ]
+console.log(idx.search('*phon'))
+// [ { ref: 'iphone', score: 1, matchData: { metadata: [Object] } } ]
+</script>

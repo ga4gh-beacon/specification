@@ -12,13 +12,13 @@ paths:
           schema:
             items:
               $ref: "https://raw.githubusercontent.com/sdelatorrep/beacon-team/openapi_v2.0/beacon.yaml#/definitions/Beacon"
-  ? "/mitigation_strategy{dataset_id}"
-  :
+
+  /mitigation_strategy{dataset_id}:
     get:
       parameters:
-              - name: dataset_id
-                in: query
-                description: dataset_id
+        - name: dataset_id
+          in: query
+          description: dataset_id
       description: "Get Information on mitigation strategy dor a given dataset"
       operationId: getMitigationStrategyByDataset
       produces:

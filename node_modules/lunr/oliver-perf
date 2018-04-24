@@ -1,0 +1,4 @@
+/usr/local/bin/node -r ./perf/perf_helper.js perf/search_perf.js
+search
+  single term x 40,508 ops/sec ±1.14% (89 runs sampled)
+  multi term x 25,044 ops/sec ±1.25% (88 runs sampled)

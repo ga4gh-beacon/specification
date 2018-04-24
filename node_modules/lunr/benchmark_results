@@ -1,0 +1,39 @@
+/usr/local/bin/node -r ./perf/perf_helper.js perf/builder_perf.js
+lunr.Builder
+  build x 2,101 ops/sec ±3.92% (86 runs sampled)
+/usr/local/bin/node -r ./perf/perf_helper.js perf/query_parser_perf.js
+lunr.QueryParser
+  simple x 865,875 ops/sec ±1.13% (88 runs sampled)
+  field x 635,733 ops/sec ±0.85% (92 runs sampled)
+  modifier x 761,596 ops/sec ±0.93% (91 runs sampled)
+  complex x 534,648 ops/sec ±0.97% (92 runs sampled)
+/usr/local/bin/node -r ./perf/perf_helper.js perf/search_perf.js
+search
+  single term x 95,046 ops/sec ±1.28% (90 runs sampled)
+  multi term x 44,916 ops/sec ±0.91% (89 runs sampled)
+  trailing wildcard x 76,453 ops/sec ±1.10% (91 runs sampled)
+  leading wildcard x 16,191 ops/sec ±0.94% (89 runs sampled)
+  contained wildcard x 77,309 ops/sec ±1.23% (89 runs sampled)
+  with field x 99,424 ops/sec ±1.42% (90 runs sampled)
+  edit distance x 6,777 ops/sec ±1.12% (90 runs sampled)
+/usr/local/bin/node -r ./perf/perf_helper.js perf/stemmer_perf.js
+lunr.stemmer
+  #call x 862 ops/sec ±1.06% (90 runs sampled)
+/usr/local/bin/node -r ./perf/perf_helper.js perf/token_set_perf.js
+lunr.TokenSet
+  .fromArray x 549 ops/sec ±4.28% (82 runs sampled)
+  .fromString (no wildcard) x 2,991,253 ops/sec ±1.03% (89 runs sampled)
+  .fromString (with wildcard) x 3,145,982 ops/sec ±0.97% (90 runs sampled)
+  .fromFuzzyString x 4,531 ops/sec ±0.95% (89 runs sampled)
+  #toArray x 107,727 ops/sec ±1.50% (91 runs sampled)
+  #toString x 1,051,123 ops/sec ±1.51% (81 runs sampled)
+  #intersect (no wildcard) x 399,397 ops/sec ±1.68% (88 runs sampled)
+  #intersect (with wildcard) x 38,697 ops/sec ±1.48% (88 runs sampled)
+/usr/local/bin/node -r ./perf/perf_helper.js perf/tokenizer_perf.js
+lunr.tokenizer
+  #call x 17,970 ops/sec ±0.86% (92 runs sampled)
+/usr/local/bin/node -r ./perf/perf_helper.js perf/vector_perf.js
+lunr.Vector
+  magnitude x 85,697,763 ops/sec ±1.44% (86 runs sampled)
+  dot x 233,802 ops/sec ±1.29% (91 runs sampled)
+  similarity x 227,634 ops/sec ±1.00% (93 runs sampled)

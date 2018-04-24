@@ -1,0 +1,9 @@
+/usr/local/bin/node -r ./perf/perf_helper.js perf/search_perf.js
+search
+  single term x 41,681 ops/sec ±1.11% (89 runs sampled)
+  multi term x 24,331 ops/sec ±1.10% (88 runs sampled)
+  trailing wildcard x 38,388 ops/sec ±1.41% (88 runs sampled)
+  leading wildcard x 13,469 ops/sec ±1.54% (86 runs sampled)
+  contained wildcard x 42,916 ops/sec ±0.92% (91 runs sampled)
+  with field x 66,466 ops/sec ±1.13% (91 runs sampled)
+  edit distance x 6,182 ops/sec ±1.44% (88 runs sampled)
