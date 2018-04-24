@@ -48,6 +48,17 @@ paths:
     get:
       description: "Get information about Network Membership"
       operationId: getNetworks
+=======
+  ? "/mitigation_strategy{dataset_id}"
+  :
+    get:
+      parameters:
+              - name: dataset_id
+                in: query
+                description: dataset_id
+      description: "Get Information on mitigation strategy dor a given dataset"
+      operationId: getMitigationStrategyByDataset
+>>>>>>> 47185e1dca81e25eb4dfd8178aa9cec63ba2dcbf
       produces:
         - application/json
       responses:
@@ -71,6 +82,36 @@ paths:
           $ref: ""
           description: "Forbidden (e.g. the resource is protected for all users or the user is authenticated but s/he is not granted for this resource)"
           schema: ~
+<<<<<<< HEAD
+=======
+  /networks:
+    get:
+      description: "Get information about Network Membership"
+      operationId: getNetworks
+      produces:
+        - application/json
+      responses:
+        ? "200"
+        :
+          $ref: ""
+          description: "OK / Call is successful"
+          items: ~
+          schema: ~
+        ? "400"
+        :
+          $ref: ""
+          description: "Bad request (e.g. missing mandatory parameter)"
+          schema: ~
+        401':
+          $ref: ""
+          description: "Unauthorised (e.g. when an unauthenticated user tries to access a protected resource)"
+          schema: ~
+        ? "403"
+        :
+          $ref: ""
+          description: "Forbidden (e.g. the resource is protected for all users or the user is authenticated but s/he is not granted for this resource)"
+          schema: ~
+>>>>>>> 47185e1dca81e25eb4dfd8178aa9cec63ba2dcbf
   /query:
     get:
       description: "Get response to a Beacon query for allele information."
