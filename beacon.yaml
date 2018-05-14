@@ -113,17 +113,22 @@ paths:
             type: string
             pattern: '^([ACGT]+|N)$'
         - name: variantType
-          description: >
+          description: |
             The `variantType` is used to denote e.g. structural variants.
-
-            Examples:
-
-            * DUP: duplication of sequence following `start`; not necessarily in
-            situ
-
-            * DEL: deletion of sequence following `start`
-
-
+            Examples:           
+            * DUP 
+                * duplication of sequence following `start` or beginning 
+                  in the `startMin` => `startMax` interval and ending at `end`
+                  or in the `endMin` => `endMax` interval; not necessarily in situ
+            * DEL
+                * deletion of sequence following `start` or beginning 
+                  in the `startMin` => `startMax` interval and ending at `end`
+                  or in the `endMin` => `endMax` interval; not necessarily in situ
+            * BND
+                * breakend, i.e. termination of the allele at position
+                  `start` or in the `startMin` => `startMax` interval, or fusion
+                  of the sequence to distant partner; TBD: fusion events need second
+                  `referenceName` attribute
             Optional: either `alternateBases` or `variantType` is required.
           in: query
           required: false
