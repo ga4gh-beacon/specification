@@ -66,6 +66,17 @@ paths:
           in: query
           schema:
             type: string
+        - name: mateName
+          description: |
+            Second chromosome for fusion events. This can be
+            * empty (no fusion or unknown partner)
+            * identical to `referenceName` (e.g. one side of an inversion)
+            * a different chromosome
+            Accepting values 1-22, X, Y.
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/Chromosome'
         - name: end
           description: |
             Precise end coordinate. See start.
@@ -115,13 +126,13 @@ paths:
         - name: variantType
           description: |
             The `variantType` is used to denote e.g. structural variants.
-            Examples:           
-            * DUP 
-                * duplication of sequence following `start` or beginning 
+            Examples:
+            * DUP
+                * duplication of sequence following `start` or beginning
                   in the `startMin` => `startMax` interval and ending at `end`
                   or in the `endMin` => `endMax` interval; not necessarily in situ
             * DEL
-                * deletion of sequence following `start` or beginning 
+                * deletion of sequence following `start` or beginning
                   in the `startMin` => `startMax` interval and ending at `end`
                   or in the `endMin` => `endMax` interval; not necessarily in situ
             * BND
@@ -155,7 +166,6 @@ paths:
             Indicator of whether responses for individual datasets
             (datasetAlleleResponses) should be included in the response
             (BeaconAlleleResponse) to this request or not.
-
             If null (not specified), the default value of NONE is assumed.
           in: query
           required: false
@@ -366,6 +376,8 @@ components:
         startMax:
           description: Maximum start coordinate. See startMin.
           type: integer
+        mateName:
+          $ref: '#/components/schemas/Chromosome'
         endMin:
           description: Minimum end coordinate. See startMin.
           type: integer
@@ -393,13 +405,13 @@ components:
         variantType:
           description: |
             The `variantType` is used to denote e.g. structural variants.
-            Examples:           
-            * DUP 
-                * duplication of sequence following `start` or beginning 
+            Examples:
+            * DUP
+                * duplication of sequence following `start` or beginning
                   in the `startMin` => `startMax` interval and ending at `end`
                   or in the `endMin` => `endMax` interval; not necessarily in situ
             * DEL
-                * deletion of sequence following `start` or beginning 
+                * deletion of sequence following `start` or beginning
                   in the `startMin` => `startMax` interval and ending at `end`
                   or in the `endMin` => `endMax` interval; not necessarily in situ
             * BND
