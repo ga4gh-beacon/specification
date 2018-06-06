@@ -87,7 +87,7 @@ definitions:
         items:
           $ref: "#/definitions/BeaconDataset"
       sampleAlleleRequests:
-        description: Examples of interesting queries, e.g. a few queries demonstrating different esponses.
+        description: Examples of interesting queries, e.g. a few queries demonstrating different responses.
         type: array
         items:
           $ref: "#/definitions/BeaconAlleleRequest"
