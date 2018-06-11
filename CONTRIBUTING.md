@@ -10,7 +10,7 @@ The project's [Issues Page](https://github.com/ga4gh-beacon/specification/issues
 
 ## Pull Requests
 
-The way to contribute development effort and code to the project is via GitHub pull requests. GitHub provides a nice [overview on how to create a pull request](https://help.github.com/articles/creating-a-pull-request).
+The way to contribute development effort and code to the project is via GitHub pull requests. GitHub provides a nice [overview on how to create a pull request](https://help.github.com/articles/creating-a-pull-request). Pull Requests should usually be made against the `develop` branch.
 
 Some general rules to follow:
 
