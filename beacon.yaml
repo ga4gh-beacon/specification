@@ -303,11 +303,11 @@ components:
         createDateTime:
           type: string
           description: The time the beacon was created (ISO 8601 format).
-          example: '2012-07-19 or 2017-01-17T20:33:40Z'
+          examples: '2012-07-19 or 2017-01-17T20:33:40Z'
         updateDateTime:
           type: string
           description: The time the beacon was created (ISO 8601 format).
-          example: '2012-07-19 or 2017-01-17T20:33:40Z'
+          examples: '2012-07-19 or 2017-01-17T20:33:40Z'
         datasets:
           description: >-
             Datasets served by the beacon. Any beacon should specify at least
@@ -513,11 +513,11 @@ components:
         createDateTime:
           type: string
           description: The time the dataset was created (ISO 8601 format).
-          example: '2012-07-29 or 2017-01-17T20:33:40Z'
+          examples: '2012-07-29 or 2017-01-17T20:33:40Z'
         updateDateTime:
           type: string
           description: The time the dataset was created (ISO 8601 format).
-          example: '2012-07-19 or 2017-01-17T20:33:40Z'
+          examples: '2012-07-19 or 2017-01-17T20:33:40Z'
         version:
           type: string
           description: Version of the dataset.
