@@ -310,8 +310,8 @@ components:
           example: '2012-07-19 or 2017-01-17T20:33:40Z'
         datasets:
           description: >-
-            Datasets served by the beacon. Any beacon should specify at least
-            one dataset.
+            Dataset(s) served by the beacon.
+          minItems: 1
           type: array
           items:
             $ref: '#/components/schemas/BeaconDataset'
