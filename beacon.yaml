@@ -1,7 +1,7 @@
 openapi: 3.0.0
 servers: []
 info:
-  version: "0.4.1-SNAPSHOT"
+  version: "1.0.0"
   title: GA4GH Beacon API Specification
   description: >-
     A Beacon is a web service for genetic data sharing that can be queried for information about specific alleles.
@@ -231,6 +231,38 @@ paths:
             schema:
               $ref: '#/components/schemas/BeaconAlleleRequest'
         required: true
+  /network:
+    get:
+      description: Get information about network membership from Beacon
+      operationId: GetNetwork
+      responses:
+        '200':
+          description: sucessful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Beacon'
+  /mitigation_strategy{dataset_id}:
+    get:
+      description: Get a mitigation strategy applied to a particular dataset
+      operationId: GetMitigationStrategy
+      responses:
+        '200':
+          description: sucessful operation
+          content:
+            application/json:
+              schema:
+                 $ref: '#/components/schemas/Beacon'
+      parameters:
+        - in: path
+          name: dataset_id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the dataset to get
+
+
+
 components:
   schemas:
     Chromosome:
@@ -491,6 +523,62 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/KeyValuePair'
+    BeaconNetwork:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: string
+          description: Unique identifier for network
+        name:
+          type: string
+          description: Name of network
+    BeaconQuery:
+      type: object
+      required:
+        - id
+        - request
+      properties:
+        id:
+          type: string
+          description: Unique Identifier for Query
+        request:
+          type: object
+          $ref: '#/components/schemas/BeaconAlleleRequest'
+    BeaconQueryLog:
+      type: object
+      required:
+        - id
+        - querySet
+      properties:
+        id:
+          type: string
+          description: Unique Identifier for query log
+        querySet:
+          type: array
+          $ref: '#/components/schemas/BeaconQuery'
+    BeaconMitigationStrategy:
+      type: object
+      required:
+        - id
+        - strategyDescription
+        - parameterDescription
+        - parameterValue
+      properties:
+        id:
+          type: string
+          description: Unique Identifier for Mitigation Strategy
+        strategyDescription:
+          type: string
+          description: String defining the mitigation Strategy
+        parameterDescription:
+          type: string
+          description: String defining the mitigation strategy associated Parameter
+        parameterValue:
+          type: number
+          description: Set value of parameter
     BeaconDataset:
       type: object
       required:
