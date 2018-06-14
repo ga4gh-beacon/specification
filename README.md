@@ -1,33 +1,39 @@
-# Beacon Schemas [![](https://travis-ci.org/ga4gh/beacon-team.svg?branch=develop)](https://travis-ci.org/ga4gh/beacon-team) [![](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://raw.githubusercontent.com/ga4gh/beacon-team/develop/LICENSE) [![](https://beacon-team-slackin.herokuapp.com/badge.svg)](https://beacon-team-slackin.herokuapp.com/) [![](https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png)](https://zenhub.com)
+# Beacon API specification [![](https://travis-ci.org/ga4gh-beacon/specification.svg?branch=develop)](https://travis-ci.org/ga4gh-beacon/specification) [![](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://raw.githubusercontent.com/ga4gh-beacon/specification/develop/LICENSE) [![](https://beacon-team-slackin.herokuapp.com/badge.svg)](https://beacon-team-slackin.herokuapp.com/)
 
 ## What is a Beacon?
 
-A _Beacon_ is a web-accessible service that can be queried for information about a specific allele. A user of a Beacon can pose queries of the form _Have you observed this nucleotide (e.g. C) at this genomic location (e.g. position 32,936,732 on chromosome 13)?_ to which the Beacon must respond with either _yes_ or _no_.
+The _Beacon_ project was launched in 2014 to show the willingness of researchers to enable the secure sharing of genomic data from participants of genomic studies. _Beacons_ are web-servers that answer questions such as _Does your dataset include a genome that has a specific nucleotide (e.g. G) at a specific genomic coordinate (e.g. Chr.1 position 111,111)?_ to which the _Beacon_ must respond with _yes_ or _no_, without referring to a specific individual.
 
-## Beacon Project
+## Specification
 
-The Beacon project is a project to test the willingness of international sites to share genetic data in the simplest of all technical contexts. For more information, visit [GA4GH Data Working Group](http://ga4gh.org/#/beacon).
+The specification is detailed in the [beacon.md](beacon.md) document.
 
-## Tools
+## License
 
-A list of related tools and projects developed by the community is maintained on the [Resources](https://github.com/ga4gh/beacon-team/wiki/Resources) wiki page.
+This project is licensed under the terms of the [Apache2.0 license](LICENSE).
 
 ## How to contribute
 
 Guidelines for contributing to this repository are listed in the [CONTRIBUTING.md](CONTRIBUTING.md) document.
 
-## How to build
-
-Prerequisites: Maven 3+, Java 1.6+.
-
-To generate Java code, run `mvn package` and check the output in the `target` directory. 
-
 ## How to test
 
-Prerequisites: Python 2.7 (incl. Pip 7+).
+Use [Swagger Validator Badge](https://github.com/swagger-api/validator-badge) to validate the YAML file.
 
-Install dependencies with `pip install -r requirements.txt`. To run the test suite, use `nosetests -v`.
+## Communications
+- [Slack Channel](https://beacon-team-slackin.herokuapp.com/)
+- [Bi-weekly Technical Call](https://docs.google.com/document/d/13c5-c2WsQTRysl0QQEMmap__0jh3OstuM8YwzE-3AlQ/edit#)
+
+## GitHub projects page
+
+All members of the [ga4gh-beacon GitHub organisation](https://github.com/ga4gh-beacon) have access to the [projects page](https://github.com/orgs/ga4gh-beacon/projects/1).
+
+This page is used to plan and manage the work across the ga4gh-beacon repositories, allowing everyone to see what’s already in motion and to work together without duplicating effort.
 
 ## More information
 
-More information for developers is available on [our wiki](https://github.com/ga4gh/beacon-team/wiki).
+More information for developers is available on [our wiki](https://github.com/ga4gh-beacon/specification/wiki). A list of related tools and projects developed by the community is maintained on the [Resources](https://github.com/ga4gh-beacon/specification/wiki/Resources) page.
+
+## Notify GA4GH of potential security flaw in specification
+
+To enable a long-term contact for potential security flaws an email address of security-notification@ga4gh.org has been set up. This email will be monitored by the GA4GH secretariat and GA4GH security members to allow for an incoming response to be directed to appropriate parties.
