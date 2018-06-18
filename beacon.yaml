@@ -306,19 +306,19 @@ components:
           examples: '2012-07-19 or 2017-01-17T20:33:40Z'
         updateDateTime:
           type: string
-          description: The time the beacon was created (ISO 8601 format).
-          examples: '2012-07-19 or 2017-01-17T20:33:40Z'
+          description: The time the beacon was updated in (ISO 8601 format).
+          example: '2012-07-19 or 2017-01-17T20:33:40Z'
         datasets:
           description: >-
-            Datasets served by the beacon. Any beacon should specify at least
-            one dataset.
+            Dataset(s) served by the beacon.
+          minItems: 1
           type: array
           items:
             $ref: '#/components/schemas/BeaconDataset'
         sampleAlleleRequests:
           description: >-
             Examples of interesting queries, e.g. a few queries demonstrating
-            different esponses.
+            different responses.
           type: array
           items:
             $ref: '#/components/schemas/BeaconAlleleRequest'
@@ -506,6 +506,9 @@ components:
         name:
           type: string
           description: Name of the dataset.
+        description:
+          type: string
+          description: Description of the dataset.
         assemblyId:
           description: 'Assembly identifier (GRC notation, e.g. `GRCh37`).'
           type: string
@@ -516,8 +519,8 @@ components:
           examples: '2012-07-29 or 2017-01-17T20:33:40Z'
         updateDateTime:
           type: string
-          description: The time the dataset was created (ISO 8601 format).
-          examples: '2012-07-19 or 2017-01-17T20:33:40Z'
+          description: The time the dataset was updated in (ISO 8601 format).
+          example: '2012-07-19 or 2017-01-17T20:33:40Z'
         version:
           type: string
           description: Version of the dataset.
