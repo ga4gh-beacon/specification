@@ -4,6 +4,8 @@
 #### Description: A Beacon is a web service for genetic data sharing that can be queried for information about specific alleles.
 
 #### Authors:
+- Dylan Spalding
+- Gary Saunders
 - Ilkka Lappalainen
 - Jordi Rambla
 - Juha Törnroos
@@ -13,7 +15,7 @@
 - Miro Cupack
 - Sabela de la Torre
 - Saif Ur-Rehman 
-
+- Serena Scollen
 
 
 #### Publication Date: xx.06.2018
