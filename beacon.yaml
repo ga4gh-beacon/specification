@@ -318,7 +318,7 @@ components:
         sampleAlleleRequests:
           description: >-
             Examples of interesting queries, e.g. a few queries demonstrating
-            different esponses.
+            different responses.
           type: array
           items:
             $ref: '#/components/schemas/BeaconAlleleRequest'
