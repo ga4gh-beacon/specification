@@ -45,7 +45,15 @@ about the API.
 The `/query` endpoint has two methods, the `get()` and the `post()`.
 
 ### Security
-Three level access tiers: open, regisered and controlled. 
+Three level access tiers: Open, Registered and Controlled.
+
+Open: no authorization (verification of access rights) or authentication (verification of identity) is performed.
+
+Registered: authentication  of the user is performed (in the case of ELIXIR verification of 'bona-fide' researcher status is performed)
+
+Controlled: both authentication and authorization checks are performed.
+
+ 
 
 ## Beacon API Methods
 
