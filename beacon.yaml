@@ -633,7 +633,7 @@ components:
       properties:
         consentCodeDataUse:
           $ref: >-
-            https://raw.githubusercontent.com/sdelatorrep/ga4gh-consent-policy/openapi_v2.0/consent_code.yaml#/definitions/ConsentCodeDataUse
+            https://raw.githubusercontent.com/ga4gh/ga4gh-consent-policy/806ea53cffacb2055c3639f0fc9783f0dcd8cb02/consent_code.yaml#/definitions/ConsentCodeDataUse
         adamDataUse:
           $ref: '#/components/schemas/AdamDataUse'
     AdamDataUse:
@@ -646,13 +646,13 @@ components:
       properties:
         header:
           $ref: >-
-            https://raw.githubusercontent.com/sdelatorrep/ADA-M/openapi_v2.0/adam.yaml#/definitions/AdamHeader
+            https://raw.githubusercontent.com/ga4gh/ADA-M/b16a72f9987ae20f433e97d6a3247ecddd8dde23/adam.yaml#/definitions/AdamHeader
         profile:
           $ref: >-
-            https://raw.githubusercontent.com/sdelatorrep/ADA-M/openapi_v2.0/adam.yaml#/definitions/AdamProfile
+            https://raw.githubusercontent.com/ga4gh/ADA-M/b16a72f9987ae20f433e97d6a3247ecddd8dde23/adam.yaml#definitions/AdamProfile
         terms:
           $ref: >-
-            https://raw.githubusercontent.com/sdelatorrep/ADA-M/openapi_v2.0/adam.yaml#/definitions/AdamTerms
+            https://raw.githubusercontent.com/ga4gh/ADA-M/b16a72f9987ae20f433e97d6a3247ecddd8dde23/adam.yaml#/definitions/AdamTerms
         metaConditions:
           $ref: >-
-            https://raw.githubusercontent.com/sdelatorrep/ADA-M/openapi_v2.0/adam.yaml#/definitions/AdamMetaConditions
+            https://raw.githubusercontent.com/ga4gh/ADA-M/b16a72f9987ae20f433e97d6a3247ecddd8dde23/adam.yaml#/definitions/AdamMetaConditions
