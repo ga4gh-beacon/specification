@@ -324,9 +324,9 @@ components:
             $ref: '#/components/schemas/BeaconAlleleRequest'
         info:
           description: 'Additional structured metadata, key-value pairs.'
-          type: array
-          items:
-            $ref: '#/components/schemas/KeyValuePair'
+          type: object
+          additionalProperties:
+            type: string
     BeaconAlleleRequest:
       description: Allele request as interpreted by the beacon.
       type: object
@@ -488,9 +488,9 @@ components:
             format).
         info:
           description: 'Additional structured metadata, key-value pairs.'
-          type: array
-          items:
-            $ref: '#/components/schemas/KeyValuePair'
+          type: object
+          additionalProperties:
+            type: string
     BeaconDataset:
       type: object
       required:
@@ -547,9 +547,9 @@ components:
           example: 'http://example.org/wiki/Main_Page'
         info:
           description: 'Additional structured metadata, key-value pairs.'
-          type: array
-          items:
-            $ref: '#/components/schemas/KeyValuePair'
+          type: object
+          additionalProperties:
+            type: string
         dataUseConditions:
           $ref: '#/components/schemas/DataUseConditions'
     BeaconDatasetAlleleResponse:
@@ -598,9 +598,9 @@ components:
             providing more information about a given allele (RFC 3986 format).
         info:
           description: 'Additional structured metadata, key-value pairs.'
-          type: array
-          items:
-            $ref: '#/components/schemas/KeyValuePair'
+          type: object
+          additionalProperties:
+            type: string
     BeaconError:
       description: >-
         Beacon-specific error. This should be non-null in exceptional situations
@@ -613,16 +613,6 @@ components:
           type: integer
           format: int32
         errorMessage:
-          type: string
-    KeyValuePair:
-      type: object
-      required:
-        - key
-        - value
-      properties:
-        key:
-          type: string
-        value:
           type: string
     DataUseConditions:
       type: object
