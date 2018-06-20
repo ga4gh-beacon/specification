@@ -646,13 +646,13 @@ components:
       properties:
         header:
           $ref: >-
-            https://raw.githubusercontent.com/ga4gh/ADA-M/b16a72f9987ae20f433e97d6a3247ecddd8dde23/adam.yaml#/definitions/AdamHeader
+            https://raw.githubusercontent.com/ga4gh/ADA-M/b16a72f9987ae20f433e97d6a3247ecddd8dde23/adam.yaml#/definitions/Header
         profile:
           $ref: >-
-            https://raw.githubusercontent.com/ga4gh/ADA-M/b16a72f9987ae20f433e97d6a3247ecddd8dde23/adam.yaml#definitions/AdamProfile
+            https://raw.githubusercontent.com/ga4gh/ADA-M/b16a72f9987ae20f433e97d6a3247ecddd8dde23/adam.yaml#/definitions/Profile
         terms:
           $ref: >-
-            https://raw.githubusercontent.com/ga4gh/ADA-M/b16a72f9987ae20f433e97d6a3247ecddd8dde23/adam.yaml#/definitions/AdamTerms
+            https://raw.githubusercontent.com/ga4gh/ADA-M/b16a72f9987ae20f433e97d6a3247ecddd8dde23/adam.yaml#/definitions/Terms
         metaConditions:
           $ref: >-
-            https://raw.githubusercontent.com/ga4gh/ADA-M/b16a72f9987ae20f433e97d6a3247ecddd8dde23/adam.yaml#/definitions/AdamMetaConditions
+            https://raw.githubusercontent.com/ga4gh/ADA-M/b16a72f9987ae20f433e97d6a3247ecddd8dde23/adam.yaml#/definitions/MetaConditions
