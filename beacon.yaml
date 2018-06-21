@@ -303,7 +303,7 @@ components:
         createDateTime:
           type: string
           description: The time the beacon was created (ISO 8601 format).
-          examples: '2012-07-19 or 2017-01-17T20:33:40Z'
+          example: '2012-07-19 or 2017-01-17T20:33:40Z'
         updateDateTime:
           type: string
           description: The time the beacon was updated in (ISO 8601 format).
@@ -516,7 +516,7 @@ components:
         createDateTime:
           type: string
           description: The time the dataset was created (ISO 8601 format).
-          examples: '2012-07-29 or 2017-01-17T20:33:40Z'
+          example: '2012-07-29 or 2017-01-17T20:33:40Z'
         updateDateTime:
           type: string
           description: The time the dataset was updated in (ISO 8601 format).
@@ -633,7 +633,7 @@ components:
       properties:
         consentCodeDataUse:
           $ref: >-
-            https://raw.githubusercontent.com/ga4gh/ga4gh-consent-policy/806ea53cffacb2055c3639f0fc9783f0dcd8cb02/consent_code.yaml#/definitions/ConsentCodeDataUse
+            https://raw.githubusercontent.com/ga4gh/ga4gh-consent-policy/806ea53cffacb2055c3639f0fc9783f0dcd8cb02/consent_code.yaml#/components/schemas/ConsentCodeDataUse
         adamDataUse:
           $ref: '#/components/schemas/AdamDataUse'
     AdamDataUse:
@@ -646,13 +646,13 @@ components:
       properties:
         header:
           $ref: >-
-            https://raw.githubusercontent.com/ga4gh/ADA-M/b16a72f9987ae20f433e97d6a3247ecddd8dde23/adam.yaml#/definitions/AdamHeader
+            https://raw.githubusercontent.com/ga4gh/ADA-M/b16a72f9987ae20f433e97d6a3247ecddd8dde23/adam.yaml#/components/schemas/Header
         profile:
           $ref: >-
-            https://raw.githubusercontent.com/ga4gh/ADA-M/b16a72f9987ae20f433e97d6a3247ecddd8dde23/adam.yaml#definitions/AdamProfile
+            https://raw.githubusercontent.com/ga4gh/ADA-M/b16a72f9987ae20f433e97d6a3247ecddd8dde23/adam.yaml#/components/schemas/Profile
         terms:
           $ref: >-
-            https://raw.githubusercontent.com/ga4gh/ADA-M/b16a72f9987ae20f433e97d6a3247ecddd8dde23/adam.yaml#/definitions/AdamTerms
+            https://raw.githubusercontent.com/ga4gh/ADA-M/b16a72f9987ae20f433e97d6a3247ecddd8dde23/adam.yaml#/components/schemas/Terms
         metaConditions:
           $ref: >-
-            https://raw.githubusercontent.com/ga4gh/ADA-M/b16a72f9987ae20f433e97d6a3247ecddd8dde23/adam.yaml#/definitions/AdamMetaConditions
+            https://raw.githubusercontent.com/ga4gh/ADA-M/b16a72f9987ae20f433e97d6a3247ecddd8dde23/adam.yaml#/components/schemas/MetaConditions
