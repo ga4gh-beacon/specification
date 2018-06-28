@@ -1,7 +1,7 @@
 openapi: 3.0.0
 servers: []
 info:
-  version: "1.0.0"
+  version: "0.4.1-SNAPSHOT"
   title: GA4GH Beacon API Specification
   description: >-
     A Beacon is a web service for genetic data sharing that can be queried for information about specific alleles.
@@ -260,9 +260,6 @@ paths:
             type: integer
           required: true
           description: Numeric ID of the dataset to get
-
-
-
 components:
   schemas:
     Chromosome:
