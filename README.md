@@ -6,7 +6,9 @@ The _Beacon_ project was launched in 2014 to show the willingness of researchers
 
 ## Specification
 
-The specification is detailed in the [beacon.md](beacon.md) document.
+The specification is done in [OpenAPI format](beacon.yaml) and it is online in [Swagger Hub](https://app.swaggerhub.com/apis/ELIXIR-Finland/ga-4_gh_beacon_api_specification/1.0.0-rc1). The overall design is explained in 
+[beacon.md](beacon.md) document.
+
 
 ## License
 
