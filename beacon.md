@@ -91,6 +91,7 @@ If a request to the URL of an API method includes the Origin header, its content
 ##### Payload: `Beacon object`  
 
 **Beacon object**
+
 |Properties (* mandatory, ~ one of these is mandatory)|Description|Type|Example|
 |---|---|:---:|---|
 |*id* *|Unique identifier of the beacon. Use reverse domain name notation.|string|org.ga4gh.beacon|
@@ -108,6 +109,7 @@ If a request to the URL of an API method includes the Origin header, its content
 |info|'Additional structured metadata, key-value pairs.'|array|-|
 
 **Beacon Organisation object** 
+
 |Properties (* mandatory, ~ one of these is mandatory)|Description|Type|Example|
 |---|---|:---:|---|
 |*id**|Unique identifier of the organization.|string|-|
@@ -261,6 +263,7 @@ An example `GET` request and response to the info endpoint:
 ##### - Parameters: `BeaconAlleleRequest`
 
 **BeaconAlleleRequest object**
+
 |Parameter (* mandatory, ~ one of these is mandatory)|Description|Type|Example|
 |---|---|:---:|---|
 |*referenceName**|Reference name (chromosome). Accepting values 1-22, X, Y.|string|`'1'`|
@@ -283,6 +286,7 @@ An example `GET` request and response to the info endpoint:
 ##### Payload: `Beacon Allele Response object`  
 
 **Beacon Allele Response object**
+
 |Properties (* mandatory, ~ one of these is mandatory)|Description|Type|Example|
 |---|---|:---:|---|
 |*beaconId**|Identifier of the beacon, as defined in `Beacon`.|string|-|
