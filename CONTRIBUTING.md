@@ -6,11 +6,11 @@ There are two ways to contribute - via issues, which are used for discussion, an
 
 ## Issues
 
-The project's [Issues Page](https://github.com/ga4gh/beacon-team/issues) is a forum to discuss both major and minor issues related to developing the Beacon API. It also serves as the means for collaborating with the group and discussing contributions that will ultimately lead to changes to the API. See the [Issue](#issue_resolution) section below for specifics on how issues are resolved by the community.
+The project's [Issues Page](https://github.com/ga4gh-beacon/specification/issues) is a forum to discuss both major and minor issues related to developing the Beacon API. It also serves as the means for collaborating with the group and discussing contributions that will ultimately lead to changes to the API. See the [Issue](#issue_resolution) section below for specifics on how issues are resolved by the community.
 
 ## Pull Requests
 
-The way to contribute development effort and code to the project is via GitHub pull requests. GitHub provides a nice [overview on how to create a pull request](https://help.github.com/articles/creating-a-pull-request).
+The way to contribute development effort and code to the project is via GitHub pull requests. GitHub provides a nice [overview on how to create a pull request](https://help.github.com/articles/creating-a-pull-request). Pull Requests should usually be made against the [`develop` branch](https://github.com/ga4gh-beacon/specification/tree/develop).
 
 Some general rules to follow:
 
@@ -38,42 +38,6 @@ We sometimes waive the time constraint for cosmetic-only changes -- use good jud
 
 The project will strive for full consensus on everything until it runs into a problem with this model.
 
-## Syntax Style and Conventions
-
-The current code conventions for the source files are as follows:
-
--   Use two-space indentation, and no tabs.
--   Hard-wrap code to 80 characters per line.
--   Use `UpperCamelCase` for object or record names.
--   Use `lowerCamelCase` for attribute or method names.
--   Use `CONSTANT_CASE` for global and constant values.
--   Comments:
-    -   Comments should be indented at the same level as the surrounding code.
-    -   Comments should precede the code that they make a comment on. Documentation comments will not work otherwise.
-    -   Documentation comments, which are intended to be processed by avrodoc and displayed in the user-facing API documentation, must use the `/** ... */` style, and must not have a leading `*` on each internal line:
-
-            /**
-            This documentation comment will be
-            processed correctly by avrodoc.
-            */
-
-            /**
-            * This documentation comment will have a
-            * bullet point at the start of every line
-            * when processed by avrodoc.
-            */
-
-    -   Block and multi-line non-documentation comments, intended for schema developers only, must use the `/* ... */` style.
-
-            /*
-            This multi-line comment will not appear in the
-            avrodoc documentation and is intended for
-            schema developers.
-            */
-
-    -   All multi-line comments should have the comment text at the same indent level as the comment delimeters.
-    -   One-line non-documentation comments, intended for schema developers only, must use the `// ...` style.
-
 ## Gitflow Workflow
 
 Our workflow is based on [Gitflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow), which defines a strict branching model designed around the project release. This workflow uses two branches to record the history of the project. The master branch stores the official release history, and the develop branch serves as an integration branch for features. Aside from these two main branches, the workflow utilizes topic and release branches.
@@ -84,7 +48,7 @@ If you wish to collaborate on a new feature with other GA4GH members you can ask
 
 Once a topic branch exists, pull requests can be made against it in the usual way. It may also be brought up to date with new changes merged into develop by anyone with commit access, if the changes produce merely a fast-forward merge for each constituent branch. However, if changes from the develop branch create a new merge commit in or or more of the repositories, that commit needs to be reviewed in a pull request.
 
-Changes made in a topic branch can be merged into develop by creating and then [resolving in the normal way](#issue_resolution) a pull request against the develop branch.
+Changes made in a topic branch can be merged into develop by creating and then resolving in the normal way a pull request against the develop branch.
 
 Topic branches that have been merged into develop and that are no longer being developed upon should be [deleted](https://github.com/blog/1335-tidying-up-after-pull-requests) (they will still appear in the git history).
 
