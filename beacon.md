@@ -1,6 +1,6 @@
 # Beacon API Specification v1.0.0
 
-Beacon is a web service for genetic data sharing that can be queried for information about specific alleles. With Beacon it is possible to make simple queries to the datasets prior to applying for access rights to the data. This is the key idea behind Beacon, by allowing these queries Beacon makes the data discoverable. If the user finds an interesting dataset, Beacon will point them to the appropriate place to apply for access rights to the data (e.g. to European Genome-Phenome Archive, EGA).
+Beacon is a web service for genetic data sharing that can be queried for information about specific alleles. Beacon permits simple queries regarding the presence or absence of specified variants in a given dataset. This is the key idea behind Beacon, by allowing these queries Beacon makes the data discoverable. If the user finds their variant(s) of interesting, Beacon will point them to the appropriate place to gain access to the data (e.g. the European Genome-Phenome Archive, EGA).
 
 **Authors**: _Ilkka Lappalainen, Jordi Rambla, Juha Törnroos, Kasper Keinänen, Marc Fiume, Michael Baudis, Miro Cupack, Sabela de la Torre, Saif Ur-Rehman_ 
 
@@ -15,31 +15,31 @@ The Beacon protocol provides _query interface_ that has been designed to be:
 - **Privacy protecting:** queries do not return information about single individuals
 
 
-Due to the needs for data discoverability providing as much metadata as possible in query responses is endorsed. The Beacon is limited for human data only. 
+Due to the needs for data discoverability providing as much metadata as possible in query responses is endorsed. The Beacon is limited for human data only.
 
 
 ## Protocol essentials
 
-Beacon provides REST API on top of the HTTP protocol, as specified in RFC 7231. The Beacon API has two endpoints: `/` (also known as _Info endpoint_) and `/query`. Info endpoint provides general metadata about Beacon instance and datasets included in the instance and query interface is provided by the _Query endpoint_. 
+Beacon provides REST API on top of the HTTP protocol, as specified in RFC 7231. The Beacon API has two endpoints: `/` (also known as _Info endpoint_) and `/query`. The Info endpoint provides general metadata about the Beacon instance and dataset(s) included. The query interface is provided by the _Query endpoint_. 
 
-The full descriptions of Beacon API endpoints, requests and responses is published in [OpenAPI format](https://github.com/ga4gh-beacon/specification/blob/master/beacon.yaml). 
+The full complement of Beacon API endpoints, requests and responses is published in [OpenAPI format](https://github.com/ga4gh-beacon/specification/blob/master/beacon.yaml). 
 
 ### Security
 Beacon endorses GA4GH's 3-tier access to data:
 
-- **Open:** No authentication (verification of identity) or authorization (verification of access rights) is performed.
+- **Open:** No authentication (verification of identity) or authorization (verification of access rights).
 
-- **Registered:** Authentication  of the user is performed. For example it is required that user is `bona-fide researcher`.
+- **Registered:** Authentication of the user is performed. For example it is required that the user is `bona-fide researcher`.
 
-- **Controlled:** Both authentication and authorization checks are performed. The user has been granted to access the data they are querying.
+- **Controlled:** Both authentication and authorization checks are performed to ensure that the user has been granted to access the data they are querying.
 
-Registered and controlled access requires authentication of the user and Beacon API supports authenticated queries using OAuth2 Bearer tokens in HTTP Authorisation header as specified in [RFC 6750](https://tools.ietf.org/html/rfc6750): 
+Registered and controlled access requires authentication of the user. The Beacon API supports authenticated queries using OAuth2 Bearer tokens in HTTP Authorisation header as specified in [RFC 6750](https://tools.ietf.org/html/rfc6750): 
 
      GET /query HTTP/1.1
      Host: beacon.com
      Authorization: Bearer doPk34akbm9bsw5nknklex
 
-Granting access to the data nor identifying `bona-fide researchers` **is not** Beacon's responsibility. 
+Both granting access to the data and identifying `bona-fide researchers` **is not** Beacon's responsibility. 
 
  ### Errors
 
