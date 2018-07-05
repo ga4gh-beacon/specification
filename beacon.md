@@ -1,6 +1,6 @@
 # Beacon API Specification v1.0.0
 
-Beacon is a web service for genetic data sharing that can be queried for information about specific alleles. Beacon permits simple queries regarding the presence or absence of specified variants in a given dataset. This is the key idea behind Beacon, by allowing these queries Beacon makes the data discoverable. If the user finds their variant(s) of interesting, Beacon will point them to the appropriate place to gain access to the data (e.g. the European Genome-Phenome Archive, EGA).
+Beacon is a web service for genetic data sharing. Beacon permits simple queries regarding the presence or absence of specified variants in a given dataset. This is the key idea behind Beacon, by allowing these queries Beacon makes the data discoverable. If the user finds their variant(s) of interesting, Beacon will point them to the appropriate place to gain access to the data (e.g. the European Genome-Phenome Archive, EGA).
 
 **Authors**: _Ilkka Lappalainen, Jordi Rambla, Juha Törnroos, Kasper Keinänen, Marc Fiume, Michael Baudis, Miro Cupack, Sabela de la Torre, Saif Ur-Rehman_ 
 
