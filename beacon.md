@@ -20,7 +20,7 @@ Due to the needs for data discoverability providing as much metadata as possible
 
 ## Protocol essentials
 
-Beacon provides REST API on top of the HTTP protocol, as specified in RFC 7231. The Beacon API has two endpoints: `/` (also known as _Info endpoint_) and `/query`. The Info endpoint provides general metadata about the Beacon instance and dataset(s) included. The query interface is provided by the _Query endpoint_. 
+Beacon provides REST API on top of the HTTP protocol, as specified in RFC 7231. The Beacon API has two endpoints: `/` (also known as _Info endpoint_) and `/query`. The _Info endpoint_ provides general metadata about the Beacon instance and dataset(s) included. The query interface is provided by the _Query endpoint_. 
 
 The full complement of Beacon API endpoints, requests and responses is published in [OpenAPI format](https://github.com/ga4gh-beacon/specification/blob/master/beacon.yaml). 
 
@@ -151,10 +151,10 @@ If a request to the URL of an API method includes the Origin header, its content
 
 |Properties (* mandatory, ~ one of these is mandatory)|Description|Type|Example|
 |---|---|:---:|---|
-|**header***|General description of what the data is.|object|See [ADA-M](https://raw.githubusercontent.com/sdelatorrep/ADA-M/openapi_v2.0/adam.yaml#/definitions/AdamHeader)|
-|**profile***|Profile of the data.|object|See [ADA-M](https://raw.githubusercontent.com/sdelatorrep/ADA-M/openapi_v2.0/adam.yaml#/definitions/AdamProfile)|
-|**terms***|Terms related to the use of the data.|object|See [ADA-M](https://raw.githubusercontent.com/sdelatorrep/ADA-M/openapi_v2.0/adam.yaml#/definitions/AdamTerms)|
-|**metaConditions***|Special conditions.|object|See [ADA-M](https://raw.githubusercontent.com/sdelatorrep/ADA-M/openapi_v2.0/adam.yaml#/definitions/AdamMetaConditions)|
+|**header***|General description of what the data is.|object|See [ADA-M](https://raw.githubusercontent.com/ga4gh/ADA-M/b16a72f9987ae20f433e97d6a3247ecddd8dde23/adam.yaml#/components/schemas/Header)|
+|**profile***|Profile of the data.|object|See [ADA-M](https://raw.githubusercontent.com/ga4gh/ADA-M/b16a72f9987ae20f433e97d6a3247ecddd8dde23/adam.yaml#/components/schemas/Profile)|
+|**terms***|Terms related to the use of the data.|object|See [ADA-M](https://raw.githubusercontent.com/ga4gh/ADA-M/b16a72f9987ae20f433e97d6a3247ecddd8dde23/adam.yaml#/components/schemas/Terms)|
+|**metaConditions***|Special conditions.|object|See [ADA-M](https://raw.githubusercontent.com/ga4gh/ADA-M/b16a72f9987ae20f433e97d6a3247ecddd8dde23/adam.yaml#/components/schemas/MetaConditions)|
 
 
 
@@ -267,18 +267,18 @@ An example `GET` request and response to the info endpoint:
 |Parameter (* mandatory, ~ one of these is mandatory)|Description|Type|Example|
 |---|---|:---:|---|
 |*referenceName**|Reference name (chromosome). Accepting values 1-22, X, Y.|string|`'1'`|
-|*referenceBases**|Reference bases for this variant (starting from `start`). Accepted values: [ACGT]* When querying for variants without specific base alterations (e.g. imprecise structural variants with separate variant_type as well as start_min & end_min ... parameters), the use of a single "N" value is required.<br/>See the REF field in [VCF 4.2 specification](https://samtools.github.io/hts-specs/VCFv4.2.pdf).|string|`'G'`|
+|*referenceBases**|Reference bases for this variant (starting from `start`). Accepted values: [ACGT]* When querying for variants without specific base alterations (e.g. imprecise structural variants with separate `variantType` as well as `startMin` & `endMin` ... parameters), the use of a single "N" value is required.<br/>See the REF field in [VCF 4.2 specification](https://samtools.github.io/hts-specs/VCFv4.2.pdf).|string|`'G'`|
 |*assemblyId* *|Assembly identifier|string|`'GRCh38'`|
-|start~|<p>* `start` only:<br />- for single positions, e.g. the start of a specified sequence alteration where the size is given through the specified alternateBases<br />- typical use are queries for SNV and small InDels<br />- the use of `start` without an `end` parameter requires the use of `referenceBases`<br />* `start` and `end:<br /> - special use case for exactly determined structural changes |integer|`345233`|
-|startMin~|Minimum start coordinate<br />* `startMin` + `startMax` + `endMin` + `endMax`:<br />- for querying imprecise positions (e.g. identifying all structural variants starting anywhere between `startMin` <-> `startMax`, and ending anywhere between `endMin` <-> `endMax`<br />- single or double sided precise matches can be achieved by setting `startMin` = `startMax` OR `endMin` = `endMax<br/> <br/>For more information on range querys, see: [Beacon-Querys](https://github.com/ga4gh-beacon/specification/wiki/Beacon-Queries#range-queries-and-structural-variants)|integer|`23433`|
+|start~|<p>* `start` only:<br />- for single positions, e.g. the start of a specified sequence alteration where the size is given through the specified `alternateBases`<br />- typical use are queries for SNV and small InDels<br />- the use of `start` without an `end` parameter requires the use of `referenceBases`<br />* `start` and `end`:<br /> - special use case for exactly determined structural changes |integer|`345233`|
+|startMin~|Minimum start coordinate<br />* `startMin` + `startMax` + `endMin` + `endMax`:<br />- for querying imprecise positions (e.g. identifying all structural variants starting anywhere between `startMin` <-> `startMax`, and ending anywhere between `endMin` <-> `endMax`<br />- single or double sided precise matches can be achieved by setting `startMin` = `startMax` OR `endMin` = `endMax`<br/> <br/>For more information on range querys, see: [Beacon-Querys](https://github.com/ga4gh-beacon/specification/wiki/Beacon-Queries#range-queries-and-structural-variants)|integer|`23433`|
 |startMax|Maximum start coordinate. See `startMin`.|integer|`23450`|
 |end|Precise end coordinate. See `start`.|integer|`455635`|
 |endMin|Minimum end coordinate. See `startMin`.|integer|`23500`|
-|endMax|Maximum end coordinate. See `startMin.|integer|`23520`|
-|alternateBases~|The bases that appear instead of the reference bases. Accepted values: [ACGT]* or N.<br /> <br/>Symbolic ALT alleles (DEL, INS, DUP, INV, CNV, DUP:TANDEM, DEL:ME, INS:ME) will be represented in variantType.<br/> <br/> See the ALT field in [VCF 4.2 specification](https://samtools.github.io/hts-specs/VCFv4.2.pdf)<br/> <br/>*Either `alternateBases` OR `varianType` is REQUIRED*|string|`'A'`|
-|variantType~|The `variantType` is used to denote e.g. structural variants.<br/> <br/>*Either `alternateBases` OR `varianType is REQUIRED*|string|`'INS'`|
+|endMax|Maximum end coordinate. See `startMin`.|integer|`23520`|
+|alternateBases~|The bases that appear instead of the reference bases. Accepted values: [ACGT]* or N.<br /> <br/>Symbolic ALT alleles (DEL, INS, DUP, INV, CNV, DUP:TANDEM, DEL:ME, INS:ME) will be represented in `variantType`.<br/> <br/> See the ALT field in [VCF 4.2 specification](https://samtools.github.io/hts-specs/VCFv4.2.pdf)<br/> <br/>*Either `alternateBases` OR `variantType` is REQUIRED*|string|`'A'`|
+|variantType~|The `variantType` is used to denote e.g. structural variants.<br/> <br/>*Either `alternateBases` OR `variantType` is REQUIRED*|string|`'INS'`|
 |datasetIds|Identifiers of datasets, as defined in `BeaconDataset`. If this field is null/not specified, all datasets should be queried.|array|`['dataset1', 'dataset2']`|
-|includeDatasetResponses|Indicator of whether responses for individual datasets (`datasetAlleleResponses`) should be included in the response (`BeaconAlleleResponse) to this request or not. If null (not specified), the default value of NONE is assumed.<br/> <br/>Accepted values : ['ALL', 'HIT', 'MISS', 'NONE']|string|`'ALL'`|
+|includeDatasetResponses|Indicator of whether responses for individual datasets (`datasetAlleleResponses`) should be included in the response (`BeaconAlleleResponse`) to this request or not. If null (not specified), the default value of NONE is assumed.<br/> <br/>Accepted values : ['ALL', 'HIT', 'MISS', 'NONE']|string|`'ALL'`|
 
 
 ### Response
