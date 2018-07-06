@@ -93,12 +93,12 @@ Beacon API SHOULD support cross-origin resource sharing (CORS) and follow [GA4GH
 |Properties (* mandatory, ~ one of these is mandatory)|Description|Type|Example|
 |---|---|:---:|---|
 |*id* *|Unique identifier of the beacon. Use reverse domain name notation.|string|org.ga4gh.beacon|
-|*name* *|Name of the beacon|string|-|
+|*name* *|Human readable name of the beacon|string|EGA Beacon|
 |*apiVersion* *|Version of the API provided by the beacon.|string|v1.0.0|
 |*organisation* *|Organisation providing the Beacon|object|Beacon Organisation object (see below)|
 |*datasets* *|Datasets served by the beacon. Any beacon should specify at least one dataset.|array|Array of Beacon Dataset objects (see below)|
-|description|Description of the beacon.|string|-|
-|version|Version of the beacon.|string|v0.1|
+|description|Description of the beacon.|string|"This sample set comprises cases of schizophrenia with additional cognitive measurements, collected in Aberdeen, Scotland."|
+|version|Version of the Beacon server instance.|string|v0.1|
 |welcomeUrl|URL to the welcome page for this beacon (RFC 3986 format).|string|'http://example.org/wiki/Main_Page'|
 |alternativeUrl|Alternative URL to the API, e.g. a restricted version of this beacon (RFC 3986 format).|string|'http://example.org/wiki/Main_Page'|
 |createDateTime|The time the beacon was created (ISO 8601 format).|string|'2012-07-19 or 2017-01-17T20:33:40Z'|
