@@ -70,9 +70,7 @@ An example of a valid JSON error response is:
 ```    
 
 ### CORS 
-Beacon API MAY have the following support for cross-origin resource sharing (CORS) to support browser-based clients:
-
-If a request to the URL of an API method includes the Origin header, its contents will be propagated into the Access-Control-Allow-Origin header of the response. 
+Beacon API SHOULD support cross-origin resource sharing (CORS) and follow [GA4GH's recommendations](https://docs.google.com/document/d/1Ifiik9afTO-CEpWGKEZ5TlixQ6tiKcvug4XLd9GNcqo/edit).
 
 
 ### External Standards referenced in the API
