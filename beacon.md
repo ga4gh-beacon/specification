@@ -336,7 +336,7 @@ Example of how to use the GET method in the `/query` endpoint:
         "apiVersion": "0.4",
         "exists": true,
         "error": null,
-        "allelRequest": {
+        "alleleRequest": {
             "referenceName": "1",
             "start": 0,
             "startMin": 28000000,
@@ -352,7 +352,7 @@ Example of how to use the GET method in the `/query` endpoint:
             ],
             "includeDatasetResponses": "ALL"
         },
-        "datasetAllelResponses": [
+        "datasetAlleleResponses": [
             {
                 "datasetId": "EGAD00000000028",
                 "exists": true,
