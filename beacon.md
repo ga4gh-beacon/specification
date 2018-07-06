@@ -182,10 +182,7 @@ An example `GET` request and response to the info endpoint:
           "callCount": 74, 
           "description": "This sample set comprises cases of schizophrenia with additional cognitive measurements, collected in Aberdeen, Scotland.", 
           "id": "EGAD00000000028", 
-          "info": {
-            "accessType": "PUBLIC", 
-            "authorized": "false"
-          }, 
+          "info": {}, 
           "sampleCount": 1, 
           "variantCount": 74, 
         }
@@ -352,10 +349,7 @@ Example of how to use the GET method in the `/query` endpoint:
                 "sampleCount": 1,
                 "note": "This sample set comprises cases of schizophrenia with additional cognitive measurements, collected in Aberdeen, Scotland.",
                 "externalUrl": null,
-                "info": {
-                    "accessType": "PUBLIC",
-                    "authorized": "false"
-                },
+                "info": {},
                 "error": null
             }
         ]
@@ -414,10 +408,7 @@ Example of how to use the POST method in the "/query" path:
                 "sampleCount": 1,
                 "note": "This sample set comprises cases of schizophrenia with additional cognitive measurements, collected in Aberdeen, Scotland.",
                 "externalUrl": null,
-                "info": {
-                    "accessType": "PUBLIC",
-                    "authorized": "false"
-                },
+                "info": {},
                 "error": null
             }
         ]
