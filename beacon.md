@@ -265,8 +265,8 @@ An example `GET` request and response to the info endpoint:
 |end|Precise end coordinate. See `start`.|integer|`455635`|
 |endMin|Minimum end coordinate. See `startMin`.|integer|`23500`|
 |endMax|Maximum end coordinate. See `startMin`.|integer|`23520`|
-|alternateBases~|The bases that appear instead of the reference bases. Accepted values: [ACGT]* or N.<br /> <br/>Symbolic ALT alleles (DEL, INS, DUP, INV, CNV, DUP:TANDEM, DEL:ME, INS:ME) will be represented in `variantType`.<br/> <br/> See the ALT field in [VCF 4.2 specification](https://samtools.github.io/hts-specs/VCFv4.2.pdf)<br/> <br/>*Either `alternateBases` OR `variantType` is REQUIRED*|string|`'A'`|
-|variantType~|The `variantType` is used to denote e.g. structural variants.<br/> <br/>*Either `alternateBases` OR `variantType` is REQUIRED*|string|`'INS'`|
+|alternateBases~|The bases that appear instead of the reference bases. Accepted values: [ACGT]* or N.<br /> <br/>Symbolic ALT alleles (DEL, INS, DUP, INV, CNV, DUP:TANDEM, DEL:ME, INS:ME) will be represented in `variantType`.<br/> <br/> See the ALT field in [VCF 4.2 specification](https://samtools.github.io/hts-specs/VCFv4.2.pdf)<br/> <br/>*Either `alternateBases` OR `variantType` is REQUIRED*|string|`'A'`, `'AGATAC'`|
+|variantType~|The `variantType` is used to denote e.g. structural variants.<br/> <br/>*Either `alternateBases` OR `variantType` is REQUIRED*|string|`'INS'`, `'DUP'`, `'DEL'`, `'INV'`|
 |datasetIds|Identifiers of datasets, as defined in `BeaconDataset`. If this field is null/not specified, all datasets should be queried.|array|`['dataset1', 'dataset2']`|
 |includeDatasetResponses|Indicator of whether responses for individual datasets (`datasetAlleleResponses`) should be included in the response (`BeaconAlleleResponse`) to this request or not. If null (not specified), the default value of NONE is assumed.<br/> <br/>Accepted values : ['ALL', 'HIT', 'MISS', 'NONE']|string|`'ALL'`|
 
