@@ -432,3 +432,54 @@ Example of how to use the POST method in the "/query" path:
     }
     * Closing connection 0
 
+´curl -v 'http://localhost:5000/query?&start=0&end=0&startMin=28000000&startMax=29000000&endMin=28000000&endMax=29000000&referenceBases=A&alternateBases=T&assemblyId=GRCh37&datasetIds=EGAD00000000028&includeDatasetResponses=ALL'´
+
+
+´´´
+*   Trying 127.0.0.1...
+* TCP_NODELAY set
+* Connected to localhost (127.0.0.1) port 5000 (#0)
+> GET /query?&start=0&end=0&startMin=28000000&startMax=29000000&endMin=28000000&endMax=29000000&referenceBases=A&alternateBases=T&assemblyId=GRCh37&datasetIds=EGAD00000000028&includeDatasetResponses=ALL HTTP/1.1
+> Host: localhost:5000
+> User-Agent: curl/7.54.0
+> Accept: */*
+> 
+* HTTP 1.0, assume close after body
+< HTTP/1.0 400 BAD REQUEST
+< Content-Type: application/json
+< Content-Length: 791
+< Server: Werkzeug/0.14.1 Python/3.6.5
+< Date: Fri, 06 Jul 2018 09:15:39 GMT
+< 
+{
+    "message": {
+        "beaconId": "ega-beacon",
+        "apiVersion": "0.4",
+        "exists": null,
+        "error": {
+            "errorCode": 400,
+            "errorMessage": "Missing mandatory parameter referenceName"
+        },
+        "allelRequest": {
+            "referenceName": "0",
+            "start": 0,
+            "startMin": 28000000,
+            "startMax": 29000000,
+            "end": 0,
+            "endMin": 28000000,
+            "endMax": 29000000,
+            "referenceBases": "A",
+            "alternateBases": "T",
+            "variantType": "0",
+            "assemblyId": "GRCh37",
+            "datasetIds": [
+                "EGAD00000000028"
+            ],
+            "includeDatasetResponses": "ALL"
+        },
+        "datasetAllelResponses": []
+    }
+}
+* Closing connection 0
+
+´´´
