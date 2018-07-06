@@ -352,7 +352,7 @@ Example of how to use the GET method in the `/query` endpoint:
             ],
             "includeDatasetResponses": "ALL"
         },
-        "datasetAllelResponses": [
+        "datasetAlleleResponses": [
             {
                 "datasetId": "EGAD00000000028",
                 "exists": true,
@@ -433,3 +433,4 @@ Example of how to use the POST method in the "/query" path:
         ]
     }
     * Closing connection 0
+
