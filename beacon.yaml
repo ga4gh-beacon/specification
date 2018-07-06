@@ -612,6 +612,7 @@ components:
         errorCode:
           type: integer
           format: int32
+          example: 'same as HTTP status code'
         errorMessage:
           type: string
     KeyValuePair:
