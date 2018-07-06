@@ -180,19 +180,14 @@ An example `GET` request and response to the info endpoint:
         {
           "assemblyId": "grch37", 
           "callCount": 74, 
-          "createDateTime": null, 
           "description": "This sample set comprises cases of schizophrenia with additional cognitive measurements, collected in Aberdeen, Scotland.", 
-          "externalUrl": null, 
           "id": "EGAD00000000028", 
           "info": {
             "accessType": "PUBLIC", 
             "authorized": "false"
           }, 
-          "name": null, 
           "sampleCount": 1, 
-          "updateDateTime": null, 
           "variantCount": 74, 
-          "version": null
         }
       ], 
       "description": "This <a href=\"http://ga4gh.org/#/beacon\">Beacon</a> is based on the GA4GH Beacon <a href=\"https://github.com/ga4gh/beacon-team/blob/develop/src/main/resources/avro/beacon.avdl\">API 0.4</a>", 
@@ -206,7 +201,6 @@ An example `GET` request and response to the info endpoint:
         "contactUrl": "mailto:beacon.ega@crg.eu", 
         "description": "The European Genome-phenome Archive (EGA) is a service for permanent archiving and sharing of all types of personally identifiable genetic and phenotypic data resulting from biomedical research projects.", 
         "id": "EGA", 
-        "info": null, 
         "logoUrl": "https://ega-archive.org/images/logo.png", 
         "name": "European Genome-Phenome Archive (EGA)", 
         "welcomeUrl": "https://ega-archive.org/"
@@ -215,7 +209,6 @@ An example `GET` request and response to the info endpoint:
         {
           "alternateBases": "A", 
           "assemblyId": "GRCh37", 
-          "datasetIds": null, 
           "includeDatasetResponses": false, 
           "referenceBases": "C", 
           "referenceName": "17", 
@@ -245,7 +238,6 @@ An example `GET` request and response to the info endpoint:
           "start": 866510
         }
       ], 
-      "updateDateTime": null, 
       "version": "v04", 
       "welcomeUrl": "https://ega-archive.org/beacon_web/"
     }
