@@ -460,7 +460,7 @@ Example of how to use the POST method in the "/query" path:
             ],
             "includeDatasetResponses": "ALL"
         },
-        "datasetAllelResponses": []
+        "datasetAlleleResponses": []
     }
 }
 * Closing connection 0
