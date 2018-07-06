@@ -256,7 +256,7 @@ An example `GET` request and response to the info endpoint:
 
 |Parameter (* mandatory, ~ one of these is mandatory)|Description|Type|Example|
 |---|---|:---:|---|
-|*referenceName**|Reference name (chromosome). Accepting values 1-22, X, Y.|string|`'1'`|
+|*referenceName**|Reference name (chromosome). Accepting values 1-22, X, Y so follows Ensembl chromosome naming convention.|string|`'1'`|
 |*referenceBases**|Reference bases for this variant (starting from `start`). Accepted values: [ACGT]* When querying for variants without specific base alterations (e.g. imprecise structural variants with separate `variantType` as well as `startMin` & `endMin` ... parameters), the use of a single "N" value is required.<br/>See the REF field in [VCF 4.2 specification](https://samtools.github.io/hts-specs/VCFv4.2.pdf).|string|`'G'`|
 |*assemblyId* *|Assembly identifier|string|`'GRCh38'`|
 |start~|<p>* `start` only:<br />- for single positions, e.g. the start of a specified sequence alteration where the size is given through the specified `alternateBases`<br />- typical use are queries for SNV and small InDels<br />- the use of `start` without an `end` parameter requires the use of `referenceBases`<br />* `start` and `end`:<br /> - special use case for exactly determined structural changes |integer|`345233`|
