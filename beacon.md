@@ -70,7 +70,7 @@ An example of a valid JSON error response is:
 ```    
 
 ### CORS 
-Beacon API SHOULD support cross-origin resource sharing (CORS) and follow [GA4GH's recommendations](https://docs.google.com/document/d/1Ifiik9afTO-CEpWGKEZ5TlixQ6tiKcvug4XLd9GNcqo/edit).
+Beacon API SHOULD support cross-origin resource sharing (CORS) and follow [GA4GH CORS recommendations](https://docs.google.com/document/d/1Ifiik9afTO-CEpWGKEZ5TlixQ6tiKcvug4XLd9GNcqo/edit).
 
 
 ### External Standards referenced in the API
