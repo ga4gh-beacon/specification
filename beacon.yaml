@@ -38,7 +38,7 @@ paths:
             $ref: '#/components/schemas/Chromosome'
         - name: start
           description: |
-            Precise start coordinate position, allele locus (0-based).
+            Precise start coordinate position, allele locus (0-based, inclusive).
             * start only:
               - for single positions, e.g. the start of a specified sequence alteration where the size is given through the specified alternateBases
               - typical use are queries for SNV and small InDels
@@ -68,7 +68,7 @@ paths:
             type: string
         - name: end
           description: |
-            Precise end coordinate. See start.
+            Precise end coordinate (0-based, exclusive). See start.
           in: query
           schema:
             type: string
