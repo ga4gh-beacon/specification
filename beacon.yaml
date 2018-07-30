@@ -117,18 +117,22 @@ paths:
             The `variantType` is used to denote e.g. structural variants.
 
             Examples:
-
             * DUP: duplication of sequence following `start`; not necessarily in
             situ
-
             * DEL: deletion of sequence following `start`
-
 
             Optional: either `alternateBases` or `variantType` is required.
           in: query
           required: false
           schema:
             type: string
+          examples:
+            dup:
+              value: DUP
+              summary: duplication of sequence following `start`; not necessarily in
+            del:
+              value: DEL
+              summary: deletion of sequence following `start`
         - name: assemblyId
           description: 'Assembly identifier (GRC notation, e.g. GRCh37).'
           in: query
