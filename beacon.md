@@ -1,3 +1,4 @@
+
 # Beacon API Specification v1.0.0
 
 Beacon is a web service for genetic data sharing. Beacon permits simple queries regarding the presence or absence of a specified variant in a given dataset. This is the key idea behind Beacon, by allowing these queries Beacon makes the data discoverable. If the user finds their variant(s) of interest, Beacon will point them to the appropriate place to gain access to the data (e.g. the European Genome-Phenome Archive, EGA).
@@ -256,10 +257,10 @@ An example `GET` request and response to the info endpoint:
 |*referenceName**|Reference name (chromosome). Accepting values 1-22, X, Y so follows Ensembl chromosome naming convention.|string|`'1'`|
 |*referenceBases**|Reference bases for this variant (starting from `start`). Accepted values: [ACGT]* When querying for variants without specific base alterations (e.g. imprecise structural variants with separate `variantType` as well as `startMin` & `endMin` ... parameters), the use of a single "N" value is required.<br/>See the REF field in [VCF 4.2 specification](https://samtools.github.io/hts-specs/VCFv4.2.pdf).|string|`'G'`|
 |*assemblyId* *|Assembly identifier|string|`'GRCh38'`|
-|start~|<p>* `start` only:<br />- for single positions, e.g. the start of a specified sequence alteration where the size is given through the specified `alternateBases`<br />- typical use are queries for SNV and small InDels<br />- the use of `start` without an `end` parameter requires the use of `referenceBases`<br />* `start` and `end`:<br /> - special use case for exactly determined structural changes |integer|`345233`|
+|start~|Precise start coordinate position, allele locus (0-based, inclusive).<p>* `start` only:<br />- for single positions, e.g. the start of a specified sequence alteration where the size is given through the specified `alternateBases`<br />- typical use are queries for SNV and small InDels<br />- the use of `start` without an `end` parameter requires the use of `referenceBases`<br />* `start` and `end`:<br /> - special use case for exactly determined structural changes |integer|`345233`|
 |startMin~|Minimum start coordinate<br />* `startMin` + `startMax` + `endMin` + `endMax`:<br />- for querying imprecise positions (e.g. identifying all structural variants starting anywhere between `startMin` <-> `startMax`, and ending anywhere between `endMin` <-> `endMax`<br />- single or double sided precise matches can be achieved by setting `startMin` = `startMax` OR `endMin` = `endMax`<br/> <br/>For more information on range querys, see: [Beacon-Querys](https://github.com/ga4gh-beacon/specification/wiki/Beacon-Queries#range-queries-and-structural-variants)|integer|`23433`|
 |startMax|Maximum start coordinate. See `startMin`.|integer|`23450`|
-|end|Precise end coordinate. See `start`.|integer|`455635`|
+|end|Precise end coordinate (0-based, exclusive). See `start`.|integer|`455635`|
 |endMin|Minimum end coordinate. See `startMin`.|integer|`23500`|
 |endMax|Maximum end coordinate. See `startMin`.|integer|`23520`|
 |alternateBases~|The bases that appear instead of the reference bases. Accepted values: [ACGT]* or N.<br /> <br/>Symbolic ALT alleles (DEL, INS, DUP, INV, CNV, DUP:TANDEM, DEL:ME, INS:ME) will be represented in `variantType`.<br/> <br/> See the ALT field in [VCF 4.2 specification](https://samtools.github.io/hts-specs/VCFv4.2.pdf)<br/> <br/>*Either `alternateBases` OR `variantType` is REQUIRED*|string|`'A'`, `'AGATAC'`|
