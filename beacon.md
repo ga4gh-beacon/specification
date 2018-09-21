@@ -21,7 +21,7 @@ Due to the needs for data discoverability providing as much metadata as possible
 
 ## Protocol essentials
 
-Beacon provides REST API on top of the HTTP protocol, as specified in RFC 7231. The Beacon API has two endpoints: `/` (also known as _Info endpoint_) and `/query`. The _Info endpoint_ provides general metadata about the Beacon instance and dataset(s) included. The query interface is provided by the _Query endpoint_. 
+Beacon provides REST API on top of the HTTPS protocol, as specified in RFC 7231.HTTPS (HTTP over SSL) MUST be used instead of regular HTTP because the communication between Beacon server and Beacon client has to be encrypted. The Beacon API has two endpoints: `/` (also known as _Info endpoint_) and `/query`. The _Info endpoint_ provides general metadata about the Beacon instance and dataset(s) included. The query interface is provided by the _Query endpoint_. 
 
 The full complement of Beacon API endpoints, requests and responses is published in [OpenAPI format](https://github.com/ga4gh-beacon/specification/blob/master/beacon.yaml). 
 
@@ -304,7 +304,7 @@ An example `GET` request and response to the info endpoint:
 
 Example of how to use the GET method in the `/query` endpoint:
 
-    curl -v 'http://localhost:5000/query?referenceName=1&start=0&end=0&startMin=28000000&startMax=29000000&endMin=28000000&endMax=29000000&referenceBases=A&alternateBases=T&assemblyId=GRCh37&datasetIds=EGAD00000000028&includeDatasetResponses=ALL'
+    curl -v 'https://localhost:5000/query?referenceName=1&start=0&end=0&startMin=28000000&startMax=29000000&endMin=28000000&endMax=29000000&referenceBases=A&alternateBases=T&assemblyId=GRCh37&datasetIds=EGAD00000000028&includeDatasetResponses=ALL'
 ######
     
     > GET /query?referenceName=1&start=0&end=0&startMin=28000000&startMax=29000000&endMin=28000000&endMax=29000000&referenceBases=A&alternateBases=T&assemblyId=GRCh37&datasetIds=EGAD00000000028&includeDatasetResponses=ALL HTTP/1.1
@@ -360,7 +360,7 @@ Example of how to use the GET method in the `/query` endpoint:
 ######
 Example of how to use the POST method in the "/query" path:
    
-    curl -v -d "referenceName=1&start=14929&referenceBases=A&alternateBases=G&assemblyId=GRCh37&datasetIds=EGAD00000000028&includeDatsetResponses=ALL" http://localhost:5000/query
+    curl -v -d "referenceName=1&start=14929&referenceBases=A&alternateBases=G&assemblyId=GRCh37&datasetIds=EGAD00000000028&includeDatsetResponses=ALL" https://localhost:5000/query
 ######
 
     > POST /query HTTP/1.1
@@ -416,7 +416,7 @@ Example of how to use the POST method in the "/query" path:
     }
     * Closing connection 0
 
-`curl -v 'http://localhost:5000/query?&start=0&end=0&startMin=28000000&startMax=29000000&endMin=28000000&endMax=29000000&referenceBases=A&alternateBases=T&assemblyId=GRCh37&datasetIds=EGAD00000000028&includeDatasetResponses=ALL'`
+`curl -v 'https://localhost:5000/query?&start=0&end=0&startMin=28000000&startMax=29000000&endMin=28000000&endMax=29000000&referenceBases=A&alternateBases=T&assemblyId=GRCh37&datasetIds=EGAD00000000028&includeDatasetResponses=ALL'`
 
 
 ```
