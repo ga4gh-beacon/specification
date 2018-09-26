@@ -9,7 +9,7 @@ before_install:
   # This setup will not be needed once the online version of validator-badge supports OAS 3.0. Until then we'll need to set up a local version. Since there isn't a release supporting OAS 3.0 yet, we unfortunately need to build some snapshot dependencies. These steps should be gradually removed as releases come out.
 
   # build swagger-core
-  - git clone --branch=2.0 https://github.com/swagger-api/swagger-core.git
+  - git clone --branch=v2.0.2 https://github.com/swagger-api/swagger-core.git
   - cd swagger-core
   - git reset --hard 5336adb9945cfdf6eddbb61f15b28a1509e0b267
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V

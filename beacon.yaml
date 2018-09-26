@@ -1,12 +1,12 @@
 openapi: 3.0.0
 servers: []
 info:
-  version: "0.4.1-SNAPSHOT"
+  version: "1.0.0"
   title: GA4GH Beacon API Specification
   description: >-
     A Beacon is a web service for genetic data sharing that can be queried for information about specific alleles.
   contact:
-    email: ga4gh-dwg-beacon@genomicsandhealth.org
+    email: beacon@ga4gh.org
   license:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
@@ -38,7 +38,7 @@ paths:
             $ref: '#/components/schemas/Chromosome'
         - name: start
           description: |
-            Precise start coordinate position, allele locus (0-based).
+            Precise start coordinate position, allele locus (0-based, inclusive).
             * start only:
               - for single positions, e.g. the start of a specified sequence alteration where the size is given through the specified alternateBases
               - typical use are queries for SNV and small InDels
@@ -68,7 +68,7 @@ paths:
             type: string
         - name: end
           description: |
-            Precise end coordinate. See start.
+            Precise end coordinate (0-based, exclusive). See start.
           in: query
           schema:
             type: string
@@ -117,18 +117,22 @@ paths:
             The `variantType` is used to denote e.g. structural variants.
 
             Examples:
-
             * DUP: duplication of sequence following `start`; not necessarily in
             situ
-
             * DEL: deletion of sequence following `start`
-
 
             Optional: either `alternateBases` or `variantType` is required.
           in: query
           required: false
           schema:
             type: string
+          examples:
+            dup:
+              value: DUP
+              summary: duplication of sequence following `start`; not necessarily in
+            del:
+              value: DEL
+              summary: deletion of sequence following `start`
         - name: assemblyId
           description: 'Assembly identifier (GRC notation, e.g. GRCh37).'
           in: query

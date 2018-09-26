@@ -1,3 +1,4 @@
+
 # Beacon API Specification v1.0.0
 
 Beacon is a web service for genetic data sharing. Beacon permits simple queries regarding the presence or absence of a specified variant in a given dataset. This is the key idea behind Beacon, by allowing these queries Beacon makes the data discoverable. If the user finds their variant(s) of interest, Beacon will point them to the appropriate place to gain access to the data (e.g. the European Genome-Phenome Archive, EGA).
@@ -20,7 +21,7 @@ Due to the needs for data discoverability providing as much metadata as possible
 
 ## Protocol essentials
 
-Beacon provides REST API on top of the HTTP protocol, as specified in RFC 7231. The Beacon API has two endpoints: `/` (also known as _Info endpoint_) and `/query`. The _Info endpoint_ provides general metadata about the Beacon instance and dataset(s) included. The query interface is provided by the _Query endpoint_. 
+Beacon provides REST API on top of the HTTPS protocol, as specified in RFC 7231. HTTPS (HTTP over SSL) MUST be used instead of regular HTTP because the communication between Beacon server and Beacon client has to be encrypted. The Beacon API has two endpoints: `/` (also known as _Info endpoint_) and `/query`. The _Info endpoint_ provides general metadata about the Beacon instance and dataset(s) included. The query interface is provided by the _Query endpoint_. 
 
 The full complement of Beacon API endpoints, requests and responses is published in [OpenAPI format](https://github.com/ga4gh-beacon/specification/blob/master/beacon.yaml). 
 
@@ -70,9 +71,7 @@ An example of a valid JSON error response is:
 ```    
 
 ### CORS 
-Beacon API MAY have the following support for cross-origin resource sharing (CORS) to support browser-based clients:
-
-If a request to the URL of an API method includes the Origin header, its contents will be propagated into the Access-Control-Allow-Origin header of the response. 
+Beacon API SHOULD support cross-origin resource sharing (CORS) and follow [GA4GH CORS recommendations](https://docs.google.com/document/d/1Ifiik9afTO-CEpWGKEZ5TlixQ6tiKcvug4XLd9GNcqo/edit).
 
 
 ### External Standards referenced in the API
@@ -95,12 +94,12 @@ If a request to the URL of an API method includes the Origin header, its content
 |Properties (* mandatory, ~ one of these is mandatory)|Description|Type|Example|
 |---|---|:---:|---|
 |*id* *|Unique identifier of the beacon. Use reverse domain name notation.|string|org.ga4gh.beacon|
-|*name* *|Name of the beacon|string|-|
+|*name* *|Human readable name of the beacon|string|EGA Beacon|
 |*apiVersion* *|Version of the API provided by the beacon.|string|v1.0.0|
 |*organisation* *|Organisation providing the Beacon|object|Beacon Organisation object (see below)|
 |*datasets* *|Datasets served by the beacon. Any beacon should specify at least one dataset.|array|Array of Beacon Dataset objects (see below)|
-|description|Description of the beacon.|string|-|
-|version|Version of the beacon.|string|v0.1|
+|description|Description of the beacon.|string|"This sample set comprises cases of schizophrenia with additional cognitive measurements, collected in Aberdeen, Scotland."|
+|version|Version of the Beacon server instance.|string|v0.1|
 |welcomeUrl|URL to the welcome page for this beacon (RFC 3986 format).|string|'http://example.org/wiki/Main_Page'|
 |alternativeUrl|Alternative URL to the API, e.g. a restricted version of this beacon (RFC 3986 format).|string|'http://example.org/wiki/Main_Page'|
 |createDateTime|The time the beacon was created (ISO 8601 format).|string|'2012-07-19 or 2017-01-17T20:33:40Z'|
@@ -182,19 +181,11 @@ An example `GET` request and response to the info endpoint:
         {
           "assemblyId": "grch37", 
           "callCount": 74, 
-          "createDateTime": null, 
           "description": "This sample set comprises cases of schizophrenia with additional cognitive measurements, collected in Aberdeen, Scotland.", 
-          "externalUrl": null, 
           "id": "EGAD00000000028", 
-          "info": {
-            "accessType": "PUBLIC", 
-            "authorized": "false"
-          }, 
-          "name": null, 
+          "info": {}, 
           "sampleCount": 1, 
-          "updateDateTime": null, 
           "variantCount": 74, 
-          "version": null
         }
       ], 
       "description": "This <a href=\"http://ga4gh.org/#/beacon\">Beacon</a> is based on the GA4GH Beacon <a href=\"https://github.com/ga4gh/beacon-team/blob/develop/src/main/resources/avro/beacon.avdl\">API 0.4</a>", 
@@ -208,7 +199,6 @@ An example `GET` request and response to the info endpoint:
         "contactUrl": "mailto:beacon.ega@crg.eu", 
         "description": "The European Genome-phenome Archive (EGA) is a service for permanent archiving and sharing of all types of personally identifiable genetic and phenotypic data resulting from biomedical research projects.", 
         "id": "EGA", 
-        "info": null, 
         "logoUrl": "https://ega-archive.org/images/logo.png", 
         "name": "European Genome-Phenome Archive (EGA)", 
         "welcomeUrl": "https://ega-archive.org/"
@@ -217,7 +207,6 @@ An example `GET` request and response to the info endpoint:
         {
           "alternateBases": "A", 
           "assemblyId": "GRCh37", 
-          "datasetIds": null, 
           "includeDatasetResponses": false, 
           "referenceBases": "C", 
           "referenceName": "17", 
@@ -247,7 +236,6 @@ An example `GET` request and response to the info endpoint:
           "start": 866510
         }
       ], 
-      "updateDateTime": null, 
       "version": "v04", 
       "welcomeUrl": "https://ega-archive.org/beacon_web/"
     }
@@ -266,18 +254,18 @@ An example `GET` request and response to the info endpoint:
 
 |Parameter (* mandatory, ~ one of these is mandatory)|Description|Type|Example|
 |---|---|:---:|---|
-|*referenceName**|Reference name (chromosome). Accepting values 1-22, X, Y.|string|`'1'`|
+|*referenceName**|Reference name (chromosome). Accepting values 1-22, X, Y so follows Ensembl chromosome naming convention.|string|`'1'`|
 |*referenceBases**|Reference bases for this variant (starting from `start`). Accepted values: [ACGT]* When querying for variants without specific base alterations (e.g. imprecise structural variants with separate `variantType` as well as `startMin` & `endMin` ... parameters), the use of a single "N" value is required.<br/>See the REF field in [VCF 4.2 specification](https://samtools.github.io/hts-specs/VCFv4.2.pdf).|string|`'G'`|
 |*assemblyId* *|Assembly identifier|string|`'GRCh38'`|
-|start~|<p>* `start` only:<br />- for single positions, e.g. the start of a specified sequence alteration where the size is given through the specified `alternateBases`<br />- typical use are queries for SNV and small InDels<br />- the use of `start` without an `end` parameter requires the use of `referenceBases`<br />* `start` and `end`:<br /> - special use case for exactly determined structural changes |integer|`345233`|
+|start~|Precise start coordinate position, allele locus (0-based, inclusive).<p>* `start` only:<br />- for single positions, e.g. the start of a specified sequence alteration where the size is given through the specified `alternateBases`<br />- typical use are queries for SNV and small InDels<br />- the use of `start` without an `end` parameter requires the use of `referenceBases`<br />* `start` and `end`:<br /> - special use case for exactly determined structural changes |integer|`345233`|
 |startMin~|Minimum start coordinate<br />* `startMin` + `startMax` + `endMin` + `endMax`:<br />- for querying imprecise positions (e.g. identifying all structural variants starting anywhere between `startMin` <-> `startMax`, and ending anywhere between `endMin` <-> `endMax`<br />- single or double sided precise matches can be achieved by setting `startMin` = `startMax` OR `endMin` = `endMax`<br/> <br/>For more information on range querys, see: [Beacon-Querys](https://github.com/ga4gh-beacon/specification/wiki/Beacon-Queries#range-queries-and-structural-variants)|integer|`23433`|
 |startMax|Maximum start coordinate. See `startMin`.|integer|`23450`|
-|end|Precise end coordinate. See `start`.|integer|`455635`|
+|end|Precise end coordinate (0-based, exclusive). See `start`.|integer|`455635`|
 |endMin|Minimum end coordinate. See `startMin`.|integer|`23500`|
 |endMax|Maximum end coordinate. See `startMin`.|integer|`23520`|
-|alternateBases~|The bases that appear instead of the reference bases. Accepted values: [ACGT]* or N.<br /> <br/>Symbolic ALT alleles (DEL, INS, DUP, INV, CNV, DUP:TANDEM, DEL:ME, INS:ME) will be represented in `variantType`.<br/> <br/> See the ALT field in [VCF 4.2 specification](https://samtools.github.io/hts-specs/VCFv4.2.pdf)<br/> <br/>*Either `alternateBases` OR `variantType` is REQUIRED*|string|`'A'`|
-|variantType~|The `variantType` is used to denote e.g. structural variants.<br/> <br/>*Either `alternateBases` OR `variantType` is REQUIRED*|string|`'INS'`|
-|datasetIds|Identifiers of datasets, as defined in `BeaconDataset`. If this field is null/not specified, all datasets should be queried.|array|`['dataset1', 'dataset2']`|
+|alternateBases~|The bases that appear instead of the reference bases. Accepted values: [ACGT]* or N.<br /> <br/>Symbolic ALT alleles (DEL, INS, DUP, INV, CNV, DUP:TANDEM, DEL:ME, INS:ME) will be represented in `variantType`.<br/> <br/> See the ALT field in [VCF 4.2 specification](https://samtools.github.io/hts-specs/VCFv4.2.pdf)<br/> <br/>*Either `alternateBases` OR `variantType` is REQUIRED*|string|`'A'`, `'AGATAC'`|
+|variantType~|The `variantType` is used to denote e.g. structural variants.<br/> <br/>*Either `alternateBases` OR `variantType` is REQUIRED*|string|`'INS'`, `'DUP'`, `'DEL'`, `'INV'`|
+|datasetIds|Identifiers of datasets, as defined in `BeaconDataset`. In case `assemblyId` doesn't match requested dataset(s) error will be raised (`400 Bad request`). If this field is not specified, all datasets should be queried.|array|`['dataset1', 'dataset2']`|
 |includeDatasetResponses|Indicator of whether responses for individual datasets (`datasetAlleleResponses`) should be included in the response (`BeaconAlleleResponse`) to this request or not. If null (not specified), the default value of NONE is assumed.<br/> <br/>Accepted values : ['ALL', 'HIT', 'MISS', 'NONE']|string|`'ALL'`|
 
 
@@ -316,7 +304,7 @@ An example `GET` request and response to the info endpoint:
 
 Example of how to use the GET method in the `/query` endpoint:
 
-    curl -v 'http://localhost:5000/query?referenceName=1&start=0&end=0&startMin=28000000&startMax=29000000&endMin=28000000&endMax=29000000&referenceBases=A&alternateBases=T&assemblyId=GRCh37&datasetIds=EGAD00000000028&includeDatasetResponses=ALL'
+    curl -v 'https://localhost:5000/query?referenceName=1&start=0&end=0&startMin=28000000&startMax=29000000&endMin=28000000&endMax=29000000&referenceBases=A&alternateBases=T&assemblyId=GRCh37&datasetIds=EGAD00000000028&includeDatasetResponses=ALL'
 ######
     
     > GET /query?referenceName=1&start=0&end=0&startMin=28000000&startMax=29000000&endMin=28000000&endMax=29000000&referenceBases=A&alternateBases=T&assemblyId=GRCh37&datasetIds=EGAD00000000028&includeDatasetResponses=ALL HTTP/1.1
@@ -362,10 +350,7 @@ Example of how to use the GET method in the `/query` endpoint:
                 "sampleCount": 1,
                 "note": "This sample set comprises cases of schizophrenia with additional cognitive measurements, collected in Aberdeen, Scotland.",
                 "externalUrl": null,
-                "info": {
-                    "accessType": "PUBLIC",
-                    "authorized": "false"
-                },
+                "info": {},
                 "error": null
             }
         ]
@@ -375,7 +360,7 @@ Example of how to use the GET method in the `/query` endpoint:
 ######
 Example of how to use the POST method in the "/query" path:
    
-    curl -v -d "referenceName=1&start=14929&referenceBases=A&alternateBases=G&assemblyId=GRCh37&datasetIds=EGAD00000000028&includeDatsetResponses=ALL" http://localhost:5000/query
+    curl -v -d "referenceName=1&start=14929&referenceBases=A&alternateBases=G&assemblyId=GRCh37&datasetIds=EGAD00000000028&includeDatsetResponses=ALL" https://localhost:5000/query
 ######
 
     > POST /query HTTP/1.1
@@ -424,12 +409,61 @@ Example of how to use the POST method in the "/query" path:
                 "sampleCount": 1,
                 "note": "This sample set comprises cases of schizophrenia with additional cognitive measurements, collected in Aberdeen, Scotland.",
                 "externalUrl": null,
-                "info": {
-                    "accessType": "PUBLIC",
-                    "authorized": "false"
-                },
+                "info": {},
                 "error": null
             }
         ]
     }
     * Closing connection 0
+
+`curl -v 'https://localhost:5000/query?&start=0&end=0&startMin=28000000&startMax=29000000&endMin=28000000&endMax=29000000&referenceBases=A&alternateBases=T&assemblyId=GRCh37&datasetIds=EGAD00000000028&includeDatasetResponses=ALL'`
+
+
+```
+*   Trying 127.0.0.1...
+* TCP_NODELAY set
+* Connected to localhost (127.0.0.1) port 5000 (#0)
+> GET /query?&start=0&end=0&startMin=28000000&startMax=29000000&endMin=28000000&endMax=29000000&referenceBases=A&alternateBases=T&assemblyId=GRCh37&datasetIds=EGAD00000000028&includeDatasetResponses=ALL HTTP/1.1
+> Host: localhost:5000
+> User-Agent: curl/7.54.0
+> Accept: */*
+> 
+* HTTP 1.0, assume close after body
+< HTTP/1.0 400 BAD REQUEST
+< Content-Type: application/json
+< Content-Length: 791
+< Server: Werkzeug/0.14.1 Python/3.6.5
+< Date: Fri, 06 Jul 2018 09:15:39 GMT
+< 
+{
+    "message": {
+        "beaconId": "ega-beacon",
+        "apiVersion": "0.4",
+        "exists": null,
+        "error": {
+            "errorCode": 400,
+            "errorMessage": "Missing mandatory parameter referenceName"
+        },
+        "allelRequest": {
+            "referenceName": "0",
+            "start": 0,
+            "startMin": 28000000,
+            "startMax": 29000000,
+            "end": 0,
+            "endMin": 28000000,
+            "endMax": 29000000,
+            "referenceBases": "A",
+            "alternateBases": "T",
+            "variantType": "0",
+            "assemblyId": "GRCh37",
+            "datasetIds": [
+                "EGAD00000000028"
+            ],
+            "includeDatasetResponses": "ALL"
+        },
+        "datasetAlleleResponses": []
+    }
+}
+* Closing connection 0
+
+```
