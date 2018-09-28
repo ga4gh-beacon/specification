@@ -31,7 +31,7 @@ paths:
       operationId: getBeaconAlleleResponse
       parameters:
         - name: referenceName
-          description: 'Reference name (chromosome). Accepting values 1-22, X, Y.'
+          description: 'Reference name (chromosome). Accepting values 1-22, X, Y, MT.'
           in: query
           required: true
           schema:
@@ -265,6 +265,7 @@ components:
         - '22'
         - 'X'
         - 'Y'
+        - 'MT'
     Beacon:
       type: object
       required:
