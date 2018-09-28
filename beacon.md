@@ -21,7 +21,7 @@ Due to the needs for data discoverability providing as much metadata as possible
 
 ## Protocol essentials
 
-Beacon provides REST API on top of the HTTPS protocol, as specified in RFC 7231. HTTPS (HTTP over SSL) MUST be used instead of regular HTTP because the communication between Beacon server and Beacon client has to be encrypted. The Beacon API has two endpoints: `/` (also known as _Info endpoint_) and `/query`. The _Info endpoint_ provides general metadata about the Beacon instance and dataset(s) included. The query interface is provided by the _Query endpoint_. 
+Beacon provides REST API on top of the HTTPS protocol, as specified in RFC 7231. HTTPS (HTTP over SSL) SHOULD be used instead of regular HTTP because the communication between Beacon server and Beacon client has to be encrypted. The Beacon API has two endpoints: `/` (also known as _Info endpoint_) and `/query`. The _Info endpoint_ provides general metadata about the Beacon instance and dataset(s) included. The query interface is provided by the _Query endpoint_. 
 
 The full complement of Beacon API endpoints, requests and responses is published in [OpenAPI format](https://github.com/ga4gh-beacon/specification/blob/master/beacon.yaml). 
 
