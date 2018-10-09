@@ -6,7 +6,9 @@ The _Beacon_ project was launched in 2014 to show the willingness of researchers
 
 ## Specification
 
-The specification is detailed in the [beacon.md](beacon.md) document.
+The specification is done in [OpenAPI format](beacon.yaml) and it is online in [Swagger Hub](https://app.swaggerhub.com/apis/ELIXIR-Finland/ga-4_gh_beacon_api_specification/1.0.0-rc1). The overall design is explained in 
+[beacon.md](beacon.md) document.
+
 
 ## License
 
@@ -14,7 +16,7 @@ This project is licensed under the terms of the [Apache2.0 license](LICENSE).
 
 ## How to contribute
 
-Guidelines for contributing to this repository are listed in the [CONTRIBUTING.md](CONTRIBUTING.md) document.
+Guidelines for contributing to this repository are listed in the [CONTRIBUTING.md](CONTRIBUTING.md) document. To introduce new development ideas or enhancements please use [this wiki-page](https://github.com/ga4gh-beacon/specification/wiki/Future-enhancements-and-development-ideas).
 
 ## How to test
 
@@ -32,7 +34,7 @@ This page is used to plan and manage the work across the ga4gh-beacon repositori
 
 ## More information
 
-More information for developers is available on [our wiki](https://github.com/ga4gh-beacon/specification/wiki). A list of related tools and projects developed by the community is maintained on the [Resources](https://github.com/ga4gh-beacon/specification/wiki/Resources) page.
+More information for developers is available on [our wiki](https://github.com/ga4gh-beacon/specification/wiki). A list of related tools and projects developed by the community is maintained on the [Resources](https://github.com/ga4gh-beacon/specification/wiki/Resources) page.  
 
 ## Notify GA4GH of potential security flaw in specification
 

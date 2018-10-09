@@ -1,12 +1,12 @@
 openapi: 3.0.0
 servers: []
 info:
-  version: "0.4.1-SNAPSHOT"
+  version: "1.0.0"
   title: GA4GH Beacon API Specification
   description: >-
     A Beacon is a web service for genetic data sharing that can be queried for information about specific alleles.
   contact:
-    email: ga4gh-dwg-beacon@genomicsandhealth.org
+    email: beacon@ga4gh.org
   license:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
@@ -38,7 +38,7 @@ paths:
             $ref: '#/components/schemas/Chromosome'
         - name: start
           description: |
-            Precise start coordinate position, allele locus (0-based).
+            Precise start coordinate position, allele locus (0-based, inclusive).
             * start only:
               - for single positions, e.g. the start of a specified sequence alteration where the size is given through the specified alternateBases
               - typical use are queries for SNV and small InDels
@@ -55,7 +55,7 @@ paths:
           description: |
             Minimum start coordinate
             * startMin + startMax + endMin + endMax
-              - for querying imprecise positions (e.g. identifying all structural variants starting anywhere between startMin <-> startMax, and ending anywhere between endMin <-> endMax
+              - for querying imprecise positions (e.g. identifying all structural variants starting anywhere between startMin <-> startMax, and ending anywhere between endMin <-> endMax)
               - single or douple sided precise matches can be achieved by setting startMin = startMax XOR endMin = endMax
           in: query
           schema:
@@ -79,7 +79,7 @@ paths:
             $ref: '#/components/schemas/Chromosome'
         - name: end
           description: |
-            Precise end coordinate. See start.
+            Precise end coordinate (0-based, exclusive). See start.
           in: query
           schema:
             type: string
@@ -144,6 +144,13 @@ paths:
           required: false
           schema:
             type: string
+          examples:
+            dup:
+              value: DUP
+              summary: duplication of sequence following `start`; not necessarily in
+            del:
+              value: DEL
+              summary: deletion of sequence following `start`
         - name: assemblyId
           description: 'Assembly identifier (GRC notation, e.g. GRCh37).'
           in: query
@@ -320,19 +327,19 @@ components:
           example: '2012-07-19 or 2017-01-17T20:33:40Z'
         updateDateTime:
           type: string
-          description: The time the beacon was created (ISO 8601 format).
+          description: The time the beacon was updated in (ISO 8601 format).
           example: '2012-07-19 or 2017-01-17T20:33:40Z'
         datasets:
           description: >-
-            Datasets served by the beacon. Any beacon should specify at least
-            one dataset.
+            Dataset(s) served by the beacon.
+          minItems: 1
           type: array
           items:
             $ref: '#/components/schemas/BeaconDataset'
         sampleAlleleRequests:
           description: >-
             Examples of interesting queries, e.g. a few queries demonstrating
-            different esponses.
+            different responses.
           type: array
           items:
             $ref: '#/components/schemas/BeaconAlleleRequest'
@@ -370,7 +377,7 @@ components:
           description: |
             Minimum start coordinate
             * startMin + startMax + endMin + endMax
-              - for querying imprecise positions (e.g. identifying all structural variants starting anywhere between startMin <-> startMax, and ending anywhere between endMin <-> endMax
+              - for querying imprecise positions (e.g. identifying all structural variants starting anywhere between startMin <-> startMax, and ending anywhere between endMin <-> endMax)
               - single or douple sided precise matches can be achieved by setting startMin = startMax XOR endMin = endMax
           type: integer
         startMax:
@@ -526,6 +533,9 @@ components:
         name:
           type: string
           description: Name of the dataset.
+        description:
+          type: string
+          description: Description of the dataset.
         assemblyId:
           description: 'Assembly identifier (GRC notation, e.g. `GRCh37`).'
           type: string
@@ -536,7 +546,7 @@ components:
           example: '2012-07-29 or 2017-01-17T20:33:40Z'
         updateDateTime:
           type: string
-          description: The time the dataset was created (ISO 8601 format).
+          description: The time the dataset was updated in (ISO 8601 format).
           example: '2012-07-19 or 2017-01-17T20:33:40Z'
         version:
           type: string
@@ -629,6 +639,7 @@ components:
         errorCode:
           type: integer
           format: int32
+          example: 'same as HTTP status code'
         errorMessage:
           type: string
     KeyValuePair:
@@ -650,7 +661,7 @@ components:
       properties:
         consentCodeDataUse:
           $ref: >-
-            https://raw.githubusercontent.com/sdelatorrep/ga4gh-consent-policy/openapi_v2.0/consent_code.yaml#/definitions/ConsentCodeDataUse
+            https://raw.githubusercontent.com/ga4gh/ga4gh-consent-policy/806ea53cffacb2055c3639f0fc9783f0dcd8cb02/consent_code.yaml#/components/schemas/ConsentCodeDataUse
         adamDataUse:
           $ref: '#/components/schemas/AdamDataUse'
     AdamDataUse:
@@ -663,13 +674,13 @@ components:
       properties:
         header:
           $ref: >-
-            https://raw.githubusercontent.com/sdelatorrep/ADA-M/openapi_v2.0/adam.yaml#/definitions/AdamHeader
+            https://raw.githubusercontent.com/ga4gh/ADA-M/b16a72f9987ae20f433e97d6a3247ecddd8dde23/adam.yaml#/components/schemas/Header
         profile:
           $ref: >-
-            https://raw.githubusercontent.com/sdelatorrep/ADA-M/openapi_v2.0/adam.yaml#/definitions/AdamProfile
+            https://raw.githubusercontent.com/ga4gh/ADA-M/b16a72f9987ae20f433e97d6a3247ecddd8dde23/adam.yaml#/components/schemas/Profile
         terms:
           $ref: >-
-            https://raw.githubusercontent.com/sdelatorrep/ADA-M/openapi_v2.0/adam.yaml#/definitions/AdamTerms
+            https://raw.githubusercontent.com/ga4gh/ADA-M/b16a72f9987ae20f433e97d6a3247ecddd8dde23/adam.yaml#/components/schemas/Terms
         metaConditions:
           $ref: >-
-            https://raw.githubusercontent.com/sdelatorrep/ADA-M/openapi_v2.0/adam.yaml#/definitions/AdamMetaConditions
+            https://raw.githubusercontent.com/ga4gh/ADA-M/b16a72f9987ae20f433e97d6a3247ecddd8dde23/adam.yaml#/components/schemas/MetaConditions
