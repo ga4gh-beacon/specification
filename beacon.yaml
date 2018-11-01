@@ -55,7 +55,7 @@ paths:
           description: |
             Minimum start coordinate
             * startMin + startMax + endMin + endMax
-              - for querying imprecise positions (e.g. identifying all structural variants starting anywhere between startMin <-> startMax, and ending anywhere between endMin <-> endMax)
+              - for querying imprecise positions (e.g. identifying all structural variants starting anywhere between startMin <-> startMax, and ending anywhere between endMin <-> endMax
               - single or douple sided precise matches can be achieved by setting startMin = startMax XOR endMin = endMax
           in: query
           schema:
@@ -327,10 +327,8 @@ components:
           items:
             $ref: '#/components/schemas/BeaconAlleleRequest'
         info:
-          description: 'Additional structured metadata, key-value pairs.'
-          type: array
-          items:
-            $ref: '#/components/schemas/KeyValuePair'
+          description: 'Additional unspecified metadata.'
+          type: object
     BeaconAlleleRequest:
       description: Allele request as interpreted by the beacon.
       type: object
@@ -360,7 +358,7 @@ components:
           description: |
             Minimum start coordinate
             * startMin + startMax + endMin + endMax
-              - for querying imprecise positions (e.g. identifying all structural variants starting anywhere between startMin <-> startMax, and ending anywhere between endMin <-> endMax)
+              - for querying imprecise positions (e.g. identifying all structural variants starting anywhere between startMin <-> startMax, and ending anywhere between endMin <-> endMax
               - single or douple sided precise matches can be achieved by setting startMin = startMax XOR endMin = endMax
           type: integer
         startMax:
@@ -491,10 +489,8 @@ components:
             URL to the logo (PNG/JPG format) of the organization (RFC 3986
             format).
         info:
-          description: 'Additional structured metadata, key-value pairs.'
-          type: array
-          items:
-            $ref: '#/components/schemas/KeyValuePair'
+          description: 'Additional unspecified metadata.'
+          type: object
     BeaconDataset:
       type: object
       required:
@@ -550,10 +546,8 @@ components:
             3986 format).
           example: 'http://example.org/wiki/Main_Page'
         info:
-          description: 'Additional structured metadata, key-value pairs.'
-          type: array
-          items:
-            $ref: '#/components/schemas/KeyValuePair'
+          description: 'Additional unspecified metadata.'
+          type: object
         dataUseConditions:
           $ref: '#/components/schemas/DataUseConditions'
     BeaconDatasetAlleleResponse:
@@ -601,10 +595,8 @@ components:
             URL to an external system, such as a secured beacon or a system
             providing more information about a given allele (RFC 3986 format).
         info:
-          description: 'Additional structured metadata, key-value pairs.'
-          type: array
-          items:
-            $ref: '#/components/schemas/KeyValuePair'
+          type: object
+          description: 'Additional unspecified metadata.'
     BeaconError:
       description: >-
         Beacon-specific error. This should be non-null in exceptional situations
@@ -618,16 +610,6 @@ components:
           format: int32
           example: 'same as HTTP status code'
         errorMessage:
-          type: string
-    KeyValuePair:
-      type: object
-      required:
-        - key
-        - value
-      properties:
-        key:
-          type: string
-        value:
           type: string
     DataUseConditions:
       type: object
