@@ -14,7 +14,6 @@ The way to contribute development effort and code to the project is via GitHub p
 
 Some general rules to follow:
 
--   [Fork](https://help.github.com/articles/fork-a-repo) the main project into your personal GitHub space to work on.
 -   Create a branch for each update that you're working on. These branches are often called "feature" or "topic" branches. Any changes that you push to your feature branch will automatically be shown in the pull request.
 -   Keep your pull requests as small as possible. Large pull requests are hard to review. Try to break up your changes into self-contained and incremental pull requests.
 -   The first line of commit messages should be a short (&lt;80 character) summary, followed by an empty line and then any details that you want to share about the commit.
