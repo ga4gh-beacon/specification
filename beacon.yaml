@@ -564,6 +564,12 @@ components:
             This should be non-null, unless there was an error, in which case
             `error` has to be non-null.
           type: boolean
+        referenceBases:
+          type: "string"
+          description: "Reference bases of the matched response, helps to differentiate wildcard responses."
+        alternateBases:
+          type: "string"
+          description: "Alternate bases of the matched response, helps to differentiate wildcard responses."
         error:
           $ref: '#/components/schemas/BeaconError'
         frequency:
