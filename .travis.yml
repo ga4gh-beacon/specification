@@ -16,7 +16,7 @@ before_install:
   - cd ..
 
   # build swagger-parser
-  - git clone --branch=2.0 https://github.com/swagger-api/swagger-parser.git
+  - git clone --branch=v2.0.0 https://github.com/swagger-api/swagger-parser.git
   - cd swagger-parser
   - git reset --hard 7ce0f756364acee3262444ab998e9fe0963382b3
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
