@@ -475,6 +475,8 @@ components:
           type: object
           example:
             additionalInfoKey: additionalInfoValue
+        beaconHandover:
+          $ref: '#/components/schemas/Handover'
     BeaconOrganization:
       description: Organization owning the beacon.
       type: object
@@ -622,7 +624,8 @@ components:
           description: 'Additional unspecified metadata about the dataset response or its content.'
           type: object
           example:
-            additionalInfoKey: additionalInfoValue
+        datasetHandover:
+          $ref: '#/components/schemas/Handover'
     BeaconError:
       description: >-
         Beacon-specific error. This should be non-null in exceptional situations
@@ -650,3 +653,20 @@ components:
         adamDataUse:
           $ref: >-
             https://raw.githubusercontent.com/ga4gh/ADA-M/v1.0.1/adam.yaml#/components/schemas/Adam
+    Handover:
+      type: object
+      required:
+        - type
+        - url
+      properties:
+        type:
+          type: string
+          description: Handover type. The use of an ontology term, in CURIE syntax, is strongly recommended. Use “CUSTOM” when no ontology is available.
+          default: CUSTOM
+        url:
+          type: string
+          description: URL endpoint to where the handover process could progress (in RFC 3986 format).
+        note:
+          type: string
+          description: Additional human readable information or description about the handover.
+>>>>>>> Add handover mechanism (issue #114).
