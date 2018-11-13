@@ -656,17 +656,22 @@ components:
     Handover:
       type: object
       required:
-        - type
+        - id
         - url
       properties:
-        type:
+        id:
           type: string
           description: Handover type. The use of an ontology term, in CURIE syntax, is strongly recommended. Use “CUSTOM” when no ontology is available.
           default: CUSTOM
+          example: ncit:C8294
+        label:
+          type: string
+          description: A short label for the handover action. In the case of an ontology, this would be the "preferred Label".
+          example: Pancreatic Adenocarcinoma
         url:
           type: string
           description: URL endpoint to where the handover process could progress (in RFC 3986 format).
+          example: 'http://purl.obolibrary.org/obo/NCIT_C8294'
         note:
           type: string
-          description: Additional human readable information or description about the handover.
->>>>>>> Add handover mechanism (issue #114).
+          description: Additional human readable information or description about the handover.>>>>>>> Add handover mechanism (issue #114).
