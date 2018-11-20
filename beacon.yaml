@@ -59,31 +59,41 @@ paths:
               - single or douple sided precise matches can be achieved by setting startMin = startMax XOR endMin = endMax
           in: query
           schema:
-            type: string
+            type: integer
+            format: int64
+            minimum: 0
         - name: startMax
           description: |
             Maximum start coordinate. See startMin.
           in: query
           schema:
-            type: string
+            type: integer
+            format: int64
+            minimum: 0
         - name: end
           description: |
             Precise end coordinate (0-based, exclusive). See start.
           in: query
           schema:
-            type: string
+            type: integer
+            format: int64
+            minimum: 0
         - name: endMin
           description: |
             Minimum end coordinate. See startMin.
           in: query
           schema:
-            type: string
+            type: integer
+            format: int64
+            minimum: 0
         - name: endMax
           description: |
             Maximum end coordinate. See startMin.
           in: query
           schema:
-            type: string
+            type: integer
+            format: int64
+            minimum: 0
         - name: referenceBases
           description: >
             Reference bases for this variant (starting from `start`). Accepted
