@@ -31,7 +31,7 @@ paths:
       operationId: getBeaconAlleleResponse
       parameters:
         - name: referenceName
-          description: 'Reference name (chromosome). Accepting values 1-22, X, Y.'
+          description: 'Reference name (chromosome). Accepting values 1-22, X, Y, MT.'
           in: query
           required: true
           schema:
@@ -55,8 +55,8 @@ paths:
           description: |
             Minimum start coordinate
             * startMin + startMax + endMin + endMax
-              - for querying imprecise positions (e.g. identifying all structural variants starting anywhere between startMin <-> startMax, and ending anywhere between endMin <-> endMax
-              - single or double sided precise matches can be achieved by setting startMin = startMax XOR endMin = endMax
+              - for querying imprecise positions (e.g. identifying all structural variants starting anywhere between startMin <-> startMax, and ending anywhere between endMin <-> endMax)
+              - single or douple sided precise matches can be achieved by setting startMin = startMax XOR endMin = endMax
           in: query
           schema:
             type: string
@@ -265,6 +265,7 @@ components:
         - '22'
         - 'X'
         - 'Y'
+        - 'MT'
     Beacon:
       type: object
       required:
@@ -343,7 +344,7 @@ components:
           $ref: '#/components/schemas/Chromosome'
         start:
           description: |
-            Precise start coordinate position, allele locus (0-based).
+            Precise start coordinate position, allele locus (0-based, inclusive).
             * start only:
               - for single positions, e.g. the start of a specified sequence alteration where the size is given through the specified alternateBases
               - typical use are queries for SNV and small InDels
@@ -354,14 +355,14 @@ components:
           format: int64
           minimum: 0
         end:
-          description: Precise end coordinate. See start.
+          description: Precise end coordinate (0-based, exclusive). See start.
           type: integer
         startMin:
           description: |
             Minimum start coordinate
             * startMin + startMax + endMin + endMax
-              - for querying imprecise positions (e.g. identifying all structural variants starting anywhere between startMin <-> startMax, and ending anywhere between endMin <-> endMax
-              - single or double sided precise matches can be achieved by setting startMin = startMax XOR endMin = endMax
+              - for querying imprecise positions (e.g. identifying all structural variants starting anywhere between startMin <-> startMax, and ending anywhere between endMin <-> endMax)
+              - single or douple sided precise matches can be achieved by setting startMin = startMax XOR endMin = endMax
           type: integer
         startMax:
           description: Maximum start coordinate. See startMin.
