@@ -56,7 +56,7 @@ paths:
             Minimum start coordinate
             * startMin + startMax + endMin + endMax
               - for querying imprecise positions (e.g. identifying all structural variants starting anywhere between startMin <-> startMax, and ending anywhere between endMin <-> endMax)
-              - single or douple sided precise matches can be achieved by setting startMin = startMax XOR endMin = endMax
+              - single or double sided precise matches can be achieved by setting startMin = startMax XOR endMin = endMax
           in: query
           schema:
             type: integer
@@ -372,7 +372,7 @@ components:
             Minimum start coordinate
             * startMin + startMax + endMin + endMax
               - for querying imprecise positions (e.g. identifying all structural variants starting anywhere between startMin <-> startMax, and ending anywhere between endMin <-> endMax)
-              - single or douple sided precise matches can be achieved by setting startMin = startMax XOR endMin = endMax
+              - single or double sided precise matches can be achieved by setting startMin = startMax XOR endMin = endMax
           type: integer
         startMax:
           description: Maximum start coordinate. See startMin.
