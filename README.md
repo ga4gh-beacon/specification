@@ -36,12 +36,6 @@ This page is used to plan and manage the work across the ga4gh-beacon repositori
 
 More information for developers is available on [our wiki](https://github.com/ga4gh-beacon/specification/wiki). A list of related tools and projects developed by the community is maintained on the [Resources](https://github.com/ga4gh-beacon/specification/wiki/Resources) page.
 
-You can render the specification from YAML to HTML using
-
-	python yaml-to-html.py < beacon.yaml > beacon.html
-
-Open then `beacon.html` in your web browser.
-
 ## Notify GA4GH of potential security flaw in specification
 
 To enable a long-term contact for potential security flaws an email address of security-notification@ga4gh.org has been set up. This email will be monitored by the GA4GH secretariat and GA4GH security members to allow for an incoming response to be directed to appropriate parties.
