@@ -60,3 +60,7 @@ Session.vim
 
 #********** IntelliJ files ******
 *.iml
+
+#********** Node JS ******
+package-lock.json
+node_modules
