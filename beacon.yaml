@@ -476,7 +476,9 @@ components:
           example:
             additionalInfoKey: additionalInfoValue
         beaconHandover:
-          $ref: '#/components/schemas/Handover'
+          type: array
+          items:
+            $ref: '#/components/schemas/Handover'
     BeaconOrganization:
       description: Organization owning the beacon.
       type: object
@@ -625,7 +627,9 @@ components:
           type: object
           example:
         datasetHandover:
-          $ref: '#/components/schemas/Handover'
+          type: array
+          items:
+            $ref: '#/components/schemas/Handover'
     BeaconError:
       description: >-
         Beacon-specific error. This should be non-null in exceptional situations
@@ -656,22 +660,35 @@ components:
     Handover:
       type: object
       required:
-        - id
+        - handoverType
         - url
       properties:
-        id:
+        handoverType:
+          $ref: '#/components/schemas/HandoverType'
+        description:
           type: string
-          description: Handover type. The use of an ontology term, in CURIE syntax, is strongly recommended. Use “CUSTOM” when no ontology is available.
-          default: CUSTOM
-          example: ncit:C8294
-        label:
-          type: string
-          description: A short label for the handover action. In the case of an ontology, this would be the "preferred Label".
-          example: Pancreatic Adenocarcinoma
+          description: An optional text describing the handover action.
+          example: "VCF file containing structural variants of the samples matched by the Beacon query."
         url:
           type: string
           description: URL endpoint to where the handover process could progress (in RFC 3986 format).
-          example: 'http://purl.obolibrary.org/obo/NCIT_C8294'
-        note:
+          example: "https://api.mygenomeservice.org/handover/9dcc48d7-fc88-11e8-9110-b0c592dbf8c0/"
+    HandoverType:
+      type: object
+      required:
+        - id
+      description: |
+            Handover type, as an Ontology_term object with CURIE syntax for the "id" value. 
+      properties:
+        id:
           type: string
-          description: Additional human readable information or description about the handover.>>>>>>> Add handover mechanism (issue #114).
+          description: >-
+            Use “CUSTOM” for the "id" when no ontology is available.
+          default: CUSTOM
+          example: "http://www.ebi.ac.uk/efo/EFO_0004157"
+        label:
+          type: string
+          description: >-
+            This would be the "preferred Label" in the case of an ontology term.
+          default: null
+          example: "BAM format"
