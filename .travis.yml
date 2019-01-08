@@ -4,30 +4,9 @@ sudo: false
 jdk:
   - oraclejdk8
 env:
-  - GH_URL=https://raw.githubusercontent.com VALIDATOR_URL=http://localhost:8080/api/debug?url FILE_TO_VALIDATE=beacon.yaml URL_TO_VALIDATE=$GH_URL/$TRAVIS_REPO_SLUG/${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}/$FILE_TO_VALIDATE
+  - GH_URL=https://raw.githubusercontent.com VALIDATOR_URL=http://localhost:8080/api/debug?url FILE_TO_VALIDATE=beacon.yaml URL_TO_VALIDATE=$GH_URL/${TRAVIS_PULL_REQUEST_SLUG:-$TRAVIS_REPO_SLUG}/${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}/$FILE_TO_VALIDATE
 before_install:
-  # This setup will not be needed once the online version of validator-badge supports OAS 3.0. Until then we'll need to set up a local version. Since there isn't a release supporting OAS 3.0 yet, we unfortunately need to build some snapshot dependencies. These steps should be gradually removed as releases come out.
-
-  # build swagger-core
-  - git clone --branch=v2.0.2 https://github.com/swagger-api/swagger-core.git
-  - cd swagger-core
-  - git reset --hard 5336adb9945cfdf6eddbb61f15b28a1509e0b267
-  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-  - cd ..
-
-  # build swagger-parser
-  - git clone --branch=v2.0.0 https://github.com/swagger-api/swagger-parser.git
-  - cd swagger-parser
-  - git reset --hard 7ce0f756364acee3262444ab998e9fe0963382b3
-  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-  - cd ..
-
-  # build swagger-inflector
-  - git clone --branch=v1.0.16 https://github.com/swagger-api/swagger-inflector.git
-  - cd swagger-inflector
-  - git reset --hard 421fedb162b9e9b781671bc7757ee78eb6d1f793
-  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-  - cd ..
+  # This setup will not be needed once the online version of validator-badge supports OAS 3.0. Until then we'll need to set up a local version. Since there isn't a release supporting OAS 3.0 yet, we unfortunately need to build from source.
 
   # build and start validator-badge
   - git clone --branch=2.0 https://github.com/swagger-api/validator-badge.git
