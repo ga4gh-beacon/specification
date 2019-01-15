@@ -70,6 +70,16 @@ paths:
             type: integer
             format: int64
             minimum: 0
+        - name: mateName
+          description: |
+            Second chromosome for fusion events. This can be
+            * empty (no fusion or unknown partner)
+            * identical to `referenceName` (e.g. one side of an inversion)
+            * a different chromosome
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/MateName'
         - name: end
           description: |
             Precise end coordinate (0-based, exclusive). See start.
@@ -123,13 +133,16 @@ paths:
             type: string
             pattern: '^([ACGT]+|N)$'
         - name: variantType
-          description: >
+          description: |
             The `variantType` is used to denote e.g. structural variants.
 
             Examples:
             * DUP: duplication of sequence following `start`; not necessarily in
             situ
             * DEL: deletion of sequence following `start`
+            * BND: breakend, i.e. termination of the allele at position
+                  `start` or in the `startMin` => `startMax` interval, or fusion
+                  of the sequence to distant partner
 
             Optional: either `alternateBases` or `variantType` is required.
           in: query
@@ -249,6 +262,39 @@ components:
   schemas:
     Chromosome:
       description: 'Reference name (chromosome). Accepting values 1-22, X, Y.'
+      type: string
+      enum:
+        - '1'
+        - '2'
+        - '3'
+        - '4'
+        - '5'
+        - '6'
+        - '7'
+        - '8'
+        - '9'
+        - '10'
+        - '11'
+        - '12'
+        - '13'
+        - '14'
+        - '15'
+        - '16'
+        - '17'
+        - '18'
+        - '19'
+        - '20'
+        - '21'
+        - '22'
+        - 'X'
+        - 'Y'
+        - 'MT'
+    MateName:
+      description: |
+        Second chromosome for fusion events. This can be
+        * empty (no fusion or unknown partner)
+        * identical to referenceName (e.g. one side of an inversion)
+        * a different chromosome
       type: string
       enum:
         - '1'
@@ -403,19 +449,22 @@ components:
           type: string
           pattern: '^([ACGT]+|N)$'
         variantType:
-          description: >
+          description: |
             The `variantType` is used to denote e.g. structural variants.
 
             Examples:
-
             * DUP: duplication of sequence following `start`; not necessarily in
             situ
-
             * DEL: deletion of sequence following `start`
+            * BND: breakend, i.e. termination of the allele at position
+                  `start` or in the `startMin` => `startMax` interval, or fusion
+                  of the sequence to distant partner
 
 
             Optional: either `alternateBases` or `variantType` is required.
           type: string
+        mateName:
+          $ref: '#/components/schemas/MateName'
         assemblyId:
           description: 'Assembly identifier (GRC notation, e.g. `GRCh37`).'
           type: string
