@@ -341,8 +341,8 @@ components:
           description: 'Additional unspecified metadata about the Beacon service.'
           type: object
           example:
-            beaconNetwork: ELIXIR Europe
-            dataCatalogue: ['Rare diseases', 'Twins']
+            additionalInfoKey1: additionalInfoValue1
+            additionalInfoKey2: [ additionalInfoValue2, additionalInfoValue3]
     BeaconAlleleRequest:
       description: Allele request as interpreted by the beacon.
       type: object
@@ -506,7 +506,7 @@ components:
           description: 'Additional unspecified metadata about the host Organization.'
           type: object
           example:
-            affiliation: ELIXIR Europe
+            additionalInfoKey: additionalInfoValue
     BeaconDataset:
       type: object
       required:
@@ -565,9 +565,8 @@ components:
           description: 'Additional unspecified metadata about the dataset.'
           type: object
           example:
-            fileTypes: ['.bam', '.vcf']
-            minReadDepth: 30
-            minQuality: 100
+            additionalInfoKey1: [ additionalInfoValue1, additionalInfoValue2]
+            additionalInfoKey2: additionalInfoValue3
         dataUseConditions:
           $ref: '#/components/schemas/DataUseConditions'
     BeaconDatasetAlleleResponse:
@@ -615,10 +614,10 @@ components:
             URL to an external system, such as a secured beacon or a system
             providing more information about a given allele (RFC 3986 format).
         info:
-          description: 'Additional metadata about the response.'
+          description: 'Additional unspecified metadata about the response or its content.'
           type: object
           example:
-            additionalVariants: true
+            additionalInfoKey: additionalInfoValue
     BeaconError:
       description: >-
         Beacon-specific error. This should be non-null in exceptional situations
