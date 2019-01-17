@@ -619,7 +619,7 @@ components:
             URL to an external system, such as a secured beacon or a system
             providing more information about a given allele (RFC 3986 format).
         info:
-          description: 'Additional unspecified metadata about the response or its content.'
+          description: 'Additional unspecified metadata about the dataset response or its content.'
           type: object
           example:
             additionalInfoKey: additionalInfoValue
