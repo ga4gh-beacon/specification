@@ -1,7 +1,7 @@
 openapi: 3.0.0
 servers: []
 info:
-  version: "1.0.1"
+  version: "1.1.0"
   title: GA4GH Beacon API Specification
   description: >-
     A Beacon is a web service for genetic data sharing that can be queried for information about specific alleles.
@@ -338,10 +338,11 @@ components:
           items:
             $ref: '#/components/schemas/BeaconAlleleRequest'
         info:
-          description: 'Additional structured metadata, key-value pairs.'
-          type: array
-          items:
-            $ref: '#/components/schemas/KeyValuePair'
+          description: 'Additional unspecified metadata about the Beacon service.'
+          type: object
+          example:
+            additionalInfoKey1: additionalInfoValue1
+            additionalInfoKey2: [ additionalInfoValue2, additionalInfoValue3]
     BeaconAlleleRequest:
       description: Allele request as interpreted by the beacon.
       type: object
@@ -502,10 +503,10 @@ components:
             URL to the logo (PNG/JPG format) of the organization (RFC 3986
             format).
         info:
-          description: 'Additional structured metadata, key-value pairs.'
-          type: array
-          items:
-            $ref: '#/components/schemas/KeyValuePair'
+          description: 'Additional unspecified metadata about the host Organization.'
+          type: object
+          example:
+            additionalInfoKey: additionalInfoValue
     BeaconDataset:
       type: object
       required:
@@ -561,10 +562,11 @@ components:
             3986 format).
           example: 'http://example.org/wiki/Main_Page'
         info:
-          description: 'Additional structured metadata, key-value pairs.'
-          type: array
-          items:
-            $ref: '#/components/schemas/KeyValuePair'
+          description: 'Additional unspecified metadata about the dataset.'
+          type: object
+          example:
+            additionalInfoKey1: [ additionalInfoValue1, additionalInfoValue2]
+            additionalInfoKey2: additionalInfoValue3
         dataUseConditions:
           $ref: '#/components/schemas/DataUseConditions'
     BeaconDatasetAlleleResponse:
@@ -612,10 +614,10 @@ components:
             URL to an external system, such as a secured beacon or a system
             providing more information about a given allele (RFC 3986 format).
         info:
-          description: 'Additional structured metadata, key-value pairs.'
-          type: array
-          items:
-            $ref: '#/components/schemas/KeyValuePair'
+          description: 'Additional unspecified metadata about the response or its content.'
+          type: object
+          example:
+            additionalInfoKey: additionalInfoValue
     BeaconError:
       description: >-
         Beacon-specific error. This should be non-null in exceptional situations
@@ -629,16 +631,6 @@ components:
           format: int32
           example: 'same as HTTP status code'
         errorMessage:
-          type: string
-    KeyValuePair:
-      type: object
-      required:
-        - key
-        - value
-      properties:
-        key:
-          type: string
-        value:
           type: string
     DataUseConditions:
       type: object
