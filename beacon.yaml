@@ -470,6 +470,11 @@ components:
             $ref: '#/components/schemas/BeaconDatasetAlleleResponse'
         error:
           $ref: '#/components/schemas/BeaconError'
+        info:
+          description: 'Additional unspecified metadata about the response or its content.'
+          type: object
+          example:
+            additionalInfoKey: additionalInfoValue
     BeaconOrganization:
       description: Organization owning the beacon.
       type: object
