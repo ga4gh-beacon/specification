@@ -166,6 +166,8 @@ paths:
             (datasetAlleleResponses) should be included in the response
             (BeaconAlleleResponse) to this request or not.
 
+            Use ERROR to filter out the datasets which return an error.
+
             If null (not specified), the default value of NONE is assumed.
           in: query
           required: false
@@ -175,6 +177,7 @@ paths:
               - ALL
               - HIT
               - MISS
+              - ERROR
               - NONE
       responses:
         '200':
@@ -428,16 +431,20 @@ components:
           items:
             type: string
         includeDatasetResponses:
-          description: >-
+          description: |
             Indicator of whether responses for individual datasets
             (datasetAlleleResponses) should be included in the response
-            (BeaconAlleleResponse) to this request or not. If null (not
-            specified), the default value of NONE is assumed.
+            (BeaconAlleleResponse) to this request or not.
+            
+            Use ERROR to filter out the datasets which return an error.
+
+            If null (not specified), the default value of NONE is assumed.
           type: string
           enum:
             - ALL
             - HIT
             - MISS
+            - ERROR
             - NONE
     BeaconAlleleResponse:
       type: object
