@@ -97,21 +97,16 @@ paths:
         - name: referenceBases
           description: >
             Reference bases for this variant (starting from `start`). Accepted
-            values: [ACGT]*
-
-            When querying for variants without specific base alterations (e.g.
-            imprecise structural variants with separate variant_type as well as
-            start_min & end_min ... parameters), the use of a single "N" value
-            is required.
+            values: [ACGTN]*
           in: query
           required: true
           schema:
             type: string
-            pattern: '^([ACGT]+|N)$'
+            pattern: '^([ACGTN]+)$'
         - name: alternateBases
           description: >
             The bases that appear instead of the reference bases. Accepted
-            values: [ACGT]* or N.
+            values: [ACGTN]*.
 
             Symbolic ALT alleles (DEL, INS, DUP, INV, CNV, DUP:TANDEM, DEL:ME,
             INS:ME) will be represented in `variantType`.
@@ -121,7 +116,7 @@ paths:
           required: false
           schema:
             type: string
-            pattern: '^([ACGT]+|N)$'
+            pattern: '^([ACGTN]+)$'
         - name: variantType
           description: |
             The `variantType` is used to denote e.g. structural variants.
@@ -400,21 +395,20 @@ components:
         referenceBases:
           description: >
             Reference bases for this variant (starting from `start`). Accepted
-            values: [ACGT]*
-              When querying for variants without specific base alterations (e.g. imprecise structural variants with separate variant_type as well as start_min & end_min ... parameters), the use of a single "N" value is required.
+            values: [ACGTN]*
           type: string
-          pattern: '^([ACGT]+|N)$'
+          pattern: '^([ACGTN]+)$'
         alternateBases:
           description: >
             The bases that appear instead of the reference bases. Accepted
-            values: [ACGT]* or N.
+            values: [ACGTN]*.
 
             Symbolic ALT alleles (DEL, INS, DUP, INV, CNV, DUP:TANDEM, DEL:ME,
             INS:ME) will be represented in `variantType`.
 
             Optional: either `alternateBases` or `variantType` is required.
           type: string
-          pattern: '^([ACGT]+|N)$'
+          pattern: '^([ACGTN]+)$'
         variantType:
           description: |
             The `variantType` is used to denote e.g. structural variants.
