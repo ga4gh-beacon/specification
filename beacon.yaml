@@ -166,7 +166,7 @@ paths:
             (datasetAlleleResponses) should be included in the response
             (BeaconAlleleResponse) to this request or not.
 
-            Use ERROR to filter out the datasets which return an error.
+            Use ERROR to return the datasets which return an error.
 
             If null (not specified), the default value of NONE is assumed.
           in: query
