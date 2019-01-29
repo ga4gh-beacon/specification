@@ -11,7 +11,7 @@ before_install:
   # build and start validator-badge
   - git clone --branch=2.0 https://github.com/swagger-api/validator-badge.git
   - cd validator-badge
-  - mvn package -DskipTests=true -Dmaven.javadoc.skip=true -B -V jetty:run &
+  - mvn --quiet package -DskipTests=true -Dmaven.javadoc.skip=true -B -V jetty:run &
   - cd ..
   - sleep 60
 script:
