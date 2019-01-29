@@ -685,7 +685,7 @@ components:
           description: >-
             Use “CUSTOM” for the "id" when no ontology is available.
           default: CUSTOM
-          example: "http://www.ebi.ac.uk/efo/EFO_0004157"
+          example: "EFO:0004157"
         label:
           type: string
           description: >-
