@@ -648,24 +648,5 @@ components:
           $ref: >-
             https://raw.githubusercontent.com/ga4gh/ga4gh-consent-policy/806ea53cffacb2055c3639f0fc9783f0dcd8cb02/consent_code.yaml#/components/schemas/ConsentCodeDataUse
         adamDataUse:
-          $ref: '#/components/schemas/AdamDataUse'
-    AdamDataUse:
-      type: object
-      required:
-        - header
-        - profile
-        - terms
-        - metaConditions
-      properties:
-        header:
           $ref: >-
-            https://raw.githubusercontent.com/ga4gh/ADA-M/b16a72f9987ae20f433e97d6a3247ecddd8dde23/adam.yaml#/components/schemas/Header
-        profile:
-          $ref: >-
-            https://raw.githubusercontent.com/ga4gh/ADA-M/b16a72f9987ae20f433e97d6a3247ecddd8dde23/adam.yaml#/components/schemas/Profile
-        terms:
-          $ref: >-
-            https://raw.githubusercontent.com/ga4gh/ADA-M/b16a72f9987ae20f433e97d6a3247ecddd8dde23/adam.yaml#/components/schemas/Terms
-        metaConditions:
-          $ref: >-
-            https://raw.githubusercontent.com/ga4gh/ADA-M/b16a72f9987ae20f433e97d6a3247ecddd8dde23/adam.yaml#/components/schemas/MetaConditions
+            https://raw.githubusercontent.com/ga4gh/ADA-M/v1.0.1/adam.yaml#/components/schemas/Adam
