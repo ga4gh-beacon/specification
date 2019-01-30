@@ -57,7 +57,7 @@ The response body SHOULD be a JSON object (`Content-Type: application/json`) pro
 [
   {
     "beaconId": "some-beacon",
-    "apiVersion": "v1.0.1",
+    "apiVersion": "v1.1.1",
     "exists": null,
     "alleleRequest": {
       "referenceName": "1",
@@ -92,7 +92,7 @@ which means that at least one of the datasets in this Beacon has a different ass
 [
   {
     "beaconId": "some-beacon",
-    "apiVersion": "v1.0.1",
+    "apiVersion": "v1.1.1",
     "exists": true,
     "alleleRequest": {
       "referenceName": "1",
@@ -192,7 +192,7 @@ Beacon API SHOULD support cross-origin resource sharing (CORS) and follow [GA4GH
 |---|---|:---:|---|
 |*id* *|Unique identifier of the beacon. Use reverse domain name notation.|string|org.ga4gh.beacon|
 |*name* *|Human readable name of the beacon|string|EGA Beacon|
-|*apiVersion* *|Version of the API provided by the beacon.|string|v1.0.0|
+|*apiVersion* *|Version of the API provided by the beacon.|string|v1.1.1|
 |*organisation* *|Organisation providing the Beacon|object|Beacon Organisation object (see below)|
 |*datasets* *|Datasets served by the beacon. Any beacon should specify at least one dataset.|array|Array of Beacon Dataset objects (see below)|
 |description|Description of the beacon.|string|"This sample set comprises cases of schizophrenia with additional cognitive measurements, collected in Aberdeen, Scotland."|
@@ -272,7 +272,7 @@ An example `GET` request and response to the info endpoint:
     < 
     {
       "alternativeUrl": "https://ega-archive.org/beacon_web/", 
-      "apiVersion": "0.4", 
+      "apiVersion": "1.1.1", 
       "createDateTime": "2015-06-15T00:00.000Z", 
       "dataset": [
         {
@@ -285,7 +285,7 @@ An example `GET` request and response to the info endpoint:
           "variantCount": 74, 
         }
       ], 
-      "description": "This <a href=\"http://ga4gh.org/#/beacon\">Beacon</a> is based on the GA4GH Beacon <a href=\"https://github.com/ga4gh/beacon-team/blob/develop/src/main/resources/avro/beacon.avdl\">API 0.4</a>", 
+     "description" : "This <a href=\"https://beacon-project.io/\">Beacon</a> is based on the GA4GH Beacon <a href=\"https://raw.githubusercontent.com/ga4gh-beacon/specification/v1.1.1/beacon.yaml\"></a>", 
       "id": "ega-beacon", 
       "info": {
         "size": "60270153"
@@ -333,7 +333,7 @@ An example `GET` request and response to the info endpoint:
           "start": 866510
         }
       ], 
-      "version": "v04", 
+      "version": "v1.1.1", 
       "welcomeUrl": "https://ega-archive.org/beacon_web/"
     }
     * Closing connection 0
@@ -414,11 +414,11 @@ Example of how to use the GET method in the `/query` endpoint:
     < Content-Type: application/json
     < Content-Length: 1078
     < Server: Werkzeug/0.14.1 Python/3.6.5
-    < Date: Mon, 11 Jun 2018 07:29:26 GMT
+    < Date: Wed, 30 Jan 2018 07:29:26 GMT
     < 
     {
         "beaconId": "ega-beacon",
-        "apiVersion": "0.4",
+        "apiVersion": "1.1.1",
         "exists": true,
         "error": {
             "errorCode": 200
@@ -459,7 +459,7 @@ Example of how to use the GET method in the `/query` endpoint:
     * Closing connection 0    
 ```
 
-Example of how to use the POST method in the "/query" path:
+Example of how to use the POST method in the `/query` path:
    
 `curl -v -d "referenceName=1&start=14929&referenceBases=A&alternateBases=G&assemblyId=GRCh37&datasetIds=EGAD00000000028&includeDatsetResponses=ALL" https://localhost:5000/query`
 
@@ -477,11 +477,11 @@ Example of how to use the POST method in the "/query" path:
     < Content-Type: application/json
     < Content-Length: 1056
     < Server: Werkzeug/0.14.1 Python/3.6.5
-    < Date: Mon, 11 Jun 2018 07:15:48 GMT
+    < Date: Wed, 30 Jan 2018 07:15:48 GMT
     < 
     {
         "beaconId": "ega-beacon",
-        "apiVersion": "0.4",
+        "apiVersion": "1.1.1",
         "exists": true,
         "error": {
             "errorCode": 200
@@ -522,53 +522,51 @@ Example of how to use the POST method in the "/query" path:
     * Closing connection 0
 ```
 
+Example of error:
+
 `curl -v 'https://localhost:5000/query?&start=0&end=0&startMin=28000000&startMax=29000000&endMin=28000000&endMax=29000000&referenceBases=A&alternateBases=T&assemblyId=GRCh37&datasetIds=EGAD00000000028&includeDatasetResponses=ALL'`
 
-
 ```
-*   Trying 127.0.0.1...
-* TCP_NODELAY set
-* Connected to localhost (127.0.0.1) port 5000 (#0)
-> GET /query?&start=0&end=0&startMin=28000000&startMax=29000000&endMin=28000000&endMax=29000000&referenceBases=A&alternateBases=T&assemblyId=GRCh37&datasetIds=EGAD00000000028&includeDatasetResponses=ALL HTTP/1.1
-> Host: localhost:5000
-> User-Agent: curl/7.54.0
-> Accept: */*
-> 
-* HTTP 1.0, assume close after body
-< HTTP/1.0 400 BAD REQUEST
-< Content-Type: application/json
-< Content-Length: 791
-< Server: Werkzeug/0.14.1 Python/3.6.5
-< Date: Fri, 06 Jul 2018 09:15:39 GMT
-< 
-{
-    "message": {
+   > POST /query HTTP/1.1
+    > Host: localhost:5000
+    > User-Agent: curl/7.54.0
+    > Accept: */*
+    > Content-Length: 133
+    > Content-Type: application/x-www-form-urlencoded
+    > 
+    * upload completely sent off: 133 out of 133 bytes
+    * HTTP 1.0, assume close after body
+    < HTTP/1.0 200 OK
+    < Content-Type: application/json
+    < Content-Length: 1056
+    < Server: Werkzeug/0.14.1 Python/3.6.5
+    < Date: Wed, 30 Jan 2018 07:15:48 GMT
+    < 
+    {
         "beaconId": "ega-beacon",
-        "apiVersion": "0.4",
-        "exists": null,
+        "apiVersion": "1.1.1",
+        "exists": true,
         "error": {
             "errorCode": 400,
-            "errorMessage": "Missing mandatory parameter referenceName"
+            "errorMessage" : "User provided assemblyId (GRCh38) does not match with dataset assembly (GRCh37)"
         },
-        "allelRequest": {
-            "referenceName": "0",
-            "start": 0,
-            "startMin": 28000000,
-            "startMax": 29000000,
+        "alleleRequest": {
+            "referenceName": "1",
+            "start": 14929,
+            "startMin": 0,
+            "startMax": 0,
             "end": 0,
-            "endMin": 28000000,
-            "endMax": 29000000,
+            "endMin": 0,
+            "endMax": 0,
             "referenceBases": "A",
-            "alternateBases": "T",
-            "variantType": "0",
+            "alternateBases": "G",
             "assemblyId": "GRCh37",
             "datasetIds": [
                 "EGAD00000000028"
             ],
-            "includeDatasetResponses": "ALL"
+            "includeDatasetResponses": "NONE"
         },
-        "datasetAlleleResponses": []
+        "datasetAlleleResponses": null
     }
-}
-* Closing connection 0
+    * Closing connection 0
 ```
