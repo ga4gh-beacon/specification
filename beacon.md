@@ -1,5 +1,5 @@
 
-# Beacon API Specification v1.0.0
+# Beacon API Specification v1.1.1
 
 Beacon is a web service for genetic data sharing. Beacon permits simple queries regarding the presence or absence of a specified variant in a given dataset. This is the key idea behind Beacon, by allowing these queries Beacon makes the data discoverable. If the user finds their variant(s) of interest, Beacon will point them to the appropriate place to gain access to the data (e.g. the European Genome-Phenome Archive, EGA).
 
@@ -44,15 +44,111 @@ Both granting access to the data and identifying `bona-fide researchers` **is no
 
  ### Errors
 
-The server MUST respond with the appropriate HTTP status code when an error condition is detected. In the case of transient 
-server errors, (e.g., 500 and other 5xx status codes), the client SHOULD implement appropriate retry logic.
+The server MUST respond with the appropriate HTTP status code when an error condition is detected. In the case of transient server errors, (e.g., 500 and other 5xx status codes), the client SHOULD implement appropriate retry logic.
 
-For errors that are specific to the Beacon API, the response will be one of the HTTP status codes represented in the table below. 
-The response body SHOULD be a JSON object (`Content-Type: application/json`) providing machine-readable information 
-about the nature of the error, along with a human-readable description. 
+For errors which are specific to the Beacon API, they will be encoded in the `error` field of either `BeaconAlleleResponse` or `BeaconDatasetAlleleResponse`, depending on the scope of the error. 
+The response body SHOULD be a JSON object (`Content-Type: application/json`) providing machine-readable information about the nature of the error, along with a human-readable description.
 
+#### Example 1 
+* Query 
+`/query?assemblyId=GRCh38&start=1111&referenceName=1&referenceBases=A&alternateBases=C`
+* Response
+```json
+[
+  {
+    "beaconId": "some-beacon",
+    "apiVersion": "v1.0.1",
+    "exists": null,
+    "alleleRequest": {
+      "referenceName": "1",
+      "start": 1111,
+      "end": null,
+      "startMin": null,
+      "startMax": null,
+      "endMin": null,
+      "endMax": null,
+      "referenceBases": "A",
+      "alternateBases": "C",
+      "variantType": null,
+      "assemblyId": "GRCh38",
+      "datasetIds": null,
+      "includeDatasetResponses": "null"
+    },
+    "datasetAlleleResponses": null,
+    "error": {
+          "errorCode": "400",
+          "errorMessage": "User provided assemblyId (GRCh38) does not match with dataset assembly (GRCh37)"
+    }
+  }
+]
+```
+which means that at least one of the datasets in this Beacon has a different assembly (GRCh37 in this example).
 
-The following error types are defined: 
+#### Example 2
+* Query 
+`/query?assemblyId=GRCh38&start=1111&referenceName=1&referenceBases=A&alternateBases=C&includeDatasetResponses=ALL`
+* Response
+```json
+[
+  {
+    "beaconId": "some-beacon",
+    "apiVersion": "v1.0.1",
+    "exists": true,
+    "alleleRequest": {
+      "referenceName": "1",
+      "start": 1111,
+      "end": null,
+      "startMin": null,
+      "startMax": null,
+      "endMin": null,
+      "endMax": null,
+      "referenceBases": "A",
+      "alternateBases": "C",
+      "variantType": null,
+      "assemblyId": "GRCh38",
+      "datasetIds": [
+        "1","2"
+      ],
+      "includeDatasetResponses": "ALL"
+    },
+    "datasetAlleleResponses": [
+      {
+        "datasetId": "1",
+        "exists": true,
+        "error": null,
+        "frequency": 0.002222,
+        "variantCount": 1,
+        "callCount": 4,
+        "sampleCount": 1,
+        "note": null,
+        "externalUrl": null,
+        "info": null
+      },
+      {
+        "datasetId": "2",
+        "exists": null,
+        "error": {
+          "errorCode": "400",
+          "errorMessage": "User provided assemblyId (GRCh38) does not match with dataset assembly (GRCh37)"
+        },
+        "frequency": null,
+        "variantCount": null,
+        "callCount": null,
+        "sampleCount": null,
+        "note": null,
+        "externalUrl": null,
+        "info": null
+      }
+    ],
+    "error": {
+      "errorCode": 200
+    }
+  }
+]
+```
+which means that dataset 2 has a different assembly but the Beacon can return the information regarding the other dataset. Notice that the top `error` field is not empty either and contains `"errorCode" : 200`.
+
+The following error types are defined:
 
 | Error type | HTTP status code | Description |
 |---|:---:|---|
@@ -60,15 +156,16 @@ The following error types are defined:
 |Unauthorized|401|An unauthenticated user is trying to access a protected resource|
 |Forbidden|403|The resource is protected for all users, or the user is authenticated but they are not granted access for this resource|
 
-The error type SHOULD be chosen from this table and be accompanied by the specified HTTP status code. 
-An example of a valid JSON error response is:
+The error type SHOULD be chosen from this table.
 
+If there is no error, the `errorCode` will be `200`.
 ```json
 "error": {
-            "errorCode": 400,
-            "errorMessage": "Missing mandatory parameter referenceName"
-        }
-```    
+            "errorCode": 200
+}
+```
+
+Notice that the server MUST always fill the `error` field, although `null` is also accepted for backward compatibility.
 
 ### CORS 
 Beacon API SHOULD support cross-origin resource sharing (CORS) and follow [GA4GH CORS recommendations](https://docs.google.com/document/d/1Ifiik9afTO-CEpWGKEZ5TlixQ6tiKcvug4XLd9GNcqo/edit).
@@ -304,9 +401,9 @@ An example `GET` request and response to the info endpoint:
 
 Example of how to use the GET method in the `/query` endpoint:
 
-    curl -v 'https://localhost:5000/query?referenceName=1&start=0&end=0&startMin=28000000&startMax=29000000&endMin=28000000&endMax=29000000&referenceBases=A&alternateBases=T&assemblyId=GRCh37&datasetIds=EGAD00000000028&includeDatasetResponses=ALL'
-######
-    
+`curl -v 'https://localhost:5000/query?referenceName=1&start=0&end=0&startMin=28000000&startMax=29000000&endMin=28000000&endMax=29000000&referenceBases=A&alternateBases=T&assemblyId=GRCh37&datasetIds=EGAD00000000028&includeDatasetResponses=ALL'`
+
+```
     > GET /query?referenceName=1&start=0&end=0&startMin=28000000&startMax=29000000&endMin=28000000&endMax=29000000&referenceBases=A&alternateBases=T&assemblyId=GRCh37&datasetIds=EGAD00000000028&includeDatasetResponses=ALL HTTP/1.1
     > Host: localhost:5000
     > User-Agent: curl/7.54.0
@@ -323,7 +420,9 @@ Example of how to use the GET method in the `/query` endpoint:
         "beaconId": "ega-beacon",
         "apiVersion": "0.4",
         "exists": true,
-        "error": null,
+        "error": {
+            "errorCode": 200
+        },
         "alleleRequest": {
             "referenceName": "1",
             "start": 0,
@@ -351,18 +450,20 @@ Example of how to use the GET method in the `/query` endpoint:
                 "note": "This sample set comprises cases of schizophrenia with additional cognitive measurements, collected in Aberdeen, Scotland.",
                 "externalUrl": null,
                 "info": {},
-                "error": null
+                "error":  {
+                    "errorCode": 200
+                }
             }
         ]
     }
     * Closing connection 0    
-    
-######
+```
+
 Example of how to use the POST method in the "/query" path:
    
-    curl -v -d "referenceName=1&start=14929&referenceBases=A&alternateBases=G&assemblyId=GRCh37&datasetIds=EGAD00000000028&includeDatsetResponses=ALL" https://localhost:5000/query
-######
+`curl -v -d "referenceName=1&start=14929&referenceBases=A&alternateBases=G&assemblyId=GRCh37&datasetIds=EGAD00000000028&includeDatsetResponses=ALL" https://localhost:5000/query`
 
+```
     > POST /query HTTP/1.1
     > Host: localhost:5000
     > User-Agent: curl/7.54.0
@@ -382,7 +483,9 @@ Example of how to use the POST method in the "/query" path:
         "beaconId": "ega-beacon",
         "apiVersion": "0.4",
         "exists": true,
-        "error": null,
+        "error": {
+            "errorCode": 200
+        },
         "alleleRequest": {
             "referenceName": "1",
             "start": 14929,
@@ -410,11 +513,14 @@ Example of how to use the POST method in the "/query" path:
                 "note": "This sample set comprises cases of schizophrenia with additional cognitive measurements, collected in Aberdeen, Scotland.",
                 "externalUrl": null,
                 "info": {},
-                "error": null
+                "error": {
+                    "errorCode": 200
+                }
             }
         ]
     }
     * Closing connection 0
+```
 
 `curl -v 'https://localhost:5000/query?&start=0&end=0&startMin=28000000&startMax=29000000&endMin=28000000&endMax=29000000&referenceBases=A&alternateBases=T&assemblyId=GRCh37&datasetIds=EGAD00000000028&includeDatasetResponses=ALL'`
 
@@ -465,5 +571,4 @@ Example of how to use the POST method in the "/query" path:
     }
 }
 * Closing connection 0
-
 ```

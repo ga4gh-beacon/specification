@@ -624,9 +624,10 @@ components:
           example:
             additionalInfoKey: additionalInfoValue
     BeaconError:
-      description: >-
-        Beacon-specific error. This should be non-null in exceptional situations
-        only, in which case `exists` has to be null.
+      description: |
+        Status of the response. If there is no error, `errorCode` will always be `200`. If there is an error, check the documentation for the available values.
+        
+        Although not recommended, it can be null for backward compatibility.
       type: object
       required:
         - errorCode
@@ -634,9 +635,11 @@ components:
         errorCode:
           type: integer
           format: int32
-          example: 'same as HTTP status code'
+          default: 200
+          example: 400
         errorMessage:
           type: string
+          example: 'User provided assemblyId (GRCh38) does not match with dataset assembly (GRCh37)'
     DataUseConditions:
       type: object
       required:
