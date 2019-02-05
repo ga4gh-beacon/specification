@@ -117,7 +117,7 @@ Beacon API SHOULD support cross-origin resource sharing (CORS) and follow [GA4GH
 |address|Address of the organization.|string|-|
 |welcomeUrl|URL of the website of the organization (RFC 3986 format).|string|-|
 |contactUrl|URL with the contact for the beacon operator/maintainer, e.g. link to a contact form (RFC 3986 format) or an email (RFC 2368 format).|string|-|
-|logoUrl|URL to the logo (PNG/JPG format) of the organization (RFC 3986 format).|string|-|
+|logoUrl|URL to the logo (PNG/JPG/SVG format) of the organization (RFC 3986 format).|string|-|
 |info|Additional structured metadata, key-value pairs.|string|-|
 
 **Beacon Dataset object**
