@@ -4,14 +4,14 @@ sudo: false
 jdk:
   - oraclejdk8
 env:
-  - GH_URL=https://raw.githubusercontent.com VALIDATOR_URL=http://localhost:8080/api/debug?url FILE_TO_VALIDATE=beacon.yaml URL_TO_VALIDATE=$GH_URL/${TRAVIS_PULL_REQUEST_SLUG:-$TRAVIS_REPO_SLUG}/${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}/$FILE_TO_VALIDATE
+  - GH_URL=https://raw.githubusercontent.com VALIDATOR_URL=http://localhost:8080/validator/debug?url FILE_TO_VALIDATE=beacon.yaml URL_TO_VALIDATE=$GH_URL/${TRAVIS_PULL_REQUEST_SLUG:-$TRAVIS_REPO_SLUG}/${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}/$FILE_TO_VALIDATE
 before_install:
-  # This setup will not be needed once the online version of validator-badge supports OAS 3.0. Until then we'll need to set up a local version. Since there isn't a release supporting OAS 3.0 yet, we unfortunately need to build from source.
+  # This setup will not be needed once the online version of validator-badge supports OAS 3.0. Until then we'll need to set up a local version.
 
   # build and start validator-badge
-  - git clone --branch=2.0 https://github.com/swagger-api/validator-badge.git
+  - git clone --branch=v2.0.0 https://github.com/swagger-api/validator-badge.git
   - cd validator-badge
-  - mvn package -DskipTests=true -Dmaven.javadoc.skip=true -B -V jetty:run &
+  - mvn package -q -DskipTests=true -Dmaven.javadoc.skip=true -B -V jetty:run &
   - cd ..
   - sleep 60
 script:
@@ -22,8 +22,9 @@ script:
 # print validation errors
 - echo $VALIDATION_OUTPUT
 
-# check if the validation output is an empty array, i.e. no errors
-- test "$VALIDATION_OUTPUT" == "[]"
+# check if the validation output ignoring warnings is an empty array
+- VALIDATION_ERROR_COUNT=`echo "$VALIDATION_OUTPUT" |jq -c '.schemaValidationMessages | map(select(.level != "warning"))' |jq length`
+- test "$VALIDATION_ERROR_COUNT" == 0
 notifications:
   slack:
     secure: RmyIMB6tA868r+dHECJ566r0+TCB6pHvg9PygNiM5ye+iX4I+CFKMoGzjeMVtuLI80MSzzoaB+PU6TczlhzdbJBALqiV74AQCoNGqswJzJCkJX7HDGk8LVFSsnpwClRLLLVgvBApGDS0ViRfGqsew8CJ8VR5BMDiU53z3Of4JHc=
