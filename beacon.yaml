@@ -665,10 +665,10 @@ components:
       properties:
         handoverType:
           $ref: '#/components/schemas/HandoverType'
-        description:
+        note:
           type: string
-          description: An optional text describing the handover action.
-          example: "VCF file containing structural variants of the samples matched by the Beacon query."
+          description: An optional text including considerations on the handover link provided.
+          example: "This handover link provides access to a summarized VCF. To access the VCF containing the details for each sample filling an application is required. See Beacon contact information details."
         url:
           type: string
           description: URL endpoint to where the handover process could progress (in RFC 3986 format).
