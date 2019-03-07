@@ -475,6 +475,10 @@ components:
           type: object
           example:
             additionalInfoKey: additionalInfoValue
+        beaconHandover:
+          type: array
+          items:
+            $ref: '#/components/schemas/Handover'
     BeaconOrganization:
       description: Organization owning the beacon.
       type: object
@@ -622,7 +626,10 @@ components:
           description: 'Additional unspecified metadata about the dataset response or its content.'
           type: object
           example:
-            additionalInfoKey: additionalInfoValue
+        datasetHandover:
+          type: array
+          items:
+            $ref: '#/components/schemas/Handover'
     BeaconError:
       description: >-
         Beacon-specific error. This should be non-null in exceptional situations
@@ -650,3 +657,38 @@ components:
         adamDataUse:
           $ref: >-
             https://raw.githubusercontent.com/ga4gh/ADA-M/v1.0.1/adam.yaml#/components/schemas/Adam
+    Handover:
+      type: object
+      required:
+        - handoverType
+        - url
+      properties:
+        handoverType:
+          $ref: '#/components/schemas/HandoverType'
+        note:
+          type: string
+          description: An optional text including considerations on the handover link provided.
+          example: "This handover link provides access to a summarized VCF. To access the VCF containing the details for each sample filling an application is required. See Beacon contact information details."
+        url:
+          type: string
+          description: URL endpoint to where the handover process could progress (in RFC 3986 format).
+          example: "https://api.mygenomeservice.org/handover/9dcc48d7-fc88-11e8-9110-b0c592dbf8c0/"
+    HandoverType:
+      type: object
+      required:
+        - id
+      description: |
+            Handover type, as an Ontology_term object with CURIE syntax for the "id" value. 
+      properties:
+        id:
+          type: string
+          description: >-
+            Use “CUSTOM” for the "id" when no ontology is available.
+          default: CUSTOM
+          example: "EFO:0004157"
+        label:
+          type: string
+          description: >-
+            This would be the "preferred Label" in the case of an ontology term.
+          default: null
+          example: "BAM format"
