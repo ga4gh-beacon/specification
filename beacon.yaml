@@ -123,13 +123,16 @@ paths:
             type: string
             pattern: '^([ACGT]+|N)$'
         - name: variantType
-          description: >
+          description: |
             The `variantType` is used to denote e.g. structural variants.
 
             Examples:
             * DUP: duplication of sequence following `start`; not necessarily in
             situ
             * DEL: deletion of sequence following `start`
+            * BND: breakend, i.e. termination of the allele at position
+                  `start` or in the `startMin` => `startMax` interval, or fusion
+                  of the sequence to distant partner
 
             Optional: either `alternateBases` or `variantType` is required.
           in: query
@@ -149,6 +152,16 @@ paths:
           required: true
           schema:
             type: string
+        - name: mateName
+          description: |
+            Second chromosome for fusion events. This can be
+            * empty (no fusion or unknown partner)
+            * identical to `referenceName` (e.g. one side of an inversion)
+            * a different chromosome
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/Chromosome'
         - name: datasetIds
           description: >-
             Identifiers of datasets, as defined in "BeaconDataset". If this
@@ -403,19 +416,22 @@ components:
           type: string
           pattern: '^([ACGT]+|N)$'
         variantType:
-          description: >
+          description: |
             The `variantType` is used to denote e.g. structural variants.
 
             Examples:
-
             * DUP: duplication of sequence following `start`; not necessarily in
             situ
-
             * DEL: deletion of sequence following `start`
+            * BND: breakend, i.e. termination of the allele at position
+                  `start` or in the `startMin` => `startMax` interval, or fusion
+                  of the sequence to distant partner
 
 
             Optional: either `alternateBases` or `variantType` is required.
           type: string
+        mateName:
+          $ref: '#/components/schemas/Chromosome'
         assemblyId:
           description: 'Assembly identifier (GRC notation, e.g. `GRCh37`).'
           type: string
