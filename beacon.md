@@ -105,7 +105,7 @@ Beacon API SHOULD support cross-origin resource sharing (CORS) and follow [GA4GH
 |createDateTime|The time the beacon was created (ISO 8601 format).|string|'2012-07-19 or 2017-01-17T20:33:40Z'|
 |updateDateTime|The time the beacon was updated in (ISO 8601 format).|string|'2012-07-19 or 2017-01-17T20:33:40Z'|
 |sampleAlleleRequests|Examples of interesting queries, e.g. a few queries demonstrating different responses.|array|Array of BeaconAlleleRequest objects (see _Query endpoint request_)|
-|info|'Additional structured metadata, key-value pairs.'|array|-|
+|info|'Additional structured metadata, key-value pairs.'|object|-|
 
 **Beacon Organisation object** 
 
@@ -118,7 +118,7 @@ Beacon API SHOULD support cross-origin resource sharing (CORS) and follow [GA4GH
 |welcomeUrl|URL of the website of the organization (RFC 3986 format).|string|-|
 |contactUrl|URL with the contact for the beacon operator/maintainer, e.g. link to a contact form (RFC 3986 format) or an email (RFC 2368 format).|string|-|
 |logoUrl|URL to the logo (PNG/JPG/SVG format) of the organization (RFC 3986 format).|string|-|
-|info|Additional structured metadata, key-value pairs.|string|-|
+|info|Additional structured metadata, key-value pairs.|object|-|
 
 **Beacon Dataset object**
 
@@ -135,7 +135,7 @@ Beacon API SHOULD support cross-origin resource sharing (CORS) and follow [GA4GH
 |callCount|Total number of calls in the dataset.|integer|`213454`|
 |sampleCount|Total number of samples in the dataset.|integer|`13`|
 |externalUrl|URL to an external system providing more dataset information (RFC 3986 format).|string|-|
-|info|Additional structured metadata, key-value pairs.|array|-|
+|info|Additional structured metadata, key-value pairs.|object|-|
 |dataUseConditions|The conditions for the use of the dataset|object|Data Use Conditions object (see below)|
 
 **Data Use Conditions object**
@@ -174,70 +174,73 @@ An example `GET` request and response to the info endpoint:
     < Date: Fri, 08 Jun 2018 12:07:36 GMT
     < 
     {
+      "id": "ega-beacon", 
+      "name": "EGA Beacon", 
+      "apiVersion": "1.1.0", 
+      "organization": {
+        "id": "EGA", 
+        "name": "European Genome-Phenome Archive (EGA)", 
+        "description": "The European Genome-phenome Archive (EGA) is a service for permanent archiving and sharing of all types of personally identifiable genetic and phenotypic data resulting from biomedical research projects.", 
+        "address": "", 
+        "welcomeUrl": "https://ega-archive.org/",
+        "contactUrl": "mailto:beacon.ega@crg.eu", 
+        "logoUrl": "https://ega-archive.org/images/logo.png" 
+      }, 
+      "description": "This <a href=\"http://ga4gh.org/#/beacon\">Beacon</a> is based on the GA4GH Beacon <a href=\"https://github.com/ga4gh/beacon-team/blob/develop/src/main/resources/avro/beacon.avdl\">API 0.4</a>", 
+      "version": "v1.0.0", 
+      "welcomeUrl": "https://ega-archive.org/beacon_web/",
       "alternativeUrl": "https://ega-archive.org/beacon_web/", 
-      "apiVersion": "0.4", 
       "createDateTime": "2015-06-15T00:00.000Z", 
-      "dataset": [
+      "datasets": [
         {
-          "assemblyId": "grch37", 
-          "callCount": 74, 
-          "description": "This sample set comprises cases of schizophrenia with additional cognitive measurements, collected in Aberdeen, Scotland.", 
           "id": "EGAD00000000028", 
-          "info": {}, 
-          "sampleCount": 1, 
+          "name": "Sample Dataset",
+          "description": "This sample set comprises cases of schizophrenia with additional cognitive measurements, collected in Aberdeen, Scotland.", 
+          "assemblyId": "GRCh37", 
+          "createDateTime": "2017-01-17T20:33:40Z", 
+          "updateDateTime": "2017-01-17T20:33:40Z", 
           "variantCount": 74, 
+          "callCount": 74, 
+          "sampleCount": 1, 
+          "info": {} 
         }
       ], 
-      "description": "This <a href=\"http://ga4gh.org/#/beacon\">Beacon</a> is based on the GA4GH Beacon <a href=\"https://github.com/ga4gh/beacon-team/blob/develop/src/main/resources/avro/beacon.avdl\">API 0.4</a>", 
-      "id": "ega-beacon", 
-      "info": {
-        "size": "60270153"
-      }, 
-      "name": "EGA Beacon", 
-      "organization": {
-        "address": "", 
-        "contactUrl": "mailto:beacon.ega@crg.eu", 
-        "description": "The European Genome-phenome Archive (EGA) is a service for permanent archiving and sharing of all types of personally identifiable genetic and phenotypic data resulting from biomedical research projects.", 
-        "id": "EGA", 
-        "logoUrl": "https://ega-archive.org/images/logo.png", 
-        "name": "European Genome-Phenome Archive (EGA)", 
-        "welcomeUrl": "https://ega-archive.org/"
-      }, 
       "sampleAlleleRequests": [
         {
+          "referenceName": "17", 
+          "start": 6689, 
+          "referenceBases": "C", 
           "alternateBases": "A", 
           "assemblyId": "GRCh37", 
-          "includeDatasetResponses": false, 
-          "referenceBases": "C", 
-          "referenceName": "17", 
-          "start": 6689
+          "includeDatasetResponses": "NONE"
         }, 
         {
+          "referenceName": "1", 
+          "start": 14929, 
+          "referenceBases": "A", 
           "alternateBases": "G", 
           "assemblyId": "GRCh37", 
           "datasetIds": [
             "EGAD00000000028"
           ], 
-          "includeDatasetResponses": "ALL", 
-          "referenceBases": "A", 
-          "referenceName": "1", 
-          "start": 14929
+          "includeDatasetResponses": "ALL" 
         }, 
         {
+          "referenceName": "1", 
+          "start": 866510, 
+          "referenceBases": "C", 
           "alternateBases": "CCCCT", 
           "assemblyId": "GRCh37", 
           "datasetIds": [
             "EGAD00001000740", 
             "EGAD00001000741"
           ], 
-          "includeDatasetResponses": "HIT", 
-          "referenceBases": "C", 
-          "referenceName": "1", 
-          "start": 866510
+          "includeDatasetResponses": "HIT" 
         }
       ], 
-      "version": "v04", 
-      "welcomeUrl": "https://ega-archive.org/beacon_web/"
+      "info": {
+        "size": "60270153"
+      } 
     }
     * Closing connection 0
 
@@ -247,15 +250,16 @@ An example `GET` request and response to the info endpoint:
 ### Request
 ##### - URL: `/query`
 ##### - HTTP method: `GET`, `POST`
-##### - Content-Type: `application/x-www-form-urlencoded`(POST)
+##### - Content-Type: `application/json`(POST)
 ##### - Parameters: `BeaconAlleleRequest`
 
 **BeaconAlleleRequest object**
 
 |Parameter (* mandatory, ~ one of these is mandatory)|Description|Type|Example|
 |---|---|:---:|---|
-|*referenceName**|Reference name (chromosome). Accepting values 1-22, X, Y so follows Ensembl chromosome naming convention.|string|`'1'`|
-|*referenceBases**|Reference bases for this variant (starting from `start`). Accepted values: [ACGT]* When querying for variants without specific base alterations (e.g. imprecise structural variants with separate `variantType` as well as `startMin` & `endMin` ... parameters), the use of a single "N" value is required.<br/>See the REF field in [VCF 4.2 specification](https://samtools.github.io/hts-specs/VCFv4.2.pdf).|string|`'G'`|
+|*referenceName**|Reference name (chromosome). Accepting values 1-22, X, Y, MT so follows Ensembl chromosome naming convention.|string|`'1'`|
+|*mateName*|Reference name (chromosome) of mate in fusion variants. Accepting values 1-22, X, Y, MT so follows Ensembl chromosome naming convention.|string|`'1'`|
+|*referenceBases**|Reference bases for this variant (starting from `start`). Accepted values: [ACGTN]*. N is a wildcard, that denotes the position of any base, and can be used as a standalone base of any type or within a partially known sequence. For example a sequence where the first and last bases are known, but the middle portion can exhibit countless variations of [ACGT], or the bases are unknown: ANNT the Ns can take take any form of [ACGT], which makes both ACCT and ATGT (or any other combination) viable sequences.<br/>See the REF field in [VCF 4.2 specification](https://samtools.github.io/hts-specs/VCFv4.2.pdf).|string|`'G'`|
 |*assemblyId* *|Assembly identifier|string|`'GRCh38'`|
 |start~|Precise start coordinate position, allele locus (0-based, inclusive).<p>* `start` only:<br />- for single positions, e.g. the start of a specified sequence alteration where the size is given through the specified `alternateBases`<br />- typical use are queries for SNV and small InDels<br />- the use of `start` without an `end` parameter requires the use of `referenceBases`<br />* `start` and `end`:<br /> - special use case for exactly determined structural changes |integer|`345233`|
 |startMin~|Minimum start coordinate<br />* `startMin` + `startMax` + `endMin` + `endMax`:<br />- for querying imprecise positions (e.g. identifying all structural variants starting anywhere between `startMin` <-> `startMax`, and ending anywhere between `endMin` <-> `endMax`<br />- single or double sided precise matches can be achieved by setting `startMin` = `startMax` OR `endMin` = `endMax`<br/> <br/>For more information on range queries, see: [Beacon-Queries](https://github.com/ga4gh-beacon/specification/wiki/Beacon-Queries#range-queries-and-structural-variants)|integer|`23433`|
@@ -263,7 +267,7 @@ An example `GET` request and response to the info endpoint:
 |end|Precise end coordinate (0-based, exclusive). See `start`.|integer|`455635`|
 |endMin|Minimum end coordinate. See `startMin`.|integer|`23500`|
 |endMax|Maximum end coordinate. See `startMin`.|integer|`23520`|
-|alternateBases~|The bases that appear instead of the reference bases. Accepted values: [ACGT]* or N.<br /> <br/>Symbolic ALT alleles (DEL, INS, DUP, INV, CNV, DUP:TANDEM, DEL:ME, INS:ME) will be represented in `variantType`.<br/> <br/> See the ALT field in [VCF 4.2 specification](https://samtools.github.io/hts-specs/VCFv4.2.pdf)<br/> <br/>*Either `alternateBases` OR `variantType` is REQUIRED*|string|`'A'`, `'AGATAC'`|
+|alternateBases~|The bases that appear instead of the reference bases. Accepted values: [ACGTN]*. N is a wildcard, that denotes the position of any base, and can be used as a standalone base of any type or within a partially known sequence. For example a sequence where the first and last bases are known, but the middle portion can exhibit countless variations of [ACGT], or the bases are unknown: ANNT the Ns can take take any form of [ACGT], which makes both ACCT and ATGT (or any other combination) viable sequences.<br /> <br/>Symbolic ALT alleles (DEL, INS, DUP, INV, CNV, DUP:TANDEM, DEL:ME, INS:ME) will be represented in `variantType`.<br/> <br/> See the ALT field in [VCF 4.2 specification](https://samtools.github.io/hts-specs/VCFv4.2.pdf)<br/> <br/>*Either `alternateBases` OR `variantType` is REQUIRED*|string|`'A'`, `'AGATAC'`|
 |variantType~|The `variantType` is used to denote e.g. structural variants.<br/> <br/>*Either `alternateBases` OR `variantType` is REQUIRED*|string|`'INS'`, `'DUP'`, `'DEL'`, `'INV'`|
 |datasetIds|Identifiers of datasets, as defined in `BeaconDataset`. In case `assemblyId` doesn't match requested dataset(s) error will be raised (`400 Bad request`). If this field is not specified, all datasets should be queried.|array|`['dataset1', 'dataset2']`|
 |includeDatasetResponses|Indicator of whether responses for individual datasets (`datasetAlleleResponses`) should be included in the response (`BeaconAlleleResponse`) to this request or not. If null (not specified), the default value of NONE is assumed.<br/> <br/>Accepted values : ['ALL', 'HIT', 'MISS', 'NONE']|string|`'ALL'`|
@@ -297,17 +301,18 @@ An example `GET` request and response to the info endpoint:
 |sampleCount|Number of samples matching the allele request in the dataset|integer|`1`|
 |note|Additional note or description of the response.|string|-|
 |externalUrl|URL to an external system, such as a secured beacon or a system providing more information about a given allele (RFC 3986 format).|string|-|
-|info|Additional structured metadata, key-value pairs.|array|-|
+|info|Additional structured metadata, key-value pairs.|object|-|
+|beaconHandover|Links to additional resources.|object|-|
 
 
 #### Examples
 
 Example of how to use the GET method in the `/query` endpoint:
 
-    curl -v 'https://localhost:5000/query?referenceName=1&start=0&end=0&startMin=28000000&startMax=29000000&endMin=28000000&endMax=29000000&referenceBases=A&alternateBases=T&assemblyId=GRCh37&datasetIds=EGAD00000000028&includeDatasetResponses=ALL'
+    curl -v 'https://localhost:5000/query?referenceName=1&startMin=28000000&startMax=29000000&endMin=28000000&endMax=29000000&referenceBases=A&alternateBases=T&assemblyId=GRCh37&datasetIds=EGAD00000000028&includeDatasetResponses=ALL'
 ######
     
-    > GET /query?referenceName=1&start=0&end=0&startMin=28000000&startMax=29000000&endMin=28000000&endMax=29000000&referenceBases=A&alternateBases=T&assemblyId=GRCh37&datasetIds=EGAD00000000028&includeDatasetResponses=ALL HTTP/1.1
+    > GET /query?referenceName=1&startMin=28000000&startMax=29000000&endMin=28000000&endMax=29000000&referenceBases=A&alternateBases=T&assemblyId=GRCh37&datasetIds=EGAD00000000028&includeDatasetResponses=ALL HTTP/1.1
     > Host: localhost:5000
     > User-Agent: curl/7.54.0
     > Accept: */*
@@ -320,25 +325,36 @@ Example of how to use the GET method in the `/query` endpoint:
     < Date: Mon, 11 Jun 2018 07:29:26 GMT
     < 
     {
-        "beaconId": "ega-beacon",
-        "apiVersion": "0.4",
-        "exists": true,
-        "error": null,
-        "alleleRequest": {
-            "referenceName": "1",
-            "start": 0,
-            "startMin": 28000000,
-            "startMax": 29000000,
-            "end": 0,
-            "endMin": 28000000,
-            "endMax": 29000000,
-            "referenceBases": "A",
-            "alternateBases": "T",
-            "assemblyId": "GRCh37",
-            "datasetIds": [
-                "EGAD00000000028"
-            ],
-            "includeDatasetResponses": "ALL"
+      "id": "ega-beacon", 
+      "name": "EGA Beacon", 
+      "apiVersion": "1.1.0", 
+      "organization": {
+        "id": "EGA", 
+        "name": "European Genome-Phenome Archive (EGA)", 
+        "description": "The European Genome-phenome Archive (EGA) is a service for permanent archiving and sharing of all types of personally identifiable genetic and phenotypic data resulting from biomedical research projects.", 
+        "address": "", 
+        "welcomeUrl": "https://ega-archive.org/",
+        "contactUrl": "mailto:beacon.ega@crg.eu", 
+        "logoUrl": "https://ega-archive.org/images/logo.png" 
+      }, 
+      "description": "This <a href=\"http://ga4gh.org/#/beacon\">Beacon</a> is based on the GA4GH Beacon <a href=\"https://github.com/ga4gh/beacon-team/blob/develop/src/main/resources/avro/beacon.avdl\">API 0.4</a>", 
+      "version": "v1.0.0", 
+      "welcomeUrl": "https://ega-archive.org/beacon_web/",
+      "alternativeUrl": "https://ega-archive.org/beacon_web/", 
+      "createDateTime": "2015-06-15T00:00.000Z", 
+      "alleleRequest": {
+          "referenceName": "1",
+          "startMin": 28000000,
+          "startMax": 29000000,
+          "endMin": 28000000,
+          "endMax": 29000000,
+          "referenceBases": "A",
+          "alternateBases": "T",
+          "assemblyId": "GRCh37",
+          "datasetIds": [
+              "EGAD00000000028"
+          ],
+          "includeDatasetResponses": "ALL"
         },
         "datasetAlleleResponses": [
             {
@@ -350,8 +366,7 @@ Example of how to use the GET method in the `/query` endpoint:
                 "sampleCount": 1,
                 "note": "This sample set comprises cases of schizophrenia with additional cognitive measurements, collected in Aberdeen, Scotland.",
                 "externalUrl": null,
-                "info": {},
-                "error": null
+                "info": {}
             }
         ]
     }
@@ -379,18 +394,26 @@ Example of how to use the POST method in the "/query" path:
     < Date: Mon, 11 Jun 2018 07:15:48 GMT
     < 
     {
-        "beaconId": "ega-beacon",
-        "apiVersion": "0.4",
-        "exists": true,
-        "error": null,
+      "id": "ega-beacon", 
+      "name": "EGA Beacon", 
+      "apiVersion": "1.1.0", 
+      "organization": {
+        "id": "EGA", 
+        "name": "European Genome-Phenome Archive (EGA)", 
+        "description": "The European Genome-phenome Archive (EGA) is a service for permanent archiving and sharing of all types of personally identifiable genetic and phenotypic data resulting from biomedical research projects.", 
+        "address": "", 
+        "welcomeUrl": "https://ega-archive.org/",
+        "contactUrl": "mailto:beacon.ega@crg.eu", 
+        "logoUrl": "https://ega-archive.org/images/logo.png" 
+      }, 
+      "description": "This <a href=\"http://ga4gh.org/#/beacon\">Beacon</a> is based on the GA4GH Beacon <a href=\"https://github.com/ga4gh/beacon-team/blob/develop/src/main/resources/avro/beacon.avdl\">API 0.4</a>", 
+      "version": "v1.0.0", 
+      "welcomeUrl": "https://ega-archive.org/beacon_web/",
+      "alternativeUrl": "https://ega-archive.org/beacon_web/", 
+      "createDateTime": "2015-06-15T00:00.000Z", 
         "alleleRequest": {
             "referenceName": "1",
             "start": 14929,
-            "startMin": 0,
-            "startMax": 0,
-            "end": 0,
-            "endMin": 0,
-            "endMax": 0,
             "referenceBases": "A",
             "alternateBases": "G",
             "assemblyId": "GRCh37",
@@ -409,14 +432,13 @@ Example of how to use the POST method in the "/query" path:
                 "sampleCount": 1,
                 "note": "This sample set comprises cases of schizophrenia with additional cognitive measurements, collected in Aberdeen, Scotland.",
                 "externalUrl": null,
-                "info": {},
-                "error": null
+                "info": {}
             }
         ]
     }
     * Closing connection 0
 
-`curl -v 'https://localhost:5000/query?&start=0&end=0&startMin=28000000&startMax=29000000&endMin=28000000&endMax=29000000&referenceBases=A&alternateBases=T&assemblyId=GRCh37&datasetIds=EGAD00000000028&includeDatasetResponses=ALL'`
+`curl -v 'https://localhost:5000/query?startMin=28000000&startMax=29000000&endMin=28000000&endMax=29000000&referenceBases=A&alternateBases=T&assemblyId=GRCh37&datasetIds=EGAD00000000028&includeDatasetResponses=ALL'`
 
 
 ```
@@ -436,33 +458,41 @@ Example of how to use the POST method in the "/query" path:
 < Date: Fri, 06 Jul 2018 09:15:39 GMT
 < 
 {
-    "message": {
-        "beaconId": "ega-beacon",
-        "apiVersion": "0.4",
-        "exists": null,
-        "error": {
-            "errorCode": 400,
-            "errorMessage": "Missing mandatory parameter referenceName"
-        },
-        "allelRequest": {
-            "referenceName": "0",
-            "start": 0,
-            "startMin": 28000000,
-            "startMax": 29000000,
-            "end": 0,
-            "endMin": 28000000,
-            "endMax": 29000000,
-            "referenceBases": "A",
-            "alternateBases": "T",
-            "variantType": "0",
-            "assemblyId": "GRCh37",
-            "datasetIds": [
-                "EGAD00000000028"
-            ],
-            "includeDatasetResponses": "ALL"
-        },
-        "datasetAlleleResponses": []
-    }
+  "id": "ega-beacon", 
+  "name": "EGA Beacon", 
+  "apiVersion": "1.1.0", 
+  "organization": {
+    "id": "EGA", 
+    "name": "European Genome-Phenome Archive (EGA)", 
+    "description": "The European Genome-phenome Archive (EGA) is a service for permanent archiving and sharing of all types of personally identifiable genetic and phenotypic data resulting from biomedical research projects.", 
+    "address": "", 
+    "welcomeUrl": "https://ega-archive.org/",
+    "contactUrl": "mailto:beacon.ega@crg.eu", 
+    "logoUrl": "https://ega-archive.org/images/logo.png" 
+  }, 
+  "description": "This <a href=\"http://ga4gh.org/#/beacon\">Beacon</a> is based on the GA4GH Beacon <a href=\"https://github.com/ga4gh/beacon-team/blob/develop/src/main/resources/avro/beacon.avdl\">API 0.4</a>", 
+  "version": "v1.0.0", 
+  "welcomeUrl": "https://ega-archive.org/beacon_web/",
+  "alternativeUrl": "https://ega-archive.org/beacon_web/", 
+  "createDateTime": "2015-06-15T00:00.000Z", 
+    "error": {
+        "errorCode": 400,
+        "errorMessage": "Missing mandatory parameter referenceName"
+    },
+    "allelRequest": {
+        "startMin": 28000000,
+        "startMax": 29000000,
+        "endMin": 28000000,
+        "endMax": 29000000,
+        "referenceBases": "A",
+        "alternateBases": "T",
+        "assemblyId": "GRCh37",
+        "datasetIds": [
+            "EGAD00000000028"
+        ],
+        "includeDatasetResponses": "ALL"
+    },
+    "datasetAlleleResponses": []
 }
 * Closing connection 0
 
