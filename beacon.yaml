@@ -95,23 +95,16 @@ paths:
             format: int64
             minimum: 0
         - name: referenceBases
-          description: >
-            Reference bases for this variant (starting from `start`). Accepted
-            values: [ACGT]*
-
-            When querying for variants without specific base alterations (e.g.
-            imprecise structural variants with separate variant_type as well as
-            start_min & end_min ... parameters), the use of a single "N" value
-            is required.
+          description: |
+            Reference bases for this variant (starting from `start`). Accepted values: [ACGTN]*. N is a wildcard, that denotes the position of any base, and can be used as a standalone base of any type or within a partially known sequence. For example a sequence where the first and last bases are known, but the middle portion can exhibit countless variations of [ACGT], or the bases are unknown: ANNT the Ns can take take any form of [ACGT], which makes both ACCT and ATGT (or any other combination) viable sequences.
           in: query
           required: true
           schema:
             type: string
-            pattern: '^([ACGT]+|N)$'
+            pattern: '^([ACGTN]+)$'
         - name: alternateBases
           description: >
-            The bases that appear instead of the reference bases. Accepted
-            values: [ACGT]* or N.
+            The bases that appear instead of the reference bases. Accepted values: [ACGTN]*. N is a wildcard, that denotes the position of any base, and can be used as a standalone base of any type or within a partially known sequence. For example a sequence where the first and last bases are known, but the middle portion can exhibit countless variations of [ACGT], or the bases are unknown: ANNT the Ns can take take any form of [ACGT], which makes both ACCT and ATGT (or any other combination) viable sequences.
 
             Symbolic ALT alleles (DEL, INS, DUP, INV, CNV, DUP:TANDEM, DEL:ME,
             INS:ME) will be represented in `variantType`.
@@ -121,7 +114,7 @@ paths:
           required: false
           schema:
             type: string
-            pattern: '^([ACGT]+|N)$'
+            pattern: '^([ACGTN]+)$'
         - name: variantType
           description: |
             The `variantType` is used to denote e.g. structural variants.
@@ -398,23 +391,20 @@ components:
           description: Maximum end coordinate. See startMin.
           type: integer
         referenceBases:
-          description: >
-            Reference bases for this variant (starting from `start`). Accepted
-            values: [ACGT]*
-              When querying for variants without specific base alterations (e.g. imprecise structural variants with separate variant_type as well as start_min & end_min ... parameters), the use of a single "N" value is required.
+          description: |
+            Reference bases for this variant (starting from `start`). Accepted values: [ACGTN]*. N is a wildcard, that denotes the position of any base, and can be used as a standalone base of any type or within a partially known sequence. For example a sequence where the first and last bases are known, but the middle portion can exhibit countless variations of [ACGT], or the bases are unknown: ANNT the Ns can take take any form of [ACGT], which makes both ACCT and ATGT (or any other combination) viable sequences.
           type: string
-          pattern: '^([ACGT]+|N)$'
+          pattern: '^([ACGTN]+)$'
         alternateBases:
-          description: >
-            The bases that appear instead of the reference bases. Accepted
-            values: [ACGT]* or N.
+          description: |
+            The bases that appear instead of the reference bases. Accepted values: [ACGTN]*. N is a wildcard, that denotes the position of any base, and can be used as a standalone base of any type or within a partially known sequence. For example a sequence where the first and last bases are known, but the middle portion can exhibit countless variations of [ACGT], or the bases are unknown: ANNT the Ns can take take any form of [ACGT], which makes both ACCT and ATGT (or any other combination) viable sequences.
 
             Symbolic ALT alleles (DEL, INS, DUP, INV, CNV, DUP:TANDEM, DEL:ME,
             INS:ME) will be represented in `variantType`.
 
             Optional: either `alternateBases` or `variantType` is required.
           type: string
-          pattern: '^([ACGT]+|N)$'
+          pattern: '^([ACGTN]+)$'
         variantType:
           description: |
             The `variantType` is used to denote e.g. structural variants.
