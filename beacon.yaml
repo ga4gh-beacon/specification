@@ -351,7 +351,7 @@ components:
             additionalInfoKey1: additionalInfoValue1
             additionalInfoKey2: [ additionalInfoValue2, additionalInfoValue3]
     BeaconAlleleRequest:
-      description: Allele request as interpreted by the beacon.
+      description: Allele request made against the beacon. The allele must be mapped against a sequence in a genome, and a range can be optionally specified.
       type: object
       required:
         - referenceName
@@ -447,6 +447,7 @@ components:
             - MISS
             - NONE
     BeaconAlleleResponse:
+      description: Response to a query for information about an allele, made against the beacon.
       type: object
       required:
         - beaconId
@@ -524,6 +525,7 @@ components:
           example:
             additionalInfoKey: additionalInfoValue
     BeaconDataset:
+      description: A dataset available in the beacon.
       type: object
       required:
         - id
@@ -586,6 +588,7 @@ components:
         dataUseConditions:
           $ref: '#/components/schemas/DataUseConditions'
     BeaconDatasetAlleleResponse:
+      description: Response containing information about an allele in a particular dataset.
       type: object
       required:
         - datasetId
