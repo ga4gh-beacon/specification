@@ -96,7 +96,7 @@ Beacon API SHOULD support cross-origin resource sharing (CORS) and follow [GA4GH
 |*id* *|Unique identifier of the beacon. Use reverse domain name notation.|string|org.ga4gh.beacon|
 |*name* *|Human readable name of the beacon|string|EGA Beacon|
 |*apiVersion* *|Version of the API provided by the beacon.|string|v1.0.0|
-|*organisation* *|Organisation providing the Beacon|object|Beacon Organisation object (see below)|
+|*organization* *|Organization providing the Beacon|object|Beacon Organization object (see below)|
 |*datasets* *|Datasets served by the beacon. Any beacon should specify at least one dataset.|array|Array of Beacon Dataset objects (see below)|
 |description|Description of the beacon.|string|"This sample set comprises cases of schizophrenia with additional cognitive measurements, collected in Aberdeen, Scotland."|
 |version|Version of the Beacon server instance.|string|v0.1|
@@ -107,7 +107,7 @@ Beacon API SHOULD support cross-origin resource sharing (CORS) and follow [GA4GH
 |sampleAlleleRequests|Examples of interesting queries, e.g. a few queries demonstrating different responses.|array|Array of BeaconAlleleRequest objects (see _Query endpoint request_)|
 |info|'Additional structured metadata, key-value pairs.'|array|-|
 
-**Beacon Organisation object** 
+**Beacon Organization object** 
 
 |Properties (* mandatory, ~ one of these is mandatory)|Description|Type|Example|
 |---|---|:---:|---|
