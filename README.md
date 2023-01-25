@@ -1,4 +1,12 @@
-# Beacon API specification [![](https://travis-ci.org/ga4gh-beacon/specification.svg?branch=develop)](https://travis-ci.org/ga4gh-beacon/specification) [![](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://raw.githubusercontent.com/ga4gh-beacon/specification/develop/LICENSE)
+# ARCHIVE: Beacon v1
+
+The Beacon v1 specification has not been updated since 2020 and has been replaced with the Beacon v2 specification, officially approved in Spring 2022. Please see the [documentation site](http://docs.genomebeacons.org) and the [code repository](http://github.com/ga4gh-beacon/beacon-v2/).
+
+The implementation of "v1" type beacons is now discouraged; beacons can be configured in v2 with v1-like functionality.
+
+----
+
+# ~~Beacon API specification [![](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://raw.githubusercontent.com/ga4gh-beacon/specification/develop/LICENSE)~~
 
 ## What is a Beacon?
 
@@ -46,4 +54,4 @@ This page is used to plan and manage the work across the ga4gh-beacon repositori
 
 ## Notify GA4GH of potential security flaw in specification
 
-To enable a long-term contact for potential security flaws an email address of security-notification@ga4gh.org has been set up. This email will be monitored by the GA4GH secretariat and GA4GH security members to allow for an incoming response to be directed to appropriate parties.
+To enable a long-term contact for potential security flaws an email address of security-notification@ga4gh.org has been set up. This email will be monitored by the GA4GH secretariat and GA4GH security members to allow for an incoming response to be directed to appropriate parties.~~
